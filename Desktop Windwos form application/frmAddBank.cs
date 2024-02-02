@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿#region Using Directives
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddBank: Form
     {
+        #region using private
         private Button btnBackNutton;
         private Label lbHedding;
         private Label lbBankId;
@@ -16,12 +19,16 @@ namespace Desktop_Windwos_form_application
         private TextBox txtBookName;
         private Button A;
         public int loggingTo;
+        #endregion
+        #region using constructor
         public frmAddBank(int logging)
         {
             InitializeComponent();
             loggingTo = logging;
         }
 
+        #endregion
+        #region using initialize
         private void InitializeComponent()
         {
             this.btnBackNutton = new System.Windows.Forms.Button();
@@ -35,9 +42,9 @@ namespace Desktop_Windwos_form_application
             // 
             // btnBackNutton
             // 
-            this.btnBackNutton.Location = new System.Drawing.Point(103, 41);
+            this.btnBackNutton.Location = new System.Drawing.Point(103, 31);
             this.btnBackNutton.Name = "btnBackNutton";
-            this.btnBackNutton.Size = new System.Drawing.Size(43, 23);
+            this.btnBackNutton.Size = new System.Drawing.Size(54, 35);
             this.btnBackNutton.TabIndex = 0;
             this.btnBackNutton.Text = "<-";
             this.btnBackNutton.UseVisualStyleBackColor = true;
@@ -123,12 +130,41 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
 
+        #region using items
         private void AddBank_Load(object sender, System.EventArgs e)
         {
 
         }
 
+        private void txtBookId_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtBookName_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void lbHeadding_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbBankId_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbBankName_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region using methode
         private async void btnSubmit_Click(object sender, System.EventArgs e)
         {
             string BankName = txtBookName.Text; // Get the bank name from the Entry field
@@ -183,36 +219,16 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void txtBookId_TextChanged(object sender, System.EventArgs e)
-        {
 
-        }
-
-        private void txtBookName_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
 
         private void btnBack(object sender, EventArgs e)
         {
             frmMainPage mianPage = new frmMainPage(loggingTo);
             mianPage.Show();
             this.Hide();
-        }
+        } 
+        #endregion
 
-        private void lbHeadding_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void lbBankId_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbBankName_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

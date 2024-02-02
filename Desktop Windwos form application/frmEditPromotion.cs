@@ -197,6 +197,7 @@ namespace Desktop_Windwos_form_application
             this.MaximizeBox = false;
             this.Name = "frmEditPromotion";
             this.Text = "Edit Promotion";
+            this.Load += new System.EventHandler(this.frmEditPromotion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,6 +295,11 @@ namespace Desktop_Windwos_form_application
         }
 
         private void lbIsValid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmEditPromotion_Load(object sender, EventArgs e)
         {
 
         }

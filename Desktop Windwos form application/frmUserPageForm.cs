@@ -1,19 +1,18 @@
-﻿using Desktop_application;
+﻿#region Using Directives
+
 using Desktop_application;
-using iTextSharp.text;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
+#endregion
 namespace Desktop_Windwos_form_application
 {
     public partial class frmUserPageForm : Form
@@ -46,7 +45,7 @@ namespace Desktop_Windwos_form_application
         public int availableQuantity = 0;
         public string name;
         public static string TmpName = "";
-       public  int orderNumber = 0;
+        public int orderNumber = 0;
         public frmUserPageForm(string username)
         {
             name = username;
@@ -83,7 +82,7 @@ namespace Desktop_Windwos_form_application
             lstProduct.Visible = filteredProducts.Any();
         }
 
-    
+
 
         private async Task FetchDiscounts(string paymentMethode)
         {
@@ -173,8 +172,8 @@ namespace Desktop_Windwos_form_application
         {
 
             string selectedPaymentMethod = cmbLoyeltyCard.SelectedItem?.ToString();
-           
-         
+
+
 
 
 
@@ -297,7 +296,7 @@ namespace Desktop_Windwos_form_application
 
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Succes,", $"Star points added to the:  { loyaltyCardNumber}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        MessageBox.Show("Succes,", $"Star points added to the:  {loyaltyCardNumber}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
                     }
                     else
@@ -315,7 +314,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        
+
 
         private async Task<CustermerDTO> FetchUserData(string userInput, bool isLoyaltyCard)
         {
@@ -597,22 +596,22 @@ namespace Desktop_Windwos_form_application
                                     quentity = availableQuantity - count;
 
                                     await UpdateProductStockQuantity(productId, selectedItemId, quentity, productName);
-                                     UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
+                                    UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
 
                                 }
 
                                 if (ItemsId.Contains(selectedItemId))
-                    {
-                        // If the item already exists, just increment its count
-                        itemIdCounts[selectedItemId] += count;
-                    }
-                    else
-                    {
-                        // If the item doesn't exist, add it to the lists and dictionaries at the top
-                        ItemsId.Insert(0, selectedItemId);
-                        itemIdCounts[selectedItemId] = count;
+                                {
+                                    // If the item already exists, just increment its count
+                                    itemIdCounts[selectedItemId] += count;
+                                }
+                                else
+                                {
+                                    // If the item doesn't exist, add it to the lists and dictionaries at the top
+                                    ItemsId.Insert(0, selectedItemId);
+                                    itemIdCounts[selectedItemId] = count;
 
-                    }
+                                }
 
 
                             }
@@ -665,7 +664,7 @@ namespace Desktop_Windwos_form_application
                         quentity = availableQuantity - count;
 
                         await UpdateProductStockQuantity(productId, selectedItemId, quentity, productName);
-                         UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
+                        UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
 
                     }
 
@@ -684,7 +683,7 @@ namespace Desktop_Windwos_form_application
 
                 }
 
-                }
+            }
             else
             {
                 // Handle case where no items were found
@@ -693,7 +692,7 @@ namespace Desktop_Windwos_form_application
             }
 
             // Fetch the unit price from productCosts dictionary
-           
+
 
 
             // Add a new row to the DataGridView
@@ -897,7 +896,7 @@ namespace Desktop_Windwos_form_application
         {
             // Clear the existing items in comboBox2
 
-        
+
 
             // Now you can handle the selected payment method based on comboBox2.SelectedItem
             string selectedPaymentMethod = cmbPaymnttype.SelectedItem?.ToString();
@@ -954,7 +953,7 @@ namespace Desktop_Windwos_form_application
                 lbAmount.Visible = true;
             }
             else if (selectedPaymentMethod == "Card")
-           {
+            {
                 txtAmount.Visible = false;
                 lbAmount.Visible = false;
                 lbCardNumber.Visible = true;
@@ -962,7 +961,7 @@ namespace Desktop_Windwos_form_application
 
             }
 
-            if(loyeltyCard == "No")
+            if (loyeltyCard == "No")
             {
                 lbExtraForCard.Visible = false;
                 txtExtraForCard.Visible = false;
@@ -986,8 +985,8 @@ namespace Desktop_Windwos_form_application
 
         private async void btnCheackOut_Click(object sender, EventArgs e)
         {
-             orderNumber = GenerateOrderId();
-             PlaceOrder(orderNumber);
+            orderNumber = GenerateOrderId();
+            PlaceOrder(orderNumber);
             txtExtraForCard.Text = "";
             Cash = 0;
             ItemsId.Clear();
@@ -1005,7 +1004,7 @@ namespace Desktop_Windwos_form_application
         }
 
         private async void PlaceOrder(int orderNumber)
-         {
+        {
             int cardNumber = 0;
             string selectedPaymentType = cmbPaymentMethode.SelectedItem as string;
 
@@ -1095,7 +1094,7 @@ namespace Desktop_Windwos_form_application
 
                         OrderItemDTO orderItem = new OrderItemDTO
                         {
-                            ItemId = item.Key+itemId, // Generate a unique item ID
+                            ItemId = item.Key + itemId, // Generate a unique item ID
                             OrderId = newOrder.OrderId,
                             ProductName = ItemSellprice[item.Key],
                             Quantity = item.Value,
@@ -1163,7 +1162,7 @@ namespace Desktop_Windwos_form_application
         private static async Task GetTemplate()
         {
 
-             var httpClient = new HttpClient();
+            var httpClient = new HttpClient();
 
             try
             {
@@ -1217,7 +1216,7 @@ namespace Desktop_Windwos_form_application
 
                     if (decimal.TryParse(txtAmount.Text, out cash))
                     {
-                       Cash = cash;
+                        Cash = cash;
                     }
                     name = UsernameOfTheLogingPersom;
 
@@ -1238,17 +1237,17 @@ namespace Desktop_Windwos_form_application
 
                     if (decimal.TryParse(totalCostLabel.Text, out price))
                     {
-                      
+
                     }
 
                     decimal balance = Cash - totalCostPrice;
                     await GetTemplate();
-              
+
                     MessageBox.Show($"Blance: {balance}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     txtAmount.Clear();
                     SimpleFontResolver.GenerateAndDownloadPdf(summary, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
-                    
-                    
+
+
 
 
 
@@ -1270,35 +1269,35 @@ namespace Desktop_Windwos_form_application
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
-{
-    // Prompt the user for username and password
-    string enteredUsername = PromptForInput("Enter Username:");
-    string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
-
-    HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
-
-    if (response.IsSuccessStatusCode)
-    {
-        string jsonResponse = await response.Content.ReadAsStringAsync();
-        Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
-
-        string userType;
-        if (userData.TryGetValue("type", out userType))
         {
-            if (userType == "user")
+            // Prompt the user for username and password
+            string enteredUsername = PromptForInput("Enter Username:");
+            string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
+
+            HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
+
+            if (response.IsSuccessStatusCode)
             {
-                // Navigate to UserPage
-                MessageBox.Show("Invalid credentials. Unable to delete data.");
-            }
-            else if (userType == "admin")
-            {
-                // Delete all rows in the dataGridView1
-                dataGridView1.Rows.Clear();
-                MessageBox.Show("All data deleted successfully!");
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
+
+                string userType;
+                if (userData.TryGetValue("type", out userType))
+                {
+                    if (userType == "user")
+                    {
+                        // Navigate to UserPage
+                        MessageBox.Show("Invalid credentials. Unable to delete data.");
+                    }
+                    else if (userType == "admin")
+                    {
+                        // Delete all rows in the dataGridView1
+                        dataGridView1.Rows.Clear();
+                        MessageBox.Show("All data deleted successfully!");
+                    }
+                }
             }
         }
-    }
-}
 
 
 
@@ -1343,7 +1342,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-               
+
             }
         }
 
@@ -1400,7 +1399,7 @@ namespace Desktop_Windwos_form_application
 
         private void lbTotal_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtCardNumber_TextChanged(object sender, EventArgs e)
@@ -1442,7 +1441,7 @@ namespace Desktop_Windwos_form_application
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-           frmAddCustermer addCustermer = new frmAddCustermer();
+            frmAddCustermer addCustermer = new frmAddCustermer();
             addCustermer.Show();
         }
 

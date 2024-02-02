@@ -155,7 +155,7 @@
             this.btnConform.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConform.Location = new System.Drawing.Point(1020, 190);
             this.btnConform.Name = "btnConform";
-            this.btnConform.Size = new System.Drawing.Size(176, 33);
+            this.btnConform.Size = new System.Drawing.Size(201, 33);
             this.btnConform.TabIndex = 9;
             this.btnConform.Text = "Conform";
             this.btnConform.UseVisualStyleBackColor = true;
@@ -166,7 +166,7 @@
             this.btnCheackOut.Location = new System.Drawing.Point(1024, 405);
             this.btnCheackOut.Name = "btnCheackOut";
             this.btnCheackOut.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnCheackOut.Size = new System.Drawing.Size(176, 45);
+            this.btnCheackOut.Size = new System.Drawing.Size(201, 45);
             this.btnCheackOut.TabIndex = 10;
             this.btnCheackOut.Text = "Check Out";
             this.btnCheackOut.UseVisualStyleBackColor = true;
@@ -175,9 +175,9 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(363, 101);
+            this.btnAdd.Location = new System.Drawing.Point(305, 101);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 36);
+            this.btnAdd.Size = new System.Drawing.Size(106, 36);
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -348,7 +348,7 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(101, 12);
+            this.btnAddCustomer.Location = new System.Drawing.Point(110, 12);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(169, 34);
             this.btnAddCustomer.TabIndex = 25;

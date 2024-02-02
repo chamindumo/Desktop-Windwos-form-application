@@ -25,7 +25,7 @@ namespace Desktop_Windwos_form_application
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
-        private Panel panel1;
+        private Panel Sidepanel;
         private Button btnLogin;
         private Button btnPurchase;
         private Button btnNewUser;
@@ -65,7 +65,7 @@ namespace Desktop_Windwos_form_application
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.Sidepanel = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnPurchase = new System.Windows.Forms.Button();
             this.btnNewUser = new System.Windows.Forms.Button();
@@ -89,7 +89,7 @@ namespace Desktop_Windwos_form_application
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.File.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.Sidepanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.promotionDataGridView)).BeginInit();
@@ -158,22 +158,22 @@ namespace Desktop_Windwos_form_application
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // panel1
+            // Sidepanel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel1.Controls.Add(this.btnLogin);
-            this.panel1.Controls.Add(this.btnPurchase);
-            this.panel1.Controls.Add(this.btnNewUser);
-            this.panel1.Controls.Add(this.btnBank);
-            this.panel1.Controls.Add(this.btnDiscount);
-            this.panel1.Controls.Add(this.btnPromotions);
-            this.panel1.Controls.Add(this.btnProducts);
-            this.panel1.Location = new System.Drawing.Point(0, 51);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(137, 706);
-            this.panel1.TabIndex = 3;
-            this.panel1.Visible = false;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.Sidepanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Sidepanel.Controls.Add(this.btnLogin);
+            this.Sidepanel.Controls.Add(this.btnPurchase);
+            this.Sidepanel.Controls.Add(this.btnNewUser);
+            this.Sidepanel.Controls.Add(this.btnBank);
+            this.Sidepanel.Controls.Add(this.btnDiscount);
+            this.Sidepanel.Controls.Add(this.btnPromotions);
+            this.Sidepanel.Controls.Add(this.btnProducts);
+            this.Sidepanel.Location = new System.Drawing.Point(0, 56);
+            this.Sidepanel.Name = "Sidepanel";
+            this.Sidepanel.Size = new System.Drawing.Size(137, 701);
+            this.Sidepanel.TabIndex = 3;
+            this.Sidepanel.Visible = false;
+            this.Sidepanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnLogin
             // 
@@ -381,7 +381,7 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.productDataGridView);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.Sidepanel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.File);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -394,7 +394,7 @@ namespace Desktop_Windwos_form_application
             this.File.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.Sidepanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.promotionDataGridView)).EndInit();
@@ -410,8 +410,16 @@ namespace Desktop_Windwos_form_application
         
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            panel1.Visible =true;
-
+            if (Sidepanel.Visible)
+            {
+                // If it's visible, hide it
+                Sidepanel.Visible = false;
+            }
+            else
+            {
+                // If it's hidden, show it
+                Sidepanel.Visible = true;
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

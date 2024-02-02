@@ -1,17 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿#region using Derectives
+
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using TextBox = System.Windows.Forms.TextBox;
+using TextBox = System.Windows.Forms.TextBox; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddDiscount: Form
     {
+        #region using variables
+
         private HttpClient client = new HttpClient();
         private Label label1;
         private Label label2;
@@ -35,18 +38,23 @@ namespace Desktop_Windwos_form_application
         private System.Windows.Forms.Button button2;
         public string bankName = "";
         public string Namepro = "";
-        public string Id ;
+        public string Id;
+        #endregion
 
-        public frmAddDiscount(int logging , string productId , string productname)
+        #region using constructor
+        public frmAddDiscount(int logging, string productId, string productname)
         {
             Namepro = productname;
             Id = productId;
-           loggingTo = logging;
+            loggingTo = logging;
             InitializeComponent();
             FetchBankNames();
             txtProductId.Text = Id;
             txtProductName.Text = Namepro;
         }
+        #endregion
+
+        #region using initalize
 
         private void InitializeComponent()
         {
@@ -231,9 +239,9 @@ namespace Desktop_Windwos_form_application
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(61, 25);
+            this.button2.Location = new System.Drawing.Point(61, 15);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 23);
+            this.button2.Size = new System.Drawing.Size(50, 33);
             this.button2.TabIndex = 21;
             this.button2.Text = "<-";
             this.button2.UseVisualStyleBackColor = true;
@@ -263,17 +271,17 @@ namespace Desktop_Windwos_form_application
             this.MaximizeBox = false;
             this.Name = "frmAddDiscount";
             this.Text = "Add Discount";
+            this.Load += new System.EventHandler(this.frmAddDiscount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
-        private void textBox6_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
+        #endregion
 
 
+
+
+        #region using methode
         private async void FetchBankNames()
         {
             try
@@ -309,7 +317,7 @@ namespace Desktop_Windwos_form_application
         {
             string selectedBankName = cmbPaymentMethode.SelectedItem?.ToString();
 
-           
+
 
             // Optionally, you can use the selected bank name to get the corresponding bank ID from the dictionary
             if (selectedBankName != null && bankDictionary.TryGetValue(selectedBankName, out int selectedBankId))
@@ -321,36 +329,14 @@ namespace Desktop_Windwos_form_application
             if (selectedBankName == null)
             {
                 bankName = "ALL";
-            } else
+            }
+            else
             {
                 bankName = selectedBankName;
             }
         }
 
-        private void txtproductId_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void txtProductName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rbIsValid_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private int GenerateItemId()
         {
@@ -391,7 +377,7 @@ namespace Desktop_Windwos_form_application
             var json = JsonConvert.SerializeObject(discountData);
 
             // Create the HttpClient
-             var client = new HttpClient();
+            var client = new HttpClient();
 
             try
             {
@@ -434,6 +420,9 @@ namespace Desktop_Windwos_form_application
             this.Hide();
         }
 
+        #endregion
+        #region using items
+
         private void lbProductId_Click(object sender, EventArgs e)
         {
 
@@ -473,5 +462,42 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void frmAddDiscount_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void txtproductId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbIsValid_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, System.EventArgs e)
+        {
+
+        } 
+        #endregion 
     }
 }

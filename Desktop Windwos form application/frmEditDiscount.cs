@@ -94,7 +94,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(481, 33);
+            this.lbHeadding.Location = new System.Drawing.Point(481, 26);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(126, 25);
             this.lbHeadding.TabIndex = 0;
@@ -300,6 +300,7 @@ namespace Desktop_Windwos_form_application
             this.MaximizeBox = false;
             this.Name = "frmEditDiscount";
             this.Text = "Edit Discount";
+            this.Load += new System.EventHandler(this.frmEditDiscount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,6 +491,11 @@ namespace Desktop_Windwos_form_application
         }
 
         private void lbIsValid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmEditDiscount_Load(object sender, EventArgs e)
         {
 
         }

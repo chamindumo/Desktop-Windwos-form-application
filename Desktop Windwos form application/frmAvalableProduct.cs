@@ -76,6 +76,7 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.avalableStockDataGridView);
             this.Name = "frmAvalableProduct";
             this.Text = "Avalable Stock";
+            this.Load += new System.EventHandler(this.frmAvalableProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.StockbindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.avalableStockDataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -136,6 +137,11 @@ namespace Desktop_Windwos_form_application
                 StockbindingSource.DataSource = stock;
                 avalableStockDataGridView.DataSource = StockbindingSource;
             }
+
+        }
+
+        private void frmAvalableProduct_Load(object sender, System.EventArgs e)
+        {
 
         }
     }

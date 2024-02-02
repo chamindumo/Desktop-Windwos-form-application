@@ -1,17 +1,18 @@
-﻿using System.Drawing;
+﻿#region using Derective
+using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using System.Windows.Forms;
-using System.Runtime.Remoting;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Text;
+using System.Text; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddNew: Form
     {
+        #region Using Variables
         public static int id = 12;
         private HttpClient _httpClient;
         public string imageNameData;
@@ -43,13 +44,17 @@ namespace Desktop_Windwos_form_application
         private PictureBox pictureBox1;
         private Label lbHeadding;
         public int loggingTo;
+        #endregion
+        #region using constructor
         public frmAddNew(int logging)
         {
             _httpClient = new HttpClient();
             loggingTo = logging;
             InitializeComponent();
         }
+        #endregion
 
+        #region using initialize
         private void InitializeComponent()
         {
             this.lbEmail = new System.Windows.Forms.Label();
@@ -344,7 +349,7 @@ namespace Desktop_Windwos_form_application
             this.button2.Location = new System.Drawing.Point(184, 352);
             this.button2.Margin = new System.Windows.Forms.Padding(20);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(82, 37);
             this.button2.TabIndex = 31;
             this.button2.Text = "Add Image";
             this.button2.UseVisualStyleBackColor = true;
@@ -365,10 +370,10 @@ namespace Desktop_Windwos_form_application
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(184, 381);
+            this.pictureBox1.Location = new System.Drawing.Point(184, 398);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(353, 182);
+            this.pictureBox1.Size = new System.Drawing.Size(252, 148);
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.previewPictureBox_Click);
@@ -426,16 +431,10 @@ namespace Desktop_Windwos_form_application
 
         }
 
-        private void AddNew_Load(object sender, System.EventArgs e)
-        {
+        #endregion
 
-        }
 
-        private void IsVerifiedRadioButton1_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
+        #region Using Methode
         private async void btnAddImage_Click(object sender, System.EventArgs e)
         {
             try
@@ -533,55 +532,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void txtUsername_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtFirstName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtLastName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAddress_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtRegion_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMobileNumber_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private int GenerateItemId()
         {
             // Your logic to generate a unique item ID
@@ -632,6 +583,9 @@ namespace Desktop_Windwos_form_application
             }
 
         }
+        #endregion
+
+        #region Using Items
 
         private void previewPictureBox_Click(object sender, EventArgs e)
         {
@@ -702,5 +656,66 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFirstName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLastName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtRegion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMobileNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNew_Load(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void IsVerifiedRadioButton1_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }

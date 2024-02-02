@@ -1,24 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿#region Using Derectives
+
 using System.Net.Http;
 using System;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using Newtonsoft.Json;
 using System.Text;
 using System.Net.Mail;
 using System.Net;
 using FirebaseAdmin.Auth;
 using FirebaseAdmin;
-using Google.Apis.Auth.OAuth2;
 using Firebase.Auth.Providers;
-using System.Threading.Tasks;
-using System.IO;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using FirebaseAdmin.Messaging;
-using System.Collections.Generic;
-using Message = FirebaseAdmin.Messaging.Message;
-using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.WinForms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
@@ -29,6 +21,7 @@ namespace Desktop_Windwos_form_application
     public class frmAddCustermer: Form
     {
 
+        #region using private variables
         private HttpClient _httpClient;
         private Label lbName;
         private Label lbLoyaltyCardNumber;
@@ -50,18 +43,22 @@ namespace Desktop_Windwos_form_application
         private const string TwilioAuthToken = "7195e1f8ffa7e6fe54a7ae8111d265ba";
         private const string TwilioPhoneNumber = "your-twilio-phone-number";
         private WebView2 webView;
+        #endregion
 
+        #region using constructor
         public frmAddCustermer()
         {
             InitializeComponent();
             _httpClient = new HttpClient();
 
-           
+
         }
+        #endregion
 
-      
 
 
+
+        #region using initialize
         private void InitializeComponent()
         {
             this.webView = new Microsoft.Web.WebView2.WinForms.WebView2();
@@ -232,12 +229,15 @@ namespace Desktop_Windwos_form_application
             this.MaximizeBox = false;
             this.Name = "frmAddCustermer";
             this.Text = "Add Custermer";
+            this.Load += new System.EventHandler(this.frmAddCustermer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+        #endregion
 
+        #region Using items
         private void txtName_TextChanged(object sender, System.EventArgs e)
         {
 
@@ -263,6 +263,67 @@ namespace Desktop_Windwos_form_application
 
         }
 
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void webBrowser1_DocumentCompleted_1(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+
+
+            // Load the HTML content into WebView2
+
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lbHeadding_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbEmail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbPhoneNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAddress_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbLoyeltyCardNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAddCustermer_Load(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+
+
+        #region using methodes
         private bool SendVerificationEmail(string toEmail, int verificationCode)
         {
             try
@@ -328,7 +389,7 @@ namespace Desktop_Windwos_form_application
             Random random = new Random();
             int verificationCode = random.Next(100000, 999999);
 
-         
+
 
 
             if (SendVerificationEmail(email, verificationCode))
@@ -337,26 +398,26 @@ namespace Desktop_Windwos_form_application
                 // Send the verification code to the user via email
                 string enteredCode = PromptForVerificationCode();
 
-            // Check if the entered code is correct
-            if (!string.IsNullOrEmpty(enteredCode) && enteredCode.Equals(verificationCode.ToString()))
-            {
-                // User entered the correct verification code
-                MessageBox.Show("Verification successful! Data added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
+                // Check if the entered code is correct
+                if (!string.IsNullOrEmpty(enteredCode) && enteredCode.Equals(verificationCode.ToString()))
+                {
+                    // User entered the correct verification code
+                    MessageBox.Show("Verification successful! Data added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect verification code. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Incorrect verification code. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error sending verification email. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-    else
-    {
-        MessageBox.Show("Error sending verification email. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
 
-    // Use the captured values (name, email, phoneNumber, address, loyaltyCardNumber, starPoints) as needed
-    // For example, you might create an object of your class and assign these values to its properties
-    CustermerDTO obj = new CustermerDTO
+            // Use the captured values (name, email, phoneNumber, address, loyaltyCardNumber, starPoints) as needed
+            // For example, you might create an object of your class and assign these values to its properties
+            CustermerDTO obj = new CustermerDTO
             {
                 Name = name,
                 Email = email,
@@ -386,58 +447,9 @@ namespace Desktop_Windwos_form_application
                 }
 
             }
-        }
-
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
-
-        private void webBrowser1_DocumentCompleted_1(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
-        }
-
-        private async void button2_Click(object sender, EventArgs e)
-        {
+        } 
+        #endregion
 
 
-            // Load the HTML content into WebView2
-        
-        }
-
-        private void webView21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lbHeadding_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbEmail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbPhoneNumber_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbAddress_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbLoyeltyCardNumber_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

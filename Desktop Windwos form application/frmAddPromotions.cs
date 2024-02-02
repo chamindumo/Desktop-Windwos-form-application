@@ -1,15 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿#region Using Derectives
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddPromotions : Form
     {
+        #region Using variables
         private HttpClient client = new HttpClient();
         private Label lbHeadding;
         private Label lbPaymentMethode;
@@ -26,6 +29,8 @@ namespace Desktop_Windwos_form_application
         private Button button2;
         private ComboBox cmbPaymentMethode;
         public int loggingTo;
+        #endregion
+        #region Using Constructor
         public frmAddPromotions(int logging)
         {
 
@@ -33,7 +38,9 @@ namespace Desktop_Windwos_form_application
             InitializeComponent();
             FetchBankNames();
         }
+        #endregion
 
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.lbHeadding = new System.Windows.Forms.Label();
@@ -55,7 +62,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(437, 9);
+            this.lbHeadding.Location = new System.Drawing.Point(437, 18);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(141, 25);
             this.lbHeadding.TabIndex = 0;
@@ -166,7 +173,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.button2.Location = new System.Drawing.Point(47, 13);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 23);
+            this.button2.Size = new System.Drawing.Size(42, 30);
             this.button2.TabIndex = 18;
             this.button2.Text = "<-";
             this.button2.UseVisualStyleBackColor = true;
@@ -183,7 +190,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddPromotions
             // 
-            this.ClientSize = new System.Drawing.Size(1219, 711);
+            this.ClientSize = new System.Drawing.Size(807, 461);
             this.Controls.Add(this.cmbPaymentMethode);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.endDateTimePicker);
@@ -206,37 +213,11 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
 
-        private void lbDiscountNumber_Click(object sender, System.EventArgs e)
-        {
-            
-        }
 
-        private void txtPaymentMethode_TextChanged(object sender, System.EventArgs e)
-        {
 
-        }
-
-        private void txtDiscountNumber_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void startDateTimePicker_ValueChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void endDateTimePicker2_ValueChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void isValidradioButton_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
+        #region Using Method
         private void btnSubmit_Click(object sender, System.EventArgs e)
         {
             // Retrieve values from the form
@@ -335,6 +316,40 @@ namespace Desktop_Windwos_form_application
             mianPage.Show();
             this.Hide();
         }
+        #endregion
+
+
+        #region Using Item
+        private void lbDiscountNumber_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtPaymentMethode_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtDiscountNumber_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void startDateTimePicker_ValueChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void endDateTimePicker2_ValueChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void isValidradioButton_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
 
         private void lbHeadding_Click(object sender, EventArgs e)
         {
@@ -369,6 +384,7 @@ namespace Desktop_Windwos_form_application
         private void cmbPaymentMethode_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
+        } 
+        #endregion
     }
 }

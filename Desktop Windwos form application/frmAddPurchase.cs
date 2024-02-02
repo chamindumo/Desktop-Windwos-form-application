@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿#region Using Derective
+using System.Collections.Generic;
 using System.Net.Http;
 using System;
 using System.Windows.Forms;
 using System.Linq;
 using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TextBox = System.Windows.Forms.TextBox;
 using ListView = System.Windows.Forms.ListView;
 using Button = System.Windows.Forms.Button;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddPurchase: Form
     {
 
+        #region Using Variable
         private readonly HttpClient _httpClient;
         public string productName = "";
         public int availableQuantity = 0;
@@ -34,11 +36,8 @@ namespace Desktop_Windwos_form_application
         private Dictionary<string, int> productIds = new Dictionary<string, int> { };
         private Dictionary<string, decimal> productCosts = new Dictionary<string, decimal>();
         private Dictionary<int, string> Product = new Dictionary<int, string>();
-
         public static int foundProductId = 0;
         private int quentity = 0;
-
-
         private Label lbHeadding;
         private Label lbBatchName;
         private Label lbItemSellPrice;
@@ -68,7 +67,9 @@ namespace Desktop_Windwos_form_application
         private Button btnSubmit;
         private ListView ProductListView;
         public int loggingto;
-        public frmAddPurchase(int logging) 
+        #endregion
+        #region Using Constructor
+        public frmAddPurchase(int logging)
         {
             InitializeComponent();
             _httpClient = new HttpClient(); // Initialize _httpClient
@@ -81,6 +82,8 @@ namespace Desktop_Windwos_form_application
             loggingto = logging;
         }
 
+        #endregion
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.lbHeadding = new System.Windows.Forms.Label();
@@ -297,7 +300,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(722, 242);
+            this.btnAdd.Location = new System.Drawing.Point(701, 241);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 34);
             this.btnAdd.TabIndex = 26;
@@ -402,17 +405,8 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
-
-        private void lbProductId_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void productsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        #endregion
+        #region Using method
         private async void FetchProducts()
         {
             try
@@ -462,38 +456,20 @@ namespace Desktop_Windwos_form_application
              .Where(p => p.ToLower().Contains(searchText.ToLower()))
              .ToList();
 
-                    // Clear the existing items in the ListView
-                    ProductListView.Items.Clear();
+            // Clear the existing items in the ListView
+            ProductListView.Items.Clear();
 
-                    // Add each item to the ListView
-                    foreach (var product in filteredProducts)
-                    {
-                        ProductListView.Items.Add(product);
-                    }
+            // Add each item to the ListView
+            foreach (var product in filteredProducts)
+            {
+                ProductListView.Items.Add(product);
+            }
 
             // Show the suggestions list only when there are matching items
 
         }
 
-        private void txtProductId_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void txtItemPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtItemSellPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtQuentity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -588,7 +564,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-           
+
         }
 
 
@@ -698,9 +674,9 @@ namespace Desktop_Windwos_form_application
 
                 // Append the selected product to the textBox1.Text
 
-                
-                    // Update the textBox3.Text with the retrieved ID
-                
+
+                // Update the textBox3.Text with the retrieved ID
+
 
                 HttpResponseMessage response1 = await _httpClient.GetAsync("https://localhost:7141/productitems");
 
@@ -718,10 +694,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void txtBatchNumber_TextChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private async void btnsubmit_Click(object sender, EventArgs e)
         {
@@ -822,8 +795,9 @@ namespace Desktop_Windwos_form_application
             await CreateNewProducts(newProductIds, ItemId, ItemSellCost, ItemQuntity, ItemName);
 
 
-        }
-
+        } 
+        #endregion
+        #region Using Items
         private void PurchaseDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
 
@@ -868,6 +842,26 @@ namespace Desktop_Windwos_form_application
 
         }
 
+        private void txtProductId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtItemPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtItemSellPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQuentity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void lbIItemSellPriceClick(object sender, EventArgs e)
         {
 
@@ -882,5 +876,21 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void lbProductId_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtBatchNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void productsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }

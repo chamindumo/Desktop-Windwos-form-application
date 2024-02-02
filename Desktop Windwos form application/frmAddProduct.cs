@@ -1,15 +1,18 @@
-﻿using System;
+﻿#region Using Derectives
+using System;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAddProduct: Form
     {
+        #region Using variables
         private HttpClient _httpClient;
         public string imageNameData;
         private Label lbProductId;
@@ -34,13 +37,17 @@ namespace Desktop_Windwos_form_application
         private Button button5;
         private Label lbHeadding;
         public int loggingTo = 0;
+        #endregion
+        #region Using Constructor
         public frmAddProduct(int logging)
         {
             InitializeComponent();
             loggingTo = logging;
             _httpClient = new HttpClient();
         }
+        #endregion
 
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.lbHeadding = new System.Windows.Forms.Label();
@@ -242,7 +249,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.EnterDateDateTimePicker.Location = new System.Drawing.Point(169, 225);
             this.EnterDateDateTimePicker.Name = "EnterDateDateTimePicker";
-            this.EnterDateDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.EnterDateDateTimePicker.Size = new System.Drawing.Size(224, 20);
             this.EnterDateDateTimePicker.TabIndex = 24;
             this.EnterDateDateTimePicker.ValueChanged += new System.EventHandler(this.EnterDateTimePicker_ValueChanged);
             // 
@@ -263,9 +270,9 @@ namespace Desktop_Windwos_form_application
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(41, 21);
+            this.button5.Location = new System.Drawing.Point(41, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(43, 23);
+            this.button5.Size = new System.Drawing.Size(48, 32);
             this.button5.TabIndex = 27;
             this.button5.Text = "<-\r\n";
             this.button5.UseVisualStyleBackColor = true;
@@ -304,27 +311,11 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
 
-        private void lbProductName_Click(object sender, System.EventArgs e)
-        {
 
-        }
 
-        private void lbIsAvalable_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void AddProduct_Load(object sender, System.EventArgs e)
-        {
-
-        }
-
+        #region Using Method
         private async void btnAddProduct_Click(object sender, System.EventArgs e)
         {
             if (int.TryParse(txtProductId.Text, out int productId) && decimal.TryParse(txtPrice.Text, out decimal priceAmount))
@@ -376,10 +367,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
-        {
 
-        }
 
         private void button5_Click(object sender, System.EventArgs e)
         {
@@ -389,40 +377,7 @@ namespace Desktop_Windwos_form_application
             this.Hide();
         }
 
-        private void txtProductId_TextChanged(object sender, System.EventArgs e)
-        {
 
-        }
-
-        private void txtProductName_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void txtPrice_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void txtDescription_TextChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void IsAvalableRadioButton_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void radioButton2_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void EnterDateTimePicker_ValueChanged(object sender, System.EventArgs e)
-        {
-
-        }
 
         private async void btnAddImage(object sender, System.EventArgs e)
         {
@@ -441,9 +396,9 @@ namespace Desktop_Windwos_form_application
                         using (Stream stream = File.OpenRead(openFileDialog.FileName))
                         {
                             await UploadImage(stream, fileName);
-                        
-                                // Resize the image and assign it to the PictureBox
-                            
+
+                            // Resize the image and assign it to the PictureBox
+
                         }
                     }
                     ResizeAndSetImage(openFileDialog.FileName);
@@ -521,10 +476,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void ImagePreviewPictureBox_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -543,6 +495,8 @@ namespace Desktop_Windwos_form_application
             EnterDateDateTimePicker.Value = DateTime.Now;
 
         }
+        #endregion
+        #region Using Items
 
         private void lbEnterdate_Click(object sender, EventArgs e)
         {
@@ -556,7 +510,12 @@ namespace Desktop_Windwos_form_application
 
         private void lbHeadding_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void ImagePreviewPictureBox_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void lbPrice_Click(object sender, EventArgs e)
@@ -573,5 +532,67 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+
+        private void lbProductName_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void lbIsAvalable_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void AddProduct_Load(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtProductId_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtProductName_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtPrice_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtDescription_TextChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void IsAvalableRadioButton_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void EnterDateTimePicker_ValueChanged(object sender, System.EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }
