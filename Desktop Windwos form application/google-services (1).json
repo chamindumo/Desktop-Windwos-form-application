@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151279181030",
+    "project_id": "windows-app-b694c",
+    "storage_bucket": "windows-app-b694c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151279181030:android:2ba12120d1da983b136f27",
+        "android_client_info": {
+          "package_name": "com.winsowsform.Desktop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8hHLkVrCT8Ef_8AUkKSMwpoGaZtKNIII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
