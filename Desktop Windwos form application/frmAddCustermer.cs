@@ -1,4 +1,4 @@
-﻿#region Using Derectives
+﻿#region Using Directives
 
 using System.Net.Http;
 using System;
@@ -9,7 +9,9 @@ using System.Net;
 using FirebaseAdmin.Auth;
 using FirebaseAdmin;
 using Firebase.Auth.Providers;
-using Microsoft.Web.WebView2.WinForms; 
+using Microsoft.Web.WebView2.WinForms;
+using System.Linq;
+
 #endregion
 
 namespace Desktop_Windwos_form_application
@@ -192,7 +194,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(413, 9);
+            this.label2.Location = new System.Drawing.Point(287, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 25);
             this.label2.TabIndex = 17;
@@ -201,7 +203,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(443, 338);
+            this.btnSubmit.Location = new System.Drawing.Point(292, 316);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(99, 38);
             this.btnSubmit.TabIndex = 18;
@@ -211,7 +213,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddCustermer
             // 
-            this.ClientSize = new System.Drawing.Size(1011, 408);
+            this.ClientSize = new System.Drawing.Size(652, 408);
             this.Controls.Add(this.webView);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label2);
@@ -319,6 +321,90 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+
+
+        private async void btnSubmit_Click(object sender, System.EventArgs e)
+        {
+            var name = txtName.Text;
+            var email = txtEmail.Text;
+            var phoneNumber = txtPhoneNumber.Text;
+            var address = txtAddress.Text;
+            var loyaltyCardNumber = txtLoyelticard.Text;
+            int starPoints = 0;
+
+
+            if (ValidateCustomerInfo(name, email, phoneNumber, address, loyaltyCardNumber))
+            {
+                Random random = new Random();
+                int verificationCode = random.Next(100000, 999999);
+
+
+
+
+                if (SendVerificationEmail(email, verificationCode))
+                {
+
+                    // Send the verification code to the user via email
+                    string enteredCode = PromptForVerificationCode();
+
+                    // Check if the entered code is correct
+                    if (!string.IsNullOrEmpty(enteredCode) && enteredCode.Equals(verificationCode.ToString()))
+                    {
+                        // User entered the correct verification code
+                        MessageBox.Show("Verification successful! Data added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect verification code. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error sending verification email. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // Use the captured values (name, email, phoneNumber, address, loyaltyCardNumber, starPoints) as needed
+                // For example, you might create an object of your class and assign these values to its properties
+                CustermerDTO obj = new CustermerDTO
+                {
+                    Name = name,
+                    Email = email,
+                    PhoneNumber = phoneNumber,
+                    Address = address,
+                    LoyaltyCardNumber = loyaltyCardNumber,
+                    StarPoints = starPoints
+                };
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Set the content type
+
+                using (var client = new HttpClient())
+                {
+                    var response = await client.PostAsync("https://localhost:7141/api/customers", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Hide();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error sending verification email. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         #endregion
 
 
@@ -376,78 +462,70 @@ namespace Desktop_Windwos_form_application
         }
 
 
-
-        private async void btnSubmit_Click(object sender, System.EventArgs e)
+        private bool ValidateCustomerInfo(string name, string email, string phoneNumber, string address, string loyaltyCardNumber)
         {
-            var name = txtName.Text;
-            var email = txtEmail.Text;
-            var phoneNumber = txtPhoneNumber.Text;
-            var address = txtAddress.Text;
-            var loyaltyCardNumber = txtLoyelticard.Text;
-            int starPoints = 0;
-
-            Random random = new Random();
-            int verificationCode = random.Next(100000, 999999);
-
-
-
-
-            if (SendVerificationEmail(email, verificationCode))
+            // Validate Name
+            if (string.IsNullOrEmpty(name))
             {
-
-                // Send the verification code to the user via email
-                string enteredCode = PromptForVerificationCode();
-
-                // Check if the entered code is correct
-                if (!string.IsNullOrEmpty(enteredCode) && enteredCode.Equals(verificationCode.ToString()))
-                {
-                    // User entered the correct verification code
-                    MessageBox.Show("Verification successful! Data added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect verification code. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error sending verification email. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a valid name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
 
-            // Use the captured values (name, email, phoneNumber, address, loyaltyCardNumber, starPoints) as needed
-            // For example, you might create an object of your class and assign these values to its properties
-            CustermerDTO obj = new CustermerDTO
+            // Check if the name contains any integers
+            if (name.Any(char.IsDigit))
             {
-                Name = name,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Address = address,
-                LoyaltyCardNumber = loyaltyCardNumber,
-                StarPoints = starPoints
-            };
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            // Set the content type
-
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync("https://localhost:7141/api/customers", content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Hide();
-
-                }
-                else
-                {
-                    MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                MessageBox.Show("Name cannot contain integers. Please enter a valid name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-        } 
+
+            // Validate Email
+            if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validate Phone Number (you can customize the phone number validation based on your requirements)
+            if (string.IsNullOrEmpty(phoneNumber) || !IsValidPhoneNumber(phoneNumber))
+            {
+                MessageBox.Show("Please enter a valid phone number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validate Address (you can customize the address validation based on your requirements)
+            if (string.IsNullOrEmpty(address))
+            {
+                MessageBox.Show("Please enter a valid address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validate Loyalty Card Number (you can customize the loyalty card number validation based on your requirements)
+            if (string.IsNullOrEmpty(loyaltyCardNumber))
+            {
+                MessageBox.Show("Please enter a valid loyalty card number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            // Add your email validation logic here
+            // For a simple example, checking if the email contains '@' and '.'
+            return email.Contains('@') && email.Contains('.');
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Add your phone number validation logic here
+            // For a simple example, checking if the phone number contains only digits
+            return phoneNumber.All(char.IsDigit);
+        }
+
+
+
+
         #endregion
 
 

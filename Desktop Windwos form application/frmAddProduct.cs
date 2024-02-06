@@ -1,4 +1,4 @@
-﻿#region Using Derectives
+﻿#region Using Directives
 using System;
 using System.Drawing;
 using System.IO;
@@ -20,7 +20,6 @@ namespace Desktop_Windwos_form_application
         private Label lbEnterDate;
         private Label lbIsAvalable;
         private Label lbDescription;
-        private Label lbPrice;
         private Label lbProductName;
         private Button btnImage;
         private Button btnAddProduct;
@@ -28,7 +27,6 @@ namespace Desktop_Windwos_form_application
         private Button btnCancel;
         private TextBox txtProductId;
         private TextBox txtDescription;
-        private TextBox txtPrice;
         private TextBox txtProductName;
         private PictureBox ImagePreviewPictureBox;
         private DateTimePicker EnterDateDateTimePicker;
@@ -56,7 +54,6 @@ namespace Desktop_Windwos_form_application
             this.lbEnterDate = new System.Windows.Forms.Label();
             this.lbIsAvalable = new System.Windows.Forms.Label();
             this.lbDescription = new System.Windows.Forms.Label();
-            this.lbPrice = new System.Windows.Forms.Label();
             this.lbProductName = new System.Windows.Forms.Label();
             this.btnImage = new System.Windows.Forms.Button();
             this.btnAddProduct = new System.Windows.Forms.Button();
@@ -64,7 +61,6 @@ namespace Desktop_Windwos_form_application
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtProductId = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.ImagePreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.EnterDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -79,7 +75,7 @@ namespace Desktop_Windwos_form_application
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHeadding.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbHeadding.Location = new System.Drawing.Point(394, 19);
+            this.lbHeadding.Location = new System.Drawing.Point(191, 13);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(120, 25);
             this.lbHeadding.TabIndex = 0;
@@ -90,7 +86,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbProductId.AutoSize = true;
             this.lbProductId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProductId.Location = new System.Drawing.Point(38, 63);
+            this.lbProductId.Location = new System.Drawing.Point(38, 99);
             this.lbProductId.Name = "lbProductId";
             this.lbProductId.Size = new System.Drawing.Size(72, 17);
             this.lbProductId.TabIndex = 1;
@@ -141,22 +137,11 @@ namespace Desktop_Windwos_form_application
             this.lbDescription.Text = "Description";
             this.lbDescription.Click += new System.EventHandler(this.lbDescription_Click);
             // 
-            // lbPrice
-            // 
-            this.lbPrice.AutoSize = true;
-            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPrice.Location = new System.Drawing.Point(38, 132);
-            this.lbPrice.Name = "lbPrice";
-            this.lbPrice.Size = new System.Drawing.Size(40, 17);
-            this.lbPrice.TabIndex = 10;
-            this.lbPrice.Text = "Price";
-            this.lbPrice.Click += new System.EventHandler(this.lbPrice_Click);
-            // 
             // lbProductName
             // 
             this.lbProductName.AutoSize = true;
             this.lbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProductName.Location = new System.Drawing.Point(38, 97);
+            this.lbProductName.Location = new System.Drawing.Point(38, 133);
             this.lbProductName.Name = "lbProductName";
             this.lbProductName.Size = new System.Drawing.Size(98, 17);
             this.lbProductName.TabIndex = 11;
@@ -176,7 +161,7 @@ namespace Desktop_Windwos_form_application
             // btnAddProduct
             // 
             this.btnAddProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnAddProduct.Location = new System.Drawing.Point(355, 582);
+            this.btnAddProduct.Location = new System.Drawing.Point(90, 546);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(111, 35);
             this.btnAddProduct.TabIndex = 13;
@@ -186,7 +171,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnRest
             // 
-            this.btnRest.Location = new System.Drawing.Point(484, 582);
+            this.btnRest.Location = new System.Drawing.Point(219, 546);
             this.btnRest.Name = "btnRest";
             this.btnRest.Size = new System.Drawing.Size(111, 35);
             this.btnRest.TabIndex = 14;
@@ -196,7 +181,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(615, 582);
+            this.btnCancel.Location = new System.Drawing.Point(350, 546);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(111, 35);
             this.btnCancel.TabIndex = 15;
@@ -206,7 +191,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtProductId
             // 
-            this.txtProductId.Location = new System.Drawing.Point(169, 63);
+            this.txtProductId.Location = new System.Drawing.Point(169, 99);
             this.txtProductId.Name = "txtProductId";
             this.txtProductId.Size = new System.Drawing.Size(224, 20);
             this.txtProductId.TabIndex = 16;
@@ -220,17 +205,9 @@ namespace Desktop_Windwos_form_application
             this.txtDescription.TabIndex = 20;
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(169, 129);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(224, 20);
-            this.txtPrice.TabIndex = 21;
-            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
-            // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(169, 94);
+            this.txtProductName.Location = new System.Drawing.Point(169, 130);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(224, 20);
             this.txtProductName.TabIndex = 22;
@@ -240,7 +217,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.ImagePreviewPictureBox.Location = new System.Drawing.Point(153, 301);
             this.ImagePreviewPictureBox.Name = "ImagePreviewPictureBox";
-            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(442, 237);
+            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(269, 191);
             this.ImagePreviewPictureBox.TabIndex = 23;
             this.ImagePreviewPictureBox.TabStop = false;
             this.ImagePreviewPictureBox.Click += new System.EventHandler(this.ImagePreviewPictureBox_Click);
@@ -280,13 +257,12 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddProduct
             // 
-            this.ClientSize = new System.Drawing.Size(1335, 629);
+            this.ClientSize = new System.Drawing.Size(604, 629);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.isAvalableRadioButton);
             this.Controls.Add(this.EnterDateDateTimePicker);
             this.Controls.Add(this.ImagePreviewPictureBox);
             this.Controls.Add(this.txtProductName);
-            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtProductId);
             this.Controls.Add(this.btnCancel);
@@ -294,7 +270,6 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.btnImage);
             this.Controls.Add(this.lbProductName);
-            this.Controls.Add(this.lbPrice);
             this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.lbIsAvalable);
             this.Controls.Add(this.lbEnterDate);
@@ -316,15 +291,139 @@ namespace Desktop_Windwos_form_application
 
 
         #region Using Method
+       
+
+
+        private void ResizeAndSetImage(string imagePath)
+        {
+            try
+            {
+                // Load the original image
+                using (var originalImage = System.Drawing.Image.FromFile(imagePath))
+                {
+                    // Set the maximum width and height for the resized image
+                    int maxWidth = 200; // Change this value to your desired maximum width
+                    int maxHeight = 200; // Change this value to your desired maximum height
+
+                    // Calculate the new size while maintaining the aspect ratio
+                    int newWidth, newHeight;
+                    if (originalImage.Width > originalImage.Height)
+                    {
+                        newWidth = maxWidth;
+                        newHeight = (int)((double)originalImage.Height / originalImage.Width * maxWidth);
+                    }
+                    else
+                    {
+                        newWidth = (int)((double)originalImage.Width / originalImage.Height * maxHeight);
+                        newHeight = maxHeight;
+                    }
+
+                    // Resize the image
+                    var resizedImage = new Bitmap(originalImage, newWidth, newHeight);
+
+                    // Assign the resized image to the PictureBox
+                    ImagePreviewPictureBox.Image = resizedImage;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during image resizing
+                MessageBox.Show($"Error resizing image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private async Task UploadImage(Stream stream, string fileName)
+        {
+            try
+            {
+                var content = new MultipartFormDataContent();
+                content.Add(new StreamContent(stream), "postedFile", fileName);
+
+                var response = await _httpClient.PostAsync("https://localhost:7141/SaveFile", content);
+                response.EnsureSuccessStatusCode(); // Ensure the response is successful
+
+                string imageName = await response.Content.ReadAsStringAsync();
+                // 'imageName' now contains the name of the uploaded image
+
+                imageNameData = imageName;
+
+                // Proceed with using 'imageName' as needed in your application
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during image upload
+            }
+        }
+
+
+
+
+
+        #endregion
+
+
+        #region Using Items
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtProductId.Clear();
+            txtProductName.Clear();
+            txtDescription.Clear();
+            isAvalableRadioButton.Checked = false; // Set to initial state
+            EnterDateDateTimePicker.Value = DateTime.Now;
+
+        }
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            frmMainPage mianPage = new frmMainPage(loggingTo);
+            mianPage.Show();
+            this.Hide();
+        }
+
         private async void btnAddProduct_Click(object sender, System.EventArgs e)
         {
-            if (int.TryParse(txtProductId.Text, out int productId) && decimal.TryParse(txtPrice.Text, out decimal priceAmount))
+
+            if (!int.TryParse(txtProductId.Text, out int Id) || Id <= 0)
+            {
+                MessageBox.Show("Please enter a valid positive integer for Product ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Product Name
+            if (string.IsNullOrEmpty(txtProductName.Text))
+            {
+                MessageBox.Show("Please enter a valid product name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Description
+            if (txtDescription.Text.Length < 15)
+            {
+                MessageBox.Show("Please enter a description with a minimum length of 15 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            // Validate Is Available
+
+          
+
+            // Validate Image Data
+            if (imageNameData == null)
+            {
+                MessageBox.Show("Please add an image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            if (int.TryParse(txtProductId.Text, out int productId) )
             {
                 var requestData = new
                 {
                     id = productId,
                     names = txtProductName.Text,
-                    price = priceAmount,
                     descriptions = txtDescription.Text,
                     isAvalable = isAvalableRadioButton.Checked, // Get the boolean value
                     expirDate = EnterDateDateTimePicker.Value,
@@ -341,7 +440,6 @@ namespace Desktop_Windwos_form_application
                 {
                     // Reset the fields after successful data addition
                     txtProductId.Clear();
-                    txtPrice.Clear();
                     txtProductName.Clear();
                     txtDescription.Clear();
                     isAvalableRadioButton.Checked = false; // Set to initial state
@@ -413,90 +511,6 @@ namespace Desktop_Windwos_form_application
 
         }
 
-
-        private void ResizeAndSetImage(string imagePath)
-        {
-            try
-            {
-                // Load the original image
-                using (var originalImage = System.Drawing.Image.FromFile(imagePath))
-                {
-                    // Set the maximum width and height for the resized image
-                    int maxWidth = 200; // Change this value to your desired maximum width
-                    int maxHeight = 200; // Change this value to your desired maximum height
-
-                    // Calculate the new size while maintaining the aspect ratio
-                    int newWidth, newHeight;
-                    if (originalImage.Width > originalImage.Height)
-                    {
-                        newWidth = maxWidth;
-                        newHeight = (int)((double)originalImage.Height / originalImage.Width * maxWidth);
-                    }
-                    else
-                    {
-                        newWidth = (int)((double)originalImage.Width / originalImage.Height * maxHeight);
-                        newHeight = maxHeight;
-                    }
-
-                    // Resize the image
-                    var resizedImage = new Bitmap(originalImage, newWidth, newHeight);
-
-                    // Assign the resized image to the PictureBox
-                    ImagePreviewPictureBox.Image = resizedImage;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that may occur during image resizing
-                MessageBox.Show($"Error resizing image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private async Task UploadImage(Stream stream, string fileName)
-        {
-            try
-            {
-                var content = new MultipartFormDataContent();
-                content.Add(new StreamContent(stream), "postedFile", fileName);
-
-                var response = await _httpClient.PostAsync("https://localhost:7141/SaveFile", content);
-                response.EnsureSuccessStatusCode(); // Ensure the response is successful
-
-                string imageName = await response.Content.ReadAsStringAsync();
-                // 'imageName' now contains the name of the uploaded image
-
-                imageNameData = imageName;
-
-                // Proceed with using 'imageName' as needed in your application
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that may occur during image upload
-            }
-        }
-
-
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
-            mianPage.Show();
-            this.Hide();
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            txtProductId.Clear();
-            txtPrice.Clear();
-            txtProductName.Clear();
-            txtDescription.Clear();
-            isAvalableRadioButton.Checked = false; // Set to initial state
-            EnterDateDateTimePicker.Value = DateTime.Now;
-
-        }
-        #endregion
-        #region Using Items
 
         private void lbEnterdate_Click(object sender, EventArgs e)
         {

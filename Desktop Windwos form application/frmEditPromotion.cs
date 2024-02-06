@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿#region Using Directives
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmEditPromotion: Form
     {
+        #region Uisng Variables
         private Label lbHeadding;
         private Label lbPaymentMethod;
         private Label lbDiscountNumber;
@@ -21,8 +24,11 @@ namespace Desktop_Windwos_form_application
         private Button btnSubmit;
         private Label lbisValid;
         public int billNumber;
+        #endregion
 
-        public frmEditPromotion(string promotionid , string payMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid)
+        #region Using Constructor
+
+        public frmEditPromotion(string promotionid, string payMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid)
         {
             if (int.TryParse(promotionid, out int parsedBillNumber))
             {
@@ -36,6 +42,9 @@ namespace Desktop_Windwos_form_application
             endDateTimePicker.Value = endDate;
             isValidRadioButton.Checked = isValid;
         }
+        #endregion
+
+        #region Using Initialize
 
         private void InitializeComponent()
         {
@@ -57,7 +66,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(454, 9);
+            this.lbHeadding.Location = new System.Drawing.Point(290, 9);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(136, 25);
             this.lbHeadding.TabIndex = 0;
@@ -170,7 +179,7 @@ namespace Desktop_Windwos_form_application
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(295, 305);
+            this.btnSubmit.Location = new System.Drawing.Point(295, 272);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(85, 33);
             this.btnSubmit.TabIndex = 16;
@@ -180,7 +189,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmEditPromotion
             // 
-            this.ClientSize = new System.Drawing.Size(1048, 414);
+            this.ClientSize = new System.Drawing.Size(675, 414);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.isValidRadioButton);
             this.Controls.Add(this.endDateTimePicker);
@@ -202,6 +211,9 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
+
+        #region Using Items
 
         private void txtPaymentMethode_TextChanged(object sender, EventArgs e)
         {
@@ -234,6 +246,19 @@ namespace Desktop_Windwos_form_application
 
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtPaymentMethode.Text))
+            {
+                MessageBox.Show("Please enter a valid Payment Method.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Discount Number
+            if (!decimal.TryParse(txtDiscountNumber.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric Discount Number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             string paymentMethod = txtPaymentMethode.Text;
             decimal discountNumber = decimal.Parse(txtDiscountNumber.Text);
@@ -261,11 +286,11 @@ namespace Desktop_Windwos_form_application
 
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Promotion updated successfully!");
+                MessageBox.Show("Data submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Failed to update Promotion. Status code: {response.StatusCode}");
+                MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -302,6 +327,7 @@ namespace Desktop_Windwos_form_application
         private void frmEditPromotion_Load(object sender, EventArgs e)
         {
 
-        }
+        } 
+        #endregion
     }
 }

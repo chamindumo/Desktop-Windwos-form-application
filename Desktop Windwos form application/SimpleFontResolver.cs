@@ -7,11 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using PageSize = iTextSharp.text.PageSize;
+using System.Net.Mime;
 
 namespace Desktop_application
 {
@@ -145,6 +148,8 @@ namespace Desktop_application
         {
             // Call the method to generate PDF from HTML template
             byte[] pdfBytes = GenerateBill("Order Summary", userName, itemCounts, totalCost, productcost, productprice, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
+            string toEmail = "janithramoramudali@gmail.com";
+            SendPdfByEmail(orderSummary, pdfBytes);
 
             // Save or send the generated PDF as needed
             string fileName = $"Bill_{DateTime.Now:yyyyMMddHHmmss}.pdf";
@@ -159,6 +164,43 @@ namespace Desktop_application
 
 
 
+        private static void SendPdfByEmail(string toEmail, byte[] pdfBytes)
+        {
+            try
+            {
+                string smtpServer = "smtp.gmail.com";
+                int smtpPort = 587; // Update with your SMTP server port
+                string smtpUsername = "chamindumoramudali99@gmail.com"; // Update with your SMTP server username
+                string smtpPassword = "faxnmyhocirfjxqx"; // Update with your SMTP server password
+
+                // Create an SMTP client
+                SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                smtpClient.EnableSsl = true;
+
+                // Create the email message
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("chamindumoramudali99@gmail.com"); // Update with your email address
+                mailMessage.To.Add(toEmail);
+                mailMessage.Subject = "Bill";
+                mailMessage.Body = "Please find attached your PDF invoice.";
+
+                // Attach the PDF file to the email
+                MemoryStream stream = new MemoryStream(pdfBytes);
+                Attachment attachment = new Attachment(stream, new ContentType(MediaTypeNames.Application.Pdf));
+                attachment.ContentDisposition.FileName = "Invoice.pdf";
+                mailMessage.Attachments.Add(attachment);
+
+                // Send the email
+                smtpClient.Send(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                Console.WriteLine($"Error sending email: {ex.Message}");
+            }
+        }
 
 
     }

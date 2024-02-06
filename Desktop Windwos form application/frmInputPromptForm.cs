@@ -1,34 +1,30 @@
-﻿using System;
-using System.Windows.Forms;
+﻿#region Using Directives
+using System;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public partial class frmInputPromptForm : Form
     {
+        #region Using Variable
         private Button btnSubmit;
         private Label label1;
         private TextBox txtInput;
-
         public string InputText { get; private set; }
+        #endregion
+
+        #region Using Constructor
 
         public frmInputPromptForm()
         {
             InitializeComponent(); // Assuming you've added controls in the designer
         }
+        #endregion
 
-        private void buttonOK_Click(object sender, EventArgs e)
-        {
-            InputText = txtInput.Text; // Assuming you have a TextBox named textBoxInput
-            DialogResult = DialogResult.OK;
-            Close();
-        }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
 
+        #region Uisng Initalize
         private void InitializeComponent()
         {
             this.txtInput = new System.Windows.Forms.TextBox();
@@ -70,10 +66,27 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtInput);
             this.Name = "frmInputPromptForm";
+            this.Load += new System.EventHandler(this.frmInputPromptForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+        #endregion
+
+        #region Uisng Items
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            InputText = txtInput.Text; // Assuming you have a TextBox named textBoxInput
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
 
         private void txtInput_TextChanged(object sender, EventArgs e)
         {
@@ -82,9 +95,35 @@ namespace Desktop_Windwos_form_application
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+
+            string userInput = txtInput.Text;
+
+            // Check if the input is null or empty
+            if (string.IsNullOrWhiteSpace(userInput))
+            {
+                MessageBox.Show("Please enter a valid input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if the input is a valid integer
+            if (!int.TryParse(userInput, out _))
+            {
+                MessageBox.Show("Please enter a valid Number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Optionally, clear the invalid input or take other actions
+                txtInput.Clear();
+                return;
+            }
+
+
             InputText = txtInput.Text; // Assuming you have a TextBox named textBoxInput
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void frmInputPromptForm_Load(object sender, EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }

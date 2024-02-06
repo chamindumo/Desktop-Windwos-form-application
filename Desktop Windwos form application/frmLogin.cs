@@ -1,27 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿#region Using Directives
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
+#endregion
 namespace Desktop_Windwos_form_application
 {
     public partial class frmLogin : Form
     {
+        #region Using Variable
         public string TextBox1Value { get; set; }
         public string TextBox2Value { get; set; }
         private bool loginInProgress = false;
-
         private HttpClient _httpClient;
+        #endregion
 
+        #region Using Constructor
         public frmLogin()
         {
             InitializeComponent();
@@ -29,7 +26,9 @@ namespace Desktop_Windwos_form_application
             txtPassword.PasswordChar = '●';
 
         }
+        #endregion
 
+        #region Using Items
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             loginInProgress = true;
@@ -81,7 +80,7 @@ namespace Desktop_Windwos_form_application
                 loginInProgress = false;
 
                 // Handle unsuccessful response (invalid credentials or server error)
-                MessageBox.Show("Invalid Username or password input.\nPlease enter the correct one", "Login Error");
+                MessageBox.Show("Invalid Username or password input.\nPlease enter the correct one", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -121,6 +120,7 @@ namespace Desktop_Windwos_form_application
                 // Perform actions related to the status strip item click during the login process
                 MessageBox.Show("Status strip item clicked during login.");
             }
-        }
+        } 
+        #endregion
     }
 }

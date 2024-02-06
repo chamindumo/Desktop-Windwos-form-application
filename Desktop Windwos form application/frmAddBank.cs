@@ -42,7 +42,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnBackNutton
             // 
-            this.btnBackNutton.Location = new System.Drawing.Point(103, 31);
+            this.btnBackNutton.Location = new System.Drawing.Point(47, 31);
             this.btnBackNutton.Name = "btnBackNutton";
             this.btnBackNutton.Size = new System.Drawing.Size(54, 35);
             this.btnBackNutton.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHedding.AutoSize = true;
             this.lbHedding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHedding.Location = new System.Drawing.Point(466, 41);
+            this.lbHedding.Location = new System.Drawing.Point(166, 41);
             this.lbHedding.Name = "lbHedding";
             this.lbHedding.Size = new System.Drawing.Size(98, 25);
             this.lbHedding.TabIndex = 1;
@@ -65,7 +65,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbBankId.AutoSize = true;
             this.lbBankId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBankId.Location = new System.Drawing.Point(100, 161);
+            this.lbBankId.Location = new System.Drawing.Point(44, 162);
             this.lbBankId.Name = "lbBankId";
             this.lbBankId.Size = new System.Drawing.Size(57, 17);
             this.lbBankId.TabIndex = 2;
@@ -76,7 +76,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbBankName.AutoSize = true;
             this.lbBankName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBankName.Location = new System.Drawing.Point(100, 199);
+            this.lbBankName.Location = new System.Drawing.Point(44, 200);
             this.lbBankName.Name = "lbBankName";
             this.lbBankName.Size = new System.Drawing.Size(81, 17);
             this.lbBankName.TabIndex = 3;
@@ -85,7 +85,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtBankId
             // 
-            this.txtBankId.Location = new System.Drawing.Point(227, 161);
+            this.txtBankId.Location = new System.Drawing.Point(171, 162);
             this.txtBankId.Name = "txtBankId";
             this.txtBankId.Size = new System.Drawing.Size(221, 20);
             this.txtBankId.TabIndex = 4;
@@ -93,7 +93,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtBookName
             // 
-            this.txtBookName.Location = new System.Drawing.Point(227, 199);
+            this.txtBookName.Location = new System.Drawing.Point(171, 200);
             this.txtBookName.Name = "txtBookName";
             this.txtBookName.Size = new System.Drawing.Size(221, 20);
             this.txtBookName.TabIndex = 5;
@@ -103,7 +103,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.A.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.A.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A.Location = new System.Drawing.Point(443, 366);
+            this.A.Location = new System.Drawing.Point(120, 313);
             this.A.Name = "A";
             this.A.Size = new System.Drawing.Size(174, 44);
             this.A.TabIndex = 6;
@@ -113,7 +113,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddBank
             // 
-            this.ClientSize = new System.Drawing.Size(1023, 516);
+            this.ClientSize = new System.Drawing.Size(508, 516);
             this.Controls.Add(this.A);
             this.Controls.Add(this.txtBookName);
             this.Controls.Add(this.txtBankId);
@@ -162,28 +162,32 @@ namespace Desktop_Windwos_form_application
         {
 
         }
-        #endregion
 
-        #region using methode
+
+
         private async void btnSubmit_Click(object sender, System.EventArgs e)
         {
-            string BankName = txtBookName.Text; // Get the bank name from the Entry field
-            if (int.TryParse(txtBankId.Text, out int BankId))
+            string bankName = txtBookName.Text;
+
+            // Validate bank ID and bank name
+            if (ValidateInputs())
             {
                 try
                 {
                     var httpClient = new HttpClient();
                     var url = "https://localhost:7141/api/banks";
 
+                    // Convert bank details to JSON
                     var bankDetails = new
                     {
-                        bankId = BankId,
-                        bankName = BankName
+                        bankId = int.Parse(txtBankId.Text),
+                        bankName = bankName
                     };
 
                     var jsonBankDetails = JsonConvert.SerializeObject(bankDetails);
                     var content = new StringContent(jsonBankDetails, Encoding.UTF8, "application/json");
 
+                    // Send a POST request to the API
                     var response = await httpClient.PostAsync(url, content);
 
                     if (response.IsSuccessStatusCode)
@@ -206,17 +210,6 @@ namespace Desktop_Windwos_form_application
                     // Handle exceptions here
                 }
             }
-            else
-            {
-            }
-            if (!string.IsNullOrEmpty(BankName))
-            {
-
-
-            }
-            else
-            {
-            }
         }
 
 
@@ -226,9 +219,33 @@ namespace Desktop_Windwos_form_application
             frmMainPage mianPage = new frmMainPage(loggingTo);
             mianPage.Show();
             this.Hide();
-        } 
+        }
+
+
+
         #endregion
 
+
+        #region Using Method
+        private bool ValidateInputs()
+        {
+            // Validate bank ID
+            if (!int.TryParse(txtBankId.Text, out int bankId) || bankId <= 0)
+            {
+                MessageBox.Show("Please enter a valid positive integer for Bank ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Validate bank name
+            if (string.IsNullOrWhiteSpace(txtBookName.Text))
+            {
+                MessageBox.Show("Please enter a valid Bank Name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        } 
+        #endregion
 
     }
 }

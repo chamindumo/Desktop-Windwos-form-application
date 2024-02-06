@@ -1,29 +1,37 @@
-﻿using Newtonsoft.Json;
+﻿#region Using Directives
+
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmAvalableProduct: Form
     {
+        #region Using Variables
         private BindingSource StockbindingSource;
         private DataGridView avalableStockDataGridView;
         private TextBox txtSearch;
         private System.ComponentModel.IContainer components;
         private Label lbHeadder;
-        public List<AvalableStock> stock; // New list to store the original data
+        public List<AvalableStock> stock; // New list to store the original data 
+        #endregion
 
+        #region Using Constructor
 
         public frmAvalableProduct()
         {
             FetchStock();
             InitializeComponent();
         }
+        #endregion
 
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -43,7 +51,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.avalableStockDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.avalableStockDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.avalableStockDataGridView.Location = new System.Drawing.Point(174, 92);
+            this.avalableStockDataGridView.Location = new System.Drawing.Point(32, 83);
             this.avalableStockDataGridView.Name = "avalableStockDataGridView";
             this.avalableStockDataGridView.Size = new System.Drawing.Size(559, 229);
             this.avalableStockDataGridView.TabIndex = 0;
@@ -70,7 +78,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAvalableProduct
             // 
-            this.ClientSize = new System.Drawing.Size(925, 355);
+            this.ClientSize = new System.Drawing.Size(635, 355);
             this.Controls.Add(this.lbHeadder);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.avalableStockDataGridView);
@@ -83,7 +91,9 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
 
+        #region Using Items
         private void StockbindingSource_CurrentChanged(object sender, System.EventArgs e)
         {
 
@@ -94,23 +104,8 @@ namespace Desktop_Windwos_form_application
 
         }
 
-
-        private async Task FetchStock()
+        private void frmAvalableProduct_Load(object sender, System.EventArgs e)
         {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/productitems");
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            BindingList<AvalableStock> banks = JsonConvert.DeserializeObject<BindingList<AvalableStock>>(content);
-            stock = JsonConvert.DeserializeObject<List<AvalableStock>>(content);
-
-            this.StockbindingSource.DataSource = banks;
-            this.avalableStockDataGridView.DataSource = this.StockbindingSource;
-
-
-
-           
 
         }
 
@@ -140,9 +135,28 @@ namespace Desktop_Windwos_form_application
 
         }
 
-        private void frmAvalableProduct_Load(object sender, System.EventArgs e)
+
+        #endregion
+
+        #region Using Method
+        private async Task FetchStock()
         {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/productitems");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+            BindingList<AvalableStock> banks = JsonConvert.DeserializeObject<BindingList<AvalableStock>>(content);
+            stock = JsonConvert.DeserializeObject<List<AvalableStock>>(content);
+
+            this.StockbindingSource.DataSource = banks;
+            this.avalableStockDataGridView.DataSource = this.StockbindingSource;
 
         }
+
+        
+        #endregion
+
+
     }
 }

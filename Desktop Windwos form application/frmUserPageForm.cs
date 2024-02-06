@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Desktop_Windwos_form_application
 {
     public partial class frmUserPageForm : Form
     {
+        #region Using Variable
         string UsernameOfTheLogingPersom = "";
         private HttpClient client = new HttpClient();
         private static decimal totalCostPrice = 0;
@@ -46,6 +48,9 @@ namespace Desktop_Windwos_form_application
         public string name;
         public static string TmpName = "";
         public int orderNumber = 0;
+        public string Email;
+        #endregion
+        #region Using Constructor
         public frmUserPageForm(string username)
         {
             name = username;
@@ -54,8 +59,10 @@ namespace Desktop_Windwos_form_application
             FetchItemPrices();
             FetchProducts();
             FetchBankNames();
-        }
 
+        }
+        #endregion
+        #region Using Items
         private void txtProduct_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtProduct.Text;
@@ -84,87 +91,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private async Task FetchDiscounts(string paymentMethode)
-        {
-            try
-            {
-                HttpResponseMessage discountResponse = await client.GetAsync("https://localhost:7141/discounts");
 
-                if (discountResponse.IsSuccessStatusCode)
-                {
-                    string discountContent = await discountResponse.Content.ReadAsStringAsync();
-                    var discounts = JsonConvert.DeserializeObject<List<Discount>>(discountContent);
-
-                    foreach (var discount in discounts)
-                    {
-                        if (!productDiscounts.ContainsKey(discount.ProductId))
-                        {
-                            productDiscounts[discount.ProductId] = new List<Discount>();
-                        }
-
-                        if (DateTime.Now >= discount.StartDate && DateTime.Now <= discount.EndDate && discount.IsValid && paymentMethode == discount.PaymentMethod)
-                        {
-                            productDiscounts[discount.ProductId].Add(discount);
-                        }
-                        else if (DateTime.Now >= discount.StartDate && DateTime.Now <= discount.EndDate && discount.IsValid && discount.PaymentMethod == "ALL")
-                        {
-                            productDiscounts[discount.ProductId].Add(discount);
-
-                        }
-                    }
-                }
-                else
-                {
-                    // Handle the case where the response is unsuccessful
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-            }
-        }
-        private async Task FetchPromotion()
-        {
-            try
-            {
-                string paymentMethod = cmbPaymentMethode.SelectedItem as string;
-
-                if (string.IsNullOrEmpty(paymentMethod))
-                {
-                    // Handle the case where no payment method is selected
-                    return;
-                }
-
-                HttpResponseMessage discountResponse = await client.GetAsync("https://localhost:7141/promotions");
-
-                if (discountResponse.IsSuccessStatusCode)
-                {
-                    string discountContent = await discountResponse.Content.ReadAsStringAsync();
-                    var promotions = JsonConvert.DeserializeObject<List<PromotionDTO>>(discountContent);
-
-                    foreach (var promotion in promotions)
-                    {
-                        if (DateTime.Now >= promotion.StartDate && DateTime.Now <= promotion.EndDate)
-                        {
-                            if (promotion.IsValid && promotion.PayMethod == paymentMethod)
-                            {
-                                productPromotion[promotion.PayMethod] = promotion.DiscountNumber;
-
-                                return;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    // Handle the case where the response is unsuccessful
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-            }
-        }
 
 
 
@@ -196,327 +123,29 @@ namespace Desktop_Windwos_form_application
 
         }
 
-        private async Task DisplayAlertForUserData(bool isLoyaltyCard)
-        {
-            string userInput = string.Empty;
-            frmInputPromptForm prompt = new frmInputPromptForm();
-            DialogResult result = prompt.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                if (isLoyaltyCard)
-                {
-                    userInput = prompt.InputText;
-                }
-                else
-                {
-                    userInput = prompt.InputText;
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(userInput))
-            {
-                CustermerDTO userData = await FetchUserData(userInput, isLoyaltyCard);
-
-                if (userData != null)
-                {
-                    string message = $"User Name: {userData.Name}\nStar Points: {userData.StarPoints}";
-                    DialogResult dialogResult = MessageBox.Show($"User Information: {message}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-                    if (dialogResult == DialogResult.OK)
-                    {
-                        // Perform actions when the user clicks OK
-                        try
-                        {
-                            HttpResponseMessage promotionResponse = await client.GetAsync("https://localhost:7141/promotions");
-
-                            if (promotionResponse.IsSuccessStatusCode)
-                            {
-                                string promotionContent = await promotionResponse.Content.ReadAsStringAsync();
-                                var promotions = JsonConvert.DeserializeObject<List<PromotionDTO>>(promotionContent);
-
-                                foreach (var promotion in promotions)
-                                {
-                                    if (promotion.PayMethod == "loyalty card")
-                                    {
-                                        // Add the loyalty card promotion to the product promotions dictionary
-                                        productPromotion[promotion.PayMethod] = promotion.DiscountNumber;
-
-                                        // Recalculate the total price considering the loyalty card promotion
-                                        UpdateTotalCost();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // Handle the case where the response is unsuccessful
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            // Handle exceptions
-                        }
-                    }
-                }
-                else
-                {
-                }
-            }
-            else
-            {
-            }
-        }
-
-
-        private int CalculateStarPoints(decimal totalCost)
-        {
-            decimal loyaltyValue = 0;
-
-            // Access the text entered in the LoyeltyCard Entry field and try to parse it into an integer
-            if (decimal.TryParse(txtExtraForCard.Text, out loyaltyValue))
-            {
-
-            }
-
-            // Calculate star points based on the total cost (e.g., 3.5%)
-            decimal starPointsDecimal = (totalCost * 0.035m) + previousstartPoint + loyaltyValue; // Assuming star points are 3.5% of the total cost
-            int starPointsRounded = (int)Math.Round(starPointsDecimal); // Rounding the decimal to the nearest integer4
-
-            return starPointsRounded;
-        }
-
-        private async Task UpdateStarPoints()
-        {
-            try
-            {
-                int starPoints = CalculateStarPoints(totalCostPrice);
-
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.PutAsync($"https://localhost:7141/api/customers/starpoints/{loyaltyCardNumber}/{starPoints}", null);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("Succes,", $"Star points added to the:  {loyaltyCardNumber}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-                    }
-                    else
-                    {
-                        // Handle unsuccessful response (e.g., log error, show alert, etc.)
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exception (e.g., log error, show alert, etc.)
-            }
-        }
 
 
 
 
 
 
-        private async Task<CustermerDTO> FetchUserData(string userInput, bool isLoyaltyCard)
-        {
-            string apiUrl = isLoyaltyCard ?
-                    $"https://localhost:7141/api/customers/byLoyaltyCardNumber/{userInput}" :
-                    $"https://localhost:7141/api/customers/byPhoneNumber/{userInput}";
-
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string json = await response.Content.ReadAsStringAsync();
-                        CustermerDTO userData = JsonConvert.DeserializeObject<CustermerDTO>(json);
-                        loyaltyCardNumber = userData?.LoyaltyCardNumber ?? "";
-                        previousstartPoint = userData.StarPoints;
-
-                        return userData;
-                    }
-                    else
-                    {
-                        // Handle unsuccessful response (e.g., log error, return null, etc.)
-                        return null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exception (e.g., log error, return null, etc.)
-                return null;
-            }
-        }
 
 
-        private void txtQutity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void FetchProducts()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/product");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    var products = JsonConvert.DeserializeObject<List<ProductDTO>>(content);
-
-                    foreach (var product in products)
-                    {
-                        // Assuming 'product.Name' is the name and 'product.Price' is the price
-                        // productCosts[product.Names] = product.Price;
-                        productIds[product.Names] = product.Id;
-
-                    }
-
-                    // After fetching the products, display them
-                }
-                else
-                {
-                    // Handle the case where the response is unsuccessful
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-            }
-        }
-
-        private async Task FetchItemPrices()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/orderItems");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    var orderItems = JsonConvert.DeserializeObject<List<ItemDetailsDTO>>(content);
-
-                    foreach (var orderItem in orderItems)
-                    {
-                        // Assuming 'orderItem.ProductName' is the name and 'orderItem.Price' is the price
-                        productCosts[orderItem.ProductName] = orderItem.ItemSellPrice;
-                        ItemSellprice[orderItem.ItemId] = orderItem.ProductName;
-                        Cost[orderItem.ItemId] = orderItem.ItemSellPrice;
-                        productItemIds[orderItem.ItemId] = orderItem.ProductId;
-                    }
-                }
-                else
-                {
-                    // Handle the case where the response is unsuccessful
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-            }
-        }
-
-
-        private async Task UpdateProductStockQuantity(int productId, int selectid, int availableQuantity, string productName)
-        {
-
-            var client = new HttpClient();
-
-            HttpResponseMessage response1 = await client.GetAsync("https://localhost:7141/productitems");
-
-            string responseData = await response1.Content.ReadAsStringAsync();
-
-            decimal SellPrice = Cost[selectid];
-
-            int Id = productId;
-            int foundProductId = 0;
-            List<ProductItemDTO> productStocks = JsonConvert.DeserializeObject<List<ProductItemDTO>>(responseData); // Your existing productStocks
-
-            ProductItemDTO foundProductStock = productStocks.FirstOrDefault(ps => ps.ProductId == Id && ps.Price == SellPrice);
-            if (foundProductStock != null)
-            {
-                foundProductId = foundProductStock.Id;
-            }
-
-            ProductItemDTO formData = new ProductItemDTO
-            {
-                Id = foundProductId,
-                ProductId = productId,
-                ProductName = productName,
-                StockQuantity = availableQuantity,
-                Price = SellPrice,
-
-
-            };
-
-            // Convert the object to JSON
-            var jsonData = JsonConvert.SerializeObject(formData);
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync($"https://localhost:7141/productitem", content);
-        }
-
-        private async Task<bool> IsQuantityAvailable(int productId, int selectedId, int requestedQuantity)
-        {
-
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage response1 = await client.GetAsync("https://localhost:7141/productitems");
-
-                    string responseData = await response1.Content.ReadAsStringAsync();
-
-                    decimal SellPrice = Cost[selectedId];
-
-                    int Id = productId;
-                    int foundProductId = 0;
-                    List<ProductItemDTO> productStocks = JsonConvert.DeserializeObject<List<ProductItemDTO>>(responseData); // Your existing productStocks
-
-                    ProductItemDTO foundProductStock = productStocks.FirstOrDefault(ps => ps.ProductId == Id && ps.Price == SellPrice);
-                    if (foundProductStock != null)
-                    {
-                        foundProductId = foundProductStock.Id;
-                    }
-
-
-                    HttpResponseMessage response = await client.GetAsync($"https://localhost:7141/productitem/{foundProductId}/?price={SellPrice}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        // Deserialize the content to get product stock information
-                        // Assuming ProductStockModel is your model representing the product stock details
-                        ProductStockDTO productStock = JsonConvert.DeserializeObject<ProductStockDTO>(content);
-
-                        // Check if the requested quantity is available
-                        if (productStock != null && productStock.StockQuantity >= requestedQuantity)
-                        {
-
-                            productName = productStock.ProductName;
-                            availableQuantity = productStock.StockQuantity;
-
-
-
-                            return true;
-                        }
-                    }
-                    // If the product doesn't exist or the quantity is insufficient
-                    return false;
-                }
-                catch (Exception ex)
-                {
-                    // Handle exceptions (e.g., network issues, JSON parsing errors)
-                    return false;
-                }
-            }
-        }
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtQuentity.Text))
+            {
+                MessageBox.Show("Please enter a valid Quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!int.TryParse(txtQuentity.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric Quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (dataGridView1 == null)
             {
                 // Create and configure the DataGridView if not already done
@@ -540,7 +169,7 @@ namespace Desktop_Windwos_form_application
             if (!int.TryParse(txtQuentity.Text, out int quantity))
             {
                 // Handle invalid quantity input
-                MessageBox.Show("Invalid quantity input.");
+                MessageBox.Show("Invalid Quentity. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -583,7 +212,7 @@ namespace Desktop_Windwos_form_application
                                 if (!isAvailable)
                                 {
                                     // Handle case where quantity is not available
-                                    MessageBox.Show("Sorry, the selected product quantity is not available.", "Quantity Unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                                    MessageBox.Show("Sorry, the selected product quantity is not available.", "Quantity Unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
 
                                     // Display a message to the user or take appropriate action
                                     return;
@@ -618,13 +247,14 @@ namespace Desktop_Windwos_form_application
                         }
                         else
                         {
-                            MessageBox.Show("Invalid selection. Product not found.");
+                            MessageBox.Show("Product Not Found. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Product selection canceled.");
+                        MessageBox.Show("Canceled. Product selection canceled.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                         return;
                     }
                 }
@@ -651,7 +281,7 @@ namespace Desktop_Windwos_form_application
                     if (!isAvailable)
                     {
                         // Handle case where quantity is not available
-                        MessageBox.Show("Sorry, the selected product quantity is not available.", "Quantity Unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        MessageBox.Show("Sorry, the selected product quantity is not available.", "Quantity Unavailable", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
 
                         // Display a message to the user or take appropriate action
                         return;
@@ -687,7 +317,7 @@ namespace Desktop_Windwos_form_application
             else
             {
                 // Handle case where no items were found
-                MessageBox.Show("No items found for the selected product.");
+                MessageBox.Show("Error.No Items found! .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -695,47 +325,15 @@ namespace Desktop_Windwos_form_application
 
 
 
-            // Add a new row to the DataGridView
-
-            // Optionally, you can update the total cost here
+          
             UpdateTotalCost();
 
-            // Clear the text boxes
             txtProduct.Clear();
             txtQuentity.Clear();
         }
 
 
-        private async void FetchBankNames()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/api/banks");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    var bankObjects = JsonConvert.DeserializeObject<List<BankModelDTO>>(content);
-
-                    // Extract bank names from bankObjects
-                    var bankNames = bankObjects.Select(bank => bank.BankName).ToList();
-                    // Bind the bank names to the Picker control
-                    cmbPaymentMethode.DataSource = bankNames;
-                    foreach (var bank in bankObjects)
-                    {
-                        bankDictionary[bank.BankName] = bank.BankId; // Assuming BankId is the property representing the ID
-                    }
-                }
-                else
-                {
-                    // Handle the case where the response is unsuccessful
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions
-            }
-        }
 
 
 
@@ -789,6 +387,21 @@ namespace Desktop_Windwos_form_application
                 var source = new BindingSource(bindingList, null);
                 bindingSource1.DataSource = source;
                 ProductDataGrid.DataSource = this.bindingSource1;
+
+
+                ProductDataGrid.Columns["ItemName"].Width = 200; 
+                ProductDataGrid.Columns["Quantity"].Width = 120;   // Set the width of the Quantity column
+                ProductDataGrid.Columns["UnitPrice"].Width = 150;  // Set the width of the UnitPrice column
+                ProductDataGrid.Columns["TotalPrice"].Width = 170;
+
+
+                ProductDataGrid.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold); // Set the font for column headers
+
+
+                ProductDataGrid.Columns["ItemName"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the ItemName column
+                ProductDataGrid.Columns["Quantity"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);  // Set the font for the Quantity column
+                ProductDataGrid.Columns["UnitPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the UnitPrice column
+                ProductDataGrid.Columns["TotalPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the TotalPrice column
             }
 
         }
@@ -803,69 +416,10 @@ namespace Desktop_Windwos_form_application
             public decimal TotalPrice => Quantity * UnitPrice;
         }
 
-        private void UpdateTotalCost()
-        {
-            decimal totalCost = 0; // Reset the total cost
-
-            foreach (var item in itemIdCounts)
-            {
-                // Calculate the total cost for each item considering the quantity and unit price
-                decimal itemTotalPrice = CalculateItemPrice(item.Key, item.Value);
-                totalCost += itemTotalPrice;
-            }
-
-            // Apply promotions to the total cost
-            foreach (var promotion in productPromotion)
-            {
-                // Assuming productPromotion is a Dictionary<string, decimal> where the key is the payment method and the value is the discount
-                if ((promotion.Key == cmbPaymentMethode.SelectedItem as string))
-                {
-                    decimal discount = promotion.Value;
-                    totalCost -= (totalCost * discount / 100); // Deduct the discount from the total cost
-
-                }
-                else if (promotion.Key == "loyalty card")
-                {
-                    decimal discount = promotion.Value;
-                    totalCost -= (totalCost * discount / 100); // Deduct the loyalty card discount from the total cost
-                }
-            }
-
-            totalCostPrice = totalCost;
-            totalCost = 0;
-            totalCostLabel.Text = $"Total Cost: {totalCostPrice:C}";
-        }
 
 
-        private decimal CalculateItemPrice(int itemName, int count)
-        {
-            if (!Cost.ContainsKey(itemName))
-            {
-                return 0; // If the product is not found, return 0
-            }
 
-            decimal itemTotalPrice = Cost[itemName] * count;
 
-            if (productDiscounts.ContainsKey(productItemIds[itemName]))
-            {
-                // Get all discounts associated with the product ID
-                var discounts = productDiscounts[productItemIds[itemName]];
-
-                // Calculate the total discount for this item
-                decimal totalDiscount = 0;
-                foreach (var discount in discounts)
-                {
-                    decimal discountValue = discount.DiscountNumber / 100;
-                    totalDiscount += itemTotalPrice * discountValue;
-                }
-
-                decimal discountedTotalPrice = itemTotalPrice - totalDiscount;
-
-                return discountedTotalPrice;
-            }
-
-            return itemTotalPrice;
-        }
 
 
         private async void cmbPaymentMethode_SelectedIndexChanged(object sender, EventArgs e)
@@ -971,11 +525,11 @@ namespace Desktop_Windwos_form_application
             {
                 lbExtraForCard.Visible = true;
                 txtExtraForCard.Visible = true;
+                await UpdateStarPoints();
 
 
             }
 
-            await UpdateStarPoints();
             await FetchDiscounts(paymentMethod);
             UpdateTotalCost();
 
@@ -985,6 +539,9 @@ namespace Desktop_Windwos_form_application
 
         private async void btnCheackOut_Click(object sender, EventArgs e)
         {
+
+            
+             
             orderNumber = GenerateOrderId();
             PlaceOrder(orderNumber);
             txtExtraForCard.Text = "";
@@ -1001,6 +558,398 @@ namespace Desktop_Windwos_form_application
 
 
 
+        }
+
+
+
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Prompt the user for username and password
+            string enteredUsername = PromptForInput("Enter Username:");
+            string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
+
+            HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
+
+                string userType;
+                if (userData.TryGetValue("type", out userType))
+                {
+                    if (userType == "user")
+                    {
+                        // Navigate to UserPage
+                        MessageBox.Show("Canceled. Invalid credentials. Unable to delete data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    else if (userType == "admin")
+                    {
+                        // Delete all rows in the dataGridView1
+                        dataGridView1.Rows.Clear();
+                        MessageBox.Show("All data deleted successfully!");
+                    }
+                }
+            }
+        }
+
+
+
+        private async void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the clicked cell is in a valid range (avoiding header clicks)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Prompt the user for username and password
+                string enteredUsername = PromptForInput("Enter Username:");
+                string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
+
+                HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
+
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
+                    int logging = 1;
+                    string userType;
+                    if (userData.TryGetValue("type", out userType))
+                    {
+                        if (userType == "user")
+                        {
+
+                            // Navigate to UserPage
+                            MessageBox.Show("Canceled. Invalid credentials. Unable to delete data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                        }
+                        else if (userType == "admin")
+                        {
+                            dataGridView1.Rows.RemoveAt(e.RowIndex);
+                            MessageBox.Show("Data deleted successfully!");
+                        }
+                    }
+                }
+
+
+
+
+
+
+            }
+        }
+
+
+
+
+        private void lstProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstProduct.SelectedItems.Count > 0)
+            {
+                string selectedProduct = lstProduct.SelectedItems[0].Text;
+
+                // Append the selected product to the textBox1.Text
+                txtProduct.Text = selectedProduct;
+
+                // Hide the suggestions list after selecting a suggestion
+                lstProduct.Visible = false;
+            }
+        }
+
+        private void totalCostLabel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCardNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbExtraForCard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbAmount_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbCardNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserPageForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            frmLogin loggingPage = new frmLogin();
+            loggingPage.Show();
+            this.Hide();
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            frmAddCustermer addCustermer = new frmAddCustermer();
+            addCustermer.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAvalableProducts_Click_1(object sender, EventArgs e)
+        {
+            frmAvalableProduct avalableProduct = new frmAvalableProduct();
+            avalableProduct.Show();
+        }
+
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lbQuentity_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbPaymentType_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbpaymentMethode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+        #endregion
+        #region Using Method
+        private string PromptForInput(string prompt, bool isPassword = false)
+        {
+            Form promptForm = new Form();
+            promptForm.Width = 300;
+            promptForm.Height = 150;
+            promptForm.Text = prompt;
+
+            TextBox textBox = new TextBox() { Left = 50, Top = 20, Width = 200 };
+            if (isPassword)
+            {
+                textBox.PasswordChar = '*';
+            }
+
+            Button okButton = new Button() { Text = "OK", Left = 50, Top = 50 };
+            okButton.Click += (sender, e) => { promptForm.Close(); };
+
+            promptForm.Controls.Add(textBox);
+            promptForm.Controls.Add(okButton);
+
+            promptForm.ShowDialog();
+
+            return textBox.Text;
+        }
+
+        private bool IsValidCredentials(string username, string password)
+        {
+            // Replace this with your authentication logic
+            // For simplicity, let's assume a hardcoded username and password
+            return username == "admin" && password == "password";
+        }
+
+        private async Task FetchDiscounts(string paymentMethode)
+        {
+            try
+            {
+                HttpResponseMessage discountResponse = await client.GetAsync("https://localhost:7141/discounts");
+
+                if (discountResponse.IsSuccessStatusCode)
+                {
+                    string discountContent = await discountResponse.Content.ReadAsStringAsync();
+                    var discounts = JsonConvert.DeserializeObject<List<Discount>>(discountContent);
+
+                    foreach (var discount in discounts)
+                    {
+                        if (!productDiscounts.ContainsKey(discount.ProductId))
+                        {
+                            productDiscounts[discount.ProductId] = new List<Discount>();
+                        }
+
+                        if (DateTime.Now >= discount.StartDate && DateTime.Now <= discount.EndDate && discount.IsValid && paymentMethode == discount.PaymentMethod)
+                        {
+                            productDiscounts[discount.ProductId].Add(discount);
+                        }
+                        else if (DateTime.Now >= discount.StartDate && DateTime.Now <= discount.EndDate && discount.IsValid && discount.PaymentMethod == "ALL")
+                        {
+                            productDiscounts[discount.ProductId].Add(discount);
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the response is unsuccessful
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+        }
+        private async Task FetchPromotion()
+        {
+            try
+            {
+                string paymentMethod = cmbPaymentMethode.SelectedItem as string;
+
+                if (string.IsNullOrEmpty(paymentMethod))
+                {
+                    // Handle the case where no payment method is selected
+                    return;
+                }
+
+                HttpResponseMessage discountResponse = await client.GetAsync("https://localhost:7141/promotions");
+
+                if (discountResponse.IsSuccessStatusCode)
+                {
+                    string discountContent = await discountResponse.Content.ReadAsStringAsync();
+                    var promotions = JsonConvert.DeserializeObject<List<PromotionDTO>>(discountContent);
+
+                    foreach (var promotion in promotions)
+                    {
+                        if (DateTime.Now >= promotion.StartDate && DateTime.Now <= promotion.EndDate)
+                        {
+                            if (promotion.IsValid && promotion.PayMethod == paymentMethod)
+                            {
+                                productPromotion[promotion.PayMethod] = promotion.DiscountNumber;
+
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the response is unsuccessful
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+        }
+
+
+
+        private async Task SendOrderToApi(OrderDTO order)
+        {
+            try
+            {
+                string apiUrl = "https://localhost:7141/api/orders";
+                string jsonOrder = JsonConvert.SerializeObject(order);
+                HttpContent content = new StringContent(jsonOrder, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                orderNumber = GenerateOrderId();
+
+                string summary = $"Order Number: {orderNumber}\nUser: {name}\nItems:\n";
+
+                decimal itemPrice = 0;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    foreach (var item in itemIdCounts)
+                    {
+                        int itemId = item.Key;
+                        itemPrice = CalculateItemPrice(item.Key, item.Value);
+                        summary += $"  {ItemSellprice[item.Key]}     Quantity: {item.Value},    Price: ${itemPrice}\n";
+                        Price[itemId] = itemPrice;
+                    }
+
+                    MessageBox.Show("Succes, product submit.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    decimal cash;
+
+                    if (decimal.TryParse(txtAmount.Text, out cash))
+                    {
+                        Cash = cash;
+                    }
+                    name = UsernameOfTheLogingPersom;
+
+                    decimal priceOf;
+
+                    if (decimal.TryParse(totalCostLabel.Text, out priceOf))
+                    {
+                        priceOf = totalCostPrice;
+                    }
+                    if (Cash == 0)
+                    {
+                        Cash = totalCostPrice;
+                    }
+
+
+
+                    decimal price;
+
+                    if (decimal.TryParse(totalCostLabel.Text, out price))
+                    {
+
+                    }
+
+                    decimal balance = Cash - totalCostPrice;
+                    await GetTemplate();
+
+                    MessageBox.Show($"Blance: {balance}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    txtAmount.Clear();
+                    string toMail = Email;
+                    Email = "";
+                    SimpleFontResolver.GenerateAndDownloadPdf(toMail, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
+
+
+
+
+
+                    dailyOrders.Add(summary);
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Error, product submit error.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private async void PlaceOrder(int orderNumber)
@@ -1187,303 +1136,441 @@ namespace Desktop_Windwos_form_application
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
-        private async Task SendOrderToApi(OrderDTO order)
+
+        private void UpdateTotalCost()
+        {
+            decimal totalCost = 0; // Reset the total cost
+
+            foreach (var item in itemIdCounts)
+            {
+                // Calculate the total cost for each item considering the quantity and unit price
+                decimal itemTotalPrice = CalculateItemPrice(item.Key, item.Value);
+                totalCost += itemTotalPrice;
+            }
+
+            // Apply promotions to the total cost
+            foreach (var promotion in productPromotion)
+            {
+                // Assuming productPromotion is a Dictionary<string, decimal> where the key is the payment method and the value is the discount
+                if ((promotion.Key == cmbPaymentMethode.SelectedItem as string))
+                {
+                    decimal discount = promotion.Value;
+                    totalCost -= (totalCost * discount / 100); // Deduct the discount from the total cost
+
+                }
+                else if (promotion.Key == "loyalty card")
+                {
+                    decimal discount = promotion.Value;
+                    totalCost -= (totalCost * discount / 100); // Deduct the loyalty card discount from the total cost
+                }
+            }
+
+            decimal totalAmount = 0;
+
+            // Calculate the total amount by summing up the TotalPrice for each row
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["TotalPrice"].Value != null)
+                {
+                    totalAmount += Convert.ToDecimal(row.Cells["TotalPrice"].Value);
+                }
+            }
+
+            // Display or use the totalAmount as needed
+            Console.WriteLine($"Total Amount: {totalAmount}");
+
+
+
+            totalCostPrice = totalCost;
+            totalCost = 0;
+            totalCostLabel.Text = totalCostPrice.ToString();
+        }
+
+        private decimal CalculateItemPrice(int itemName, int count)
+        {
+            if (!Cost.ContainsKey(itemName))
+            {
+                return 0; // If the product is not found, return 0
+            }
+
+            decimal itemTotalPrice = Cost[itemName] * count;
+
+            if (productDiscounts.ContainsKey(productItemIds[itemName]))
+            {
+                // Get all discounts associated with the product ID
+                var discounts = productDiscounts[productItemIds[itemName]];
+
+                // Calculate the total discount for this item
+                decimal totalDiscount = 0;
+                foreach (var discount in discounts)
+                {
+                    decimal discountValue = discount.DiscountNumber / 100;
+                    totalDiscount += itemTotalPrice * discountValue;
+                }
+
+                decimal discountedTotalPrice = itemTotalPrice - totalDiscount;
+
+                return discountedTotalPrice;
+            }
+
+            return itemTotalPrice;
+        }
+
+
+        private async Task<bool> IsQuantityAvailable(int productId, int selectedId, int requestedQuantity)
+        {
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response1 = await client.GetAsync("https://localhost:7141/productitems");
+
+                    string responseData = await response1.Content.ReadAsStringAsync();
+
+                    decimal SellPrice = Cost[selectedId];
+
+                    int Id = productId;
+                    int foundProductId = 0;
+                    List<ProductItemDTO> productStocks = JsonConvert.DeserializeObject<List<ProductItemDTO>>(responseData); // Your existing productStocks
+
+                    ProductItemDTO foundProductStock = productStocks.FirstOrDefault(ps => ps.ProductId == Id && ps.Price == SellPrice);
+                    if (foundProductStock != null)
+                    {
+                        foundProductId = foundProductStock.Id;
+                    }
+
+
+                    HttpResponseMessage response = await client.GetAsync($"https://localhost:7141/productitem/{foundProductId}/?price={SellPrice}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        // Deserialize the content to get product stock information
+                        // Assuming ProductStockModel is your model representing the product stock details
+                        ProductStockDTO productStock = JsonConvert.DeserializeObject<ProductStockDTO>(content);
+
+                        // Check if the requested quantity is available
+                        if (productStock != null && productStock.StockQuantity >= requestedQuantity)
+                        {
+
+                            productName = productStock.ProductName;
+                            availableQuantity = productStock.StockQuantity;
+
+
+
+                            return true;
+                        }
+                    }
+                    // If the product doesn't exist or the quantity is insufficient
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions (e.g., network issues, JSON parsing errors)
+                    return false;
+                }
+            }
+        }
+
+        private async void FetchBankNames()
         {
             try
             {
-                string apiUrl = "https://localhost:7141/api/orders";
-                string jsonOrder = JsonConvert.SerializeObject(order);
-                HttpContent content = new StringContent(jsonOrder, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-                orderNumber = GenerateOrderId();
-
-                string summary = $"Order Number: {orderNumber}\nUser: {name}\nItems:\n";
-
-                decimal itemPrice = 0;
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/api/banks");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    foreach (var item in itemIdCounts)
+                    string content = await response.Content.ReadAsStringAsync();
+                    var bankObjects = JsonConvert.DeserializeObject<List<BankModelDTO>>(content);
+
+                    // Extract bank names from bankObjects
+                    var bankNames = bankObjects.Select(bank => bank.BankName).ToList();
+                    // Bind the bank names to the Picker control
+                    cmbPaymentMethode.DataSource = bankNames;
+                    foreach (var bank in bankObjects)
                     {
-                        int itemId = item.Key;
-                        itemPrice = CalculateItemPrice(item.Key, item.Value);
-                        summary += $"  {ItemSellprice[item.Key]}     Quantity: {item.Value},    Price: ${itemPrice}\n";
-                        Price[itemId] = itemPrice;
+                        bankDictionary[bank.BankName] = bank.BankId; // Assuming BankId is the property representing the ID
                     }
-
-                    MessageBox.Show("Succes, product submit.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                    decimal cash;
-
-                    if (decimal.TryParse(txtAmount.Text, out cash))
-                    {
-                        Cash = cash;
-                    }
-                    name = UsernameOfTheLogingPersom;
-
-                    decimal priceOf;
-
-                    if (decimal.TryParse(totalCostLabel.Text, out priceOf))
-                    {
-                        priceOf = totalCostPrice;
-                    }
-                    if (Cash == 0)
-                    {
-                        Cash = totalCostPrice;
-                    }
-
-
-
-                    decimal price;
-
-                    if (decimal.TryParse(totalCostLabel.Text, out price))
-                    {
-
-                    }
-
-                    decimal balance = Cash - totalCostPrice;
-                    await GetTemplate();
-
-                    MessageBox.Show($"Blance: {balance}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                    txtAmount.Clear();
-                    SimpleFontResolver.GenerateAndDownloadPdf(summary, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
-
-
-
-
-
-                    dailyOrders.Add(summary);
-
-
-
                 }
                 else
                 {
-                    MessageBox.Show("Error, product submit error.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-
+                    // Handle the case where the response is unsuccessful
                 }
             }
             catch (Exception ex)
             {
+                // Handle exceptions
             }
         }
 
-        private async void btnDelete_Click(object sender, EventArgs e)
+        private async Task UpdateProductStockQuantity(int productId, int selectid, int availableQuantity, string productName)
         {
-            // Prompt the user for username and password
-            string enteredUsername = PromptForInput("Enter Username:");
-            string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
 
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
+            var client = new HttpClient();
 
-            if (response.IsSuccessStatusCode)
+            HttpResponseMessage response1 = await client.GetAsync("https://localhost:7141/productitems");
+
+            string responseData = await response1.Content.ReadAsStringAsync();
+
+            decimal SellPrice = Cost[selectid];
+
+            int Id = productId;
+            int foundProductId = 0;
+            List<ProductItemDTO> productStocks = JsonConvert.DeserializeObject<List<ProductItemDTO>>(responseData); // Your existing productStocks
+
+            ProductItemDTO foundProductStock = productStocks.FirstOrDefault(ps => ps.ProductId == Id && ps.Price == SellPrice);
+            if (foundProductStock != null)
             {
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
-
-                string userType;
-                if (userData.TryGetValue("type", out userType))
-                {
-                    if (userType == "user")
-                    {
-                        // Navigate to UserPage
-                        MessageBox.Show("Invalid credentials. Unable to delete data.");
-                    }
-                    else if (userType == "admin")
-                    {
-                        // Delete all rows in the dataGridView1
-                        dataGridView1.Rows.Clear();
-                        MessageBox.Show("All data deleted successfully!");
-                    }
-                }
+                foundProductId = foundProductStock.Id;
             }
+
+            ProductItemDTO formData = new ProductItemDTO
+            {
+                Id = foundProductId,
+                ProductId = productId,
+                ProductName = productName,
+                StockQuantity = availableQuantity,
+                Price = SellPrice,
+
+
+            };
+
+            // Convert the object to JSON
+            var jsonData = JsonConvert.SerializeObject(formData);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"https://localhost:7141/productitem", content);
         }
 
-
-
-        private async void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e)
+        private async Task FetchItemPrices()
         {
-            // Check if the clicked cell is in a valid range (avoiding header clicks)
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            try
             {
-                // Prompt the user for username and password
-                string enteredUsername = PromptForInput("Enter Username:");
-                string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
-
-                HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
-
-
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/orderItems");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
-                    int logging = 1;
-                    string userType;
-                    if (userData.TryGetValue("type", out userType))
+                    string content = await response.Content.ReadAsStringAsync();
+                    var orderItems = JsonConvert.DeserializeObject<List<ItemDetailsDTO>>(content);
+
+                    foreach (var orderItem in orderItems)
                     {
-                        if (userType == "user")
+                        // Assuming 'orderItem.ProductName' is the name and 'orderItem.Price' is the price
+                        productCosts[orderItem.ProductName] = orderItem.ItemSellPrice;
+                        ItemSellprice[orderItem.ItemId] = orderItem.ProductName;
+                        Cost[orderItem.ItemId] = orderItem.ItemSellPrice;
+                        productItemIds[orderItem.ItemId] = orderItem.ProductId;
+                    }
+                }
+                else
+                {
+                    // Handle the case where the response is unsuccessful
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+
+
+        }
+        private async Task DisplayAlertForUserData(bool isLoyaltyCard)
+        {
+            string userInput = string.Empty;
+            frmInputPromptForm prompt = new frmInputPromptForm();
+            DialogResult result = prompt.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (isLoyaltyCard)
+                {
+                    userInput = prompt.InputText;
+                }
+                else
+                {
+                    userInput = prompt.InputText;
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(userInput))
+            {
+                CustermerDTO userData = await FetchUserData(userInput, isLoyaltyCard);
+
+                if (userData != null)
+                {
+                    Email = userData.Email;
+                    string message = $"User Name: {userData.Name}\nStar Points: {userData.StarPoints} \nEmail:{userData.Email}";
+                    DialogResult dialogResult = MessageBox.Show($"User Information: {message}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        // Perform actions when the user clicks OK
+                        try
                         {
+                            HttpResponseMessage promotionResponse = await client.GetAsync("https://localhost:7141/promotions");
 
-                            // Navigate to UserPage
-                            MessageBox.Show("Invalid credentials. Unable to delete data.");
+                            if (promotionResponse.IsSuccessStatusCode)
+                            {
+                                string promotionContent = await promotionResponse.Content.ReadAsStringAsync();
+                                var promotions = JsonConvert.DeserializeObject<List<PromotionDTO>>(promotionContent);
 
+                                foreach (var promotion in promotions)
+                                {
+                                    if (promotion.PayMethod == "loyalty card")
+                                    {
+                                        // Add the loyalty card promotion to the product promotions dictionary
+                                        productPromotion[promotion.PayMethod] = promotion.DiscountNumber;
 
+                                        // Recalculate the total price considering the loyalty card promotion
+                                        UpdateTotalCost();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("User data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
-                        else if (userType == "admin")
+                        catch (Exception ex)
                         {
-                            dataGridView1.Rows.RemoveAt(e.RowIndex);
-                            MessageBox.Show("Data deleted successfully!");
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("User data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-
-
-
-
-
+                }
             }
-        }
-
-        private string PromptForInput(string prompt, bool isPassword = false)
-        {
-            Form promptForm = new Form();
-            promptForm.Width = 300;
-            promptForm.Height = 150;
-            promptForm.Text = prompt;
-
-            TextBox textBox = new TextBox() { Left = 50, Top = 20, Width = 200 };
-            if (isPassword)
+            else
             {
-                textBox.PasswordChar = '*';
+                MessageBox.Show("Please enter a valid user input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-
-            Button okButton = new Button() { Text = "OK", Left = 50, Top = 50 };
-            okButton.Click += (sender, e) => { promptForm.Close(); };
-
-            promptForm.Controls.Add(textBox);
-            promptForm.Controls.Add(okButton);
-
-            promptForm.ShowDialog();
-
-            return textBox.Text;
-        }
-
-        private bool IsValidCredentials(string username, string password)
-        {
-            // Replace this with your authentication logic
-            // For simplicity, let's assume a hardcoded username and password
-            return username == "admin" && password == "password";
         }
 
 
-        private void lstProduct_SelectedIndexChanged(object sender, EventArgs e)
+        private int CalculateStarPoints(decimal totalCost)
         {
-            if (lstProduct.SelectedItems.Count > 0)
+            decimal loyaltyValue = 0;
+
+            // Access the text entered in the LoyeltyCard Entry field and try to parse it into an integer
+            if (decimal.TryParse(txtExtraForCard.Text, out loyaltyValue))
             {
-                string selectedProduct = lstProduct.SelectedItems[0].Text;
 
-                // Append the selected product to the textBox1.Text
-                txtProduct.Text = selectedProduct;
+            }
 
-                // Hide the suggestions list after selecting a suggestion
-                lstProduct.Visible = false;
+            // Calculate star points based on the total cost (e.g., 3.5%)
+            decimal starPointsDecimal = (totalCost * 0.035m) + previousstartPoint + loyaltyValue; // Assuming star points are 3.5% of the total cost
+            int starPointsRounded = (int)Math.Round(starPointsDecimal); // Rounding the decimal to the nearest integer4
+
+            return starPointsRounded;
+        }
+
+        private async Task UpdateStarPoints()
+        {
+            try
+            {
+                int starPoints = CalculateStarPoints(totalCostPrice);
+
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.PutAsync($"https://localhost:7141/api/customers/starpoints/{loyaltyCardNumber}/{starPoints}", null);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Succes, Star points added to the.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                    }
+                    else
+                    {
+                        // Handle unsuccessful response (e.g., log error, show alert, etc.)
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (e.g., log error, show alert, etc.)
             }
         }
 
-        private void totalCostLabel_TextChanged(object sender, EventArgs e)
+
+
+
+
+
+        private async Task<CustermerDTO> FetchUserData(string userInput, bool isLoyaltyCard)
+        {
+            string apiUrl = isLoyaltyCard ?
+                    $"https://localhost:7141/api/customers/byLoyaltyCardNumber/{userInput}" :
+                    $"https://localhost:7141/api/customers/byPhoneNumber/{userInput}";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string json = await response.Content.ReadAsStringAsync();
+                        CustermerDTO userData = JsonConvert.DeserializeObject<CustermerDTO>(json);
+                        loyaltyCardNumber = userData?.LoyaltyCardNumber ?? "";
+                        previousstartPoint = userData.StarPoints;
+
+                        return userData;
+                    }
+                    else
+                    {
+                        // Handle unsuccessful response (e.g., log error, return null, etc.)
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (e.g., log error, return null, etc.)
+                return null;
+            }
+        }
+
+
+        private void txtQutity_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lbTotal_Click(object sender, EventArgs e)
+        private async void FetchProducts()
         {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/product");
 
-        }
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var products = JsonConvert.DeserializeObject<List<ProductDTO>>(content);
 
-        private void txtCardNumber_TextChanged(object sender, EventArgs e)
-        {
+                    foreach (var product in products)
+                    {
+                        // Assuming 'product.Name' is the name and 'product.Price' is the price
+                        // productCosts[product.Names] = product.Price;
+                        productIds[product.Names] = product.Id;
 
-        }
+                    }
 
-        private void lbProduct_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbExtraForCard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbAmount_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbCardNumber_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UserPageForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            frmLogin loggingPage = new frmLogin();
-            loggingPage.Show();
-            this.Hide();
-        }
-
-        private void btnAddCustomer_Click(object sender, EventArgs e)
-        {
-            frmAddCustermer addCustermer = new frmAddCustermer();
-            addCustermer.Show();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAvalableProducts_Click_1(object sender, EventArgs e)
-        {
-            frmAvalableProduct avalableProduct = new frmAvalableProduct();
-            avalableProduct.Show();
-        }
-
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ProductDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void lbQuentity_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbPaymentType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbpaymentMethode_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
+                    // After fetching the products, display them
+                }
+                else
+                {
+                    // Handle the case where the response is unsuccessful
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+        } 
+        #endregion
     }
+
 }

@@ -1,23 +1,22 @@
-﻿using Desktop_application;
+﻿#region Using Directives
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ComboBox = System.Windows.Forms.ComboBox;
-using TextBox = System.Windows.Forms.TextBox;
+using TextBox = System.Windows.Forms.TextBox; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmEditDiscount: Form
     {
+        #region Using Varables
         private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
         private HttpClient client = new HttpClient();
-
         private int promotionId;
         private string payMethod;
         private decimal discountNumber;
@@ -45,16 +44,17 @@ namespace Desktop_Windwos_form_application
         public string bankName = "";
         private System.Windows.Forms.Button btnSubmit;
         private int discountid;
+        #endregion
 
 
 
-        public frmEditDiscount(int discountId , int productId, decimal discountNumber, DateTime startDate, DateTime endDate,bool isValid, string paymentMethod,string productname)
+        #region Using Constructor
+        public frmEditDiscount(int discountId, int productId, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid, string paymentMethod, string productname)
         {
             InitializeComponent();
             FetchBankNames();
-     
-            this.discountid = discountId;
 
+            this.discountid = discountId;
             txtProductId.Text = productId.ToString();
             paymentMethodComboBox.SelectedItem = paymentMethod;
             txtDiscountId.Text = discountNumber.ToString();
@@ -67,7 +67,9 @@ namespace Desktop_Windwos_form_application
 
 
         }
+        #endregion
 
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.lbHeadding = new System.Windows.Forms.Label();
@@ -94,7 +96,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(481, 26);
+            this.lbHeadding.Location = new System.Drawing.Point(260, 24);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(126, 25);
             this.lbHeadding.TabIndex = 0;
@@ -267,7 +269,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(336, 468);
+            this.btnSubmit.Location = new System.Drawing.Point(265, 380);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(109, 40);
             this.btnSubmit.TabIndex = 19;
@@ -277,7 +279,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmEditDiscount
             // 
-            this.ClientSize = new System.Drawing.Size(1170, 598);
+            this.ClientSize = new System.Drawing.Size(593, 445);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.paymentMethodComboBox);
             this.Controls.Add(this.endDateTimePicker2);
@@ -305,9 +307,11 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
 
 
 
+        #region Using Method
         private async void FetchBankNames()
         {
             try
@@ -340,10 +344,49 @@ namespace Desktop_Windwos_form_application
         }
 
 
-        private void lbStartDate_Click(object sender, System.EventArgs e)
-        {
 
+
+        
+        private async void SubmitDataToEndpoint()
+        {
+            try
+            {
+                // Assuming you are using HttpClient to send a request to your API endpoint
+                var httpClient = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(new
+                {
+                    ProductId = promotionId,
+                    DiscountId = discountid,
+                    PaymentMethod = payMethod,
+                    DiscountNumber = discountNumber,
+                    ProductName = productName,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    IsValid = isValid
+                }), Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync("https://localhost:7141/discounts/" + discountid, content);
+
+                // Check the response status and handle accordingly
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Data submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+        #endregion
+
+        #region Using Items
 
         private async void paymentMethodeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -368,45 +411,39 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private void txtProductId_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void txtDiscountId_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtProductName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDiscountNumber_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void startDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void endDateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void isValidRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            // Assuming the properties you want to update are instance variables of your form class
-            // Update the properties based on the values in your form controls
+            if (!int.TryParse(txtProductId.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric Promotion ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validation for Discount ID
+            if (!decimal.TryParse(txtDiscountId.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric Discount ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validation for Product Name
+            if (string.IsNullOrWhiteSpace(txtProductName.Text))
+            {
+                MessageBox.Show("Please enter a valid Product Name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validation for Discount Number
+            if (!decimal.TryParse(txtDiscountNumber.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric Discount Number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+        
+
             promotionId = int.Parse(txtProductId.Text);
             payMethod = paymentMethodComboBox.SelectedItem?.ToString();
             discountNumber = decimal.Parse(txtDiscountId.Text);
@@ -419,41 +456,7 @@ namespace Desktop_Windwos_form_application
             SubmitDataToEndpoint();
         }
 
-        private async void SubmitDataToEndpoint()
-        {
-            try
-            {
-                // Assuming you are using HttpClient to send a request to your API endpoint
-                var httpClient = new HttpClient();
-                var content = new StringContent(JsonConvert.SerializeObject(new
-                {
-                    ProductId = promotionId,
-                    DiscountId = discountid,
-                    PaymentMethod = payMethod,
-                    DiscountNumber = discountNumber,
-                    ProductName = productName,
-                    StartDate = startDate,
-                    EndDate = endDate,
-                    IsValid = isValid
-                }), Encoding.UTF8, "application/json"); 
 
-                var response = await httpClient.PutAsync("https://localhost:7141/discounts/" + discountid, content);
-
-                // Check the response status and handle accordingly
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Data submitted successfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Error submitting data. Please try again.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}");
-            }
-        }
 
         private void lbHeadding_Click(object sender, EventArgs e)
         {
@@ -499,5 +502,46 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void lbStartDate_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void txtProductId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiscountId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiscountNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void endDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void isValidRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }

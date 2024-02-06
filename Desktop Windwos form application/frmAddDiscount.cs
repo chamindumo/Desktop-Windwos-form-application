@@ -1,4 +1,4 @@
-﻿#region using Derectives
+﻿#region using Directives
 
 using Newtonsoft.Json;
 using System;
@@ -81,7 +81,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(427, 23);
+            this.label1.Location = new System.Drawing.Point(210, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(129, 25);
             this.label1.TabIndex = 0;
@@ -229,7 +229,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btnSubmit.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(488, 429);
+            this.btnSubmit.Location = new System.Drawing.Point(156, 433);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(114, 40);
             this.btnSubmit.TabIndex = 20;
@@ -249,7 +249,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddDiscount
             // 
-            this.ClientSize = new System.Drawing.Size(1088, 619);
+            this.ClientSize = new System.Drawing.Size(563, 479);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.isValidRadioButton);
@@ -313,6 +313,137 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+     
+
+
+
+        private int GenerateItemId()
+        {
+            // Your logic to generate a unique item ID
+            return new Random().Next(10000, 99999);
+        }
+
+
+        private void ClearInputFields()
+        {
+            txtProductId.Clear();
+            txtProductName.Clear();
+            txtDiscountNumber.Clear();
+            startDateTimePicker.Value = DateTime.Now; // Set to current date and time
+            endDateTimePicker.Value = DateTime.Now; // Set to current date and time
+            isValidRadioButton.Checked = false; // Set to initial state
+            cmbPaymentMethode.SelectedIndex = -1; // Clear the selected item in the combo box
+        }
+
+        #endregion
+        #region using items
+
+
+
+
+        private async void btnSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Parse input values
+                int productId = int.Parse(txtProductId.Text);
+                string productName = txtProductName.Text;
+                decimal discountNumber = decimal.Parse(txtDiscountNumber.Text);
+                DateTime startDate = startDateTimePicker.Value;
+                DateTime endDate = endDateTimePicker.Value;
+                bool isValid = isValidRadioButton.Checked;
+
+                string bankName = "ALL"; // Default value
+
+                // Validate product ID
+                if (productId <= 0)
+                {
+                    MessageBox.Show("Please enter a valid product ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Validate product name
+                if (string.IsNullOrEmpty(productName))
+                {
+                    MessageBox.Show("Please enter a valid product name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Validate discount number
+                if (discountNumber <= 0)
+                {
+                    MessageBox.Show("Please enter a valid discount number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+               
+                // Validate that a payment method is selected
+                if (cmbPaymentMethode.SelectedItem != null)
+                {
+                    bankName = cmbPaymentMethode.SelectedItem.ToString();
+                }
+
+                // Create a model to hold the data
+                var discountData = new
+                {
+                    DiscountId = GenerateItemId(),
+                    ProductId = productId,
+                    ProductName = productName,
+                    DiscountNumber = discountNumber,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    PaymentMethod = bankName,
+                    IsValid = isValid
+                };
+
+                // Serialize the discount data to JSON
+                var json = JsonConvert.SerializeObject(discountData);
+
+                // Create the HttpClient
+                using (var client = new HttpClient())
+                {
+                    // Create the HTTP content with JSON
+                    var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+                    // Post the JSON data to the specified endpoint
+                    HttpResponseMessage response = await client.PostAsync("https://localhost:7141/discounts", content);
+
+                    // Check if the response is successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Clear the input fields
+                        ClearInputFields();
+
+                        // Show a success message
+                        MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        // Show an error message
+                        MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please enter valid numeric values for product ID and discount number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unexpected error occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmMainPage mianPage = new frmMainPage(loggingTo);
+            mianPage.Show();
+            this.Hide();
+        }
+
+
         private async void cmbPaymentMethode_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             string selectedBankName = cmbPaymentMethode.SelectedItem?.ToString();
@@ -336,92 +467,6 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-
-
-        private int GenerateItemId()
-        {
-            // Your logic to generate a unique item ID
-            return new Random().Next(10000, 99999);
-        }
-
-        private async void btnSubmit_Click(object sender, EventArgs e)
-        {
-            int productId = int.Parse(txtProductId.Text);
-            string productName = txtProductName.Text;
-            int discountNumber = int.Parse(txtDiscountNumber.Text);
-            DateTime startDate = startDateTimePicker.Value;
-            DateTime endDate = endDateTimePicker.Value;
-            bool isValid = isValidRadioButton.Checked;
-            if (cmbPaymentMethode.SelectedItem == null)
-            {
-                bankName = "ALL";
-            }
-            else
-            {
-                bankName = cmbPaymentMethode.SelectedItem as string;
-            }
-            // Create a model to hold the data
-            var discountData = new
-            {
-                DiscountId = GenerateItemId(),
-                ProductId = productId,
-                ProductName = productName,
-                DiscountNumber = discountNumber,
-                StartDate = startDate,
-                EndDate = endDate,
-                PaymentMethod = bankName,
-                IsValid = isValid
-            };
-
-            // Serialize the discount data to JSON
-            var json = JsonConvert.SerializeObject(discountData);
-
-            // Create the HttpClient
-            var client = new HttpClient();
-
-            try
-            {
-                // Create the HTTP content with JSON
-                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                // Post the JSON data to the specified endpoint
-                HttpResponseMessage response = await client.PostAsync("https://localhost:7141/discounts", content);
-
-                // Check if the response is successful
-                if (response.IsSuccessStatusCode)
-                {
-                    // Clear the input fields
-                    txtProductId.Clear();
-                    txtProductName.Clear();
-                    txtDiscountNumber.Clear();
-                    startDateTimePicker.Value = DateTime.Now; // Set to current date and time
-                    endDateTimePicker.Value = DateTime.Now; // Set to current date and time
-                    isValidRadioButton.Checked = false; // Set to initial state
-                    cmbPaymentMethode.SelectedIndex = -1; // Clear the selected item in the combo box
-
-                    // Show a success message
-                    MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // Show an error message
-                    MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
-            mianPage.Show();
-            this.Hide();
-        }
-
-        #endregion
-        #region using items
 
         private void lbProductId_Click(object sender, EventArgs e)
         {

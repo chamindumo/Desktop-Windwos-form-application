@@ -1,22 +1,28 @@
-﻿using System.Windows.Forms;
+﻿#region Using Directives
+using System.Windows.Forms;
 using System;
 
+#endregion
 namespace Desktop_Windwos_form_application
 {
     public partial class frmInputDialogForm : Form
     {
+        #region Using Variable
         private Button btnSubmit;
         private Label lbHeadding;
         private TextBox txtVerificationCode;
-
         public string VerificationCode { get; private set; }
+        #endregion
 
+        #region Using Constructor
         public frmInputDialogForm()
         {
             InitializeComponent();
         }
+        #endregion
 
 
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -60,16 +66,19 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.lbHeadding);
             this.Controls.Add(this.btnSubmit);
             this.Name = "frmInputDialogForm";
+            this.Load += new System.EventHandler(this.frmInputDialogForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+        #endregion
 
+        #region Uisng Items
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             VerificationCode = txtVerificationCode.Text;
             DialogResult = DialogResult.OK;
-            Close();  
+            Close();
         }
 
         private void lbHeadding_Click(object sender, EventArgs e)
@@ -81,6 +90,12 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void frmInputDialogForm_Load(object sender, EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 
 }

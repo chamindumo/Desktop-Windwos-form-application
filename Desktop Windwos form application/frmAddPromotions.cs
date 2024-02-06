@@ -1,4 +1,4 @@
-﻿#region Using Derectives
+﻿#region Using Directives
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(437, 18);
+            this.lbHeadding.Location = new System.Drawing.Point(220, 18);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(141, 25);
             this.lbHeadding.TabIndex = 0;
@@ -126,7 +126,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(411, 406);
+            this.btnSubmit.Location = new System.Drawing.Point(206, 294);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(109, 43);
             this.btnSubmit.TabIndex = 8;
@@ -190,7 +190,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddPromotions
             // 
-            this.ClientSize = new System.Drawing.Size(807, 461);
+            this.ClientSize = new System.Drawing.Size(491, 376);
             this.Controls.Add(this.cmbPaymentMethode);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.endDateTimePicker);
@@ -218,21 +218,7 @@ namespace Desktop_Windwos_form_application
 
 
         #region Using Method
-        private void btnSubmit_Click(object sender, System.EventArgs e)
-        {
-            // Retrieve values from the form
-            int billNumber = GenerateBillNumber(); // You can generate this based on your logic
-            string paymentMethod = cmbPaymentMethode.SelectedItem as string;
-            int discountNumber = int.Parse(txtDiscountNumber.Text); // Assuming discount number is an integer
-            DateTime startDate = startDateTimePicker.Value;
-            DateTime endDate = endDateTimePicker.Value;
-            bool isValid = isValidRadioButton.Checked;
-
-            // Perform actions with the retrieved values (e.g., send them to an API, process them, etc.)
-            // For example:
-            SubmitFormToAPI(billNumber, paymentMethod, discountNumber, startDate, endDate, isValid);
-
-        }
+       
 
         private int GenerateBillNumber()
         {
@@ -272,7 +258,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private async void SubmitFormToAPI(int billNumber, string paymentMethod, int discountNumber, DateTime startDate, DateTime endDate, bool isValid)
+        private async void SubmitFormToAPI(int billNumber, string paymentMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid)
         {
 
             var formData = new
@@ -302,6 +288,8 @@ namespace Desktop_Windwos_form_application
                 startDateTimePicker.Value = DateTime.Now; // Set to current date and time
                 endDateTimePicker.Value = DateTime.Now; // Set to current date and time
                 isValidRadioButton.Checked = false; // Set to initial state
+                MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             else
             {
@@ -310,16 +298,46 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+
+        #endregion
+
+
+        #region Using Item
+
+
         private void btnBack(object sender, EventArgs e)
         {
             frmMainPage mianPage = new frmMainPage(loggingTo);
             mianPage.Show();
             this.Hide();
         }
-        #endregion
 
 
-        #region Using Item
+        private void btnSubmit_Click(object sender, System.EventArgs e)
+        {
+
+            if (!decimal.TryParse(txtDiscountNumber.Text, out decimal discount) || discount < 0)
+            {
+                MessageBox.Show("Please enter a valid non-negative discount number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            // Retrieve values from the form
+            int billNumber = GenerateBillNumber(); // You can generate this based on your logic
+            string paymentMethod = cmbPaymentMethode.SelectedItem as string;
+            decimal discountNumber = decimal.Parse(txtDiscountNumber.Text); // Assuming discount number is an integer
+            DateTime startDate = startDateTimePicker.Value;
+            DateTime endDate = endDateTimePicker.Value;
+            bool isValid = isValidRadioButton.Checked;
+
+            // Perform actions with the retrieved values (e.g., send them to an API, process them, etc.)
+            // For example:
+            SubmitFormToAPI(billNumber, paymentMethod, discountNumber, startDate, endDate, isValid);
+
+        }
+
+
         private void lbDiscountNumber_Click(object sender, System.EventArgs e)
         {
 

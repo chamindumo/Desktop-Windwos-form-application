@@ -1,11 +1,13 @@
-﻿#region using Derective
+﻿#region using Directives
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using System.Windows.Forms;
-using System.Text; 
+using System.Text;
+using System.Linq;
+
 #endregion
 
 namespace Desktop_Windwos_form_application
@@ -233,7 +235,7 @@ namespace Desktop_Windwos_form_application
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 605);
+            this.button1.Location = new System.Drawing.Point(221, 647);
             this.button1.Margin = new System.Windows.Forms.Padding(20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 37);
@@ -382,7 +384,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(502, 27);
+            this.lbHeadding.Location = new System.Drawing.Point(239, 27);
             this.lbHeadding.Margin = new System.Windows.Forms.Padding(20);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(138, 25);
@@ -392,7 +394,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddNew
             // 
-            this.ClientSize = new System.Drawing.Size(1193, 704);
+            this.ClientSize = new System.Drawing.Size(581, 704);
             this.Controls.Add(this.lbHeadding);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.comboBox1);
@@ -435,39 +437,108 @@ namespace Desktop_Windwos_form_application
 
 
         #region Using Methode
-        private async void btnAddImage_Click(object sender, System.EventArgs e)
+
+
+        private bool IsValidName(string name)
         {
-            try
-            {
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    openFileDialog.Title = "Select an Image";
-                    openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png";
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string fileName = Path.GetFileName(openFileDialog.FileName);
-
-                        // Pass the file stream and file name to the method handling image upload
-                        using (Stream stream = File.OpenRead(openFileDialog.FileName))
-                        {
-                            await UploadImage(stream, fileName);
-
-                            // Resize the image and assign it to the PictureBox
-
-                        }
-                    }
-                    ResizeAndSetImage(openFileDialog.FileName);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that may occur during file picking or upload
-                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            // Add your specific validation logic for a valid name (e.g., only alphabetic characters allowed)
+            return name.All(char.IsLetter);
         }
+
+        // Validate input fields
+        private bool ValidateInput()
+        {
+            // Email validation
+            if (string.IsNullOrEmpty(textBox1.Text) || !IsValidEmail(textBox1.Text))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Username validation
+            if (string.IsNullOrEmpty(textBox16.Text) || textBox16.Text.Length < 5)
+            {
+                MessageBox.Show("Please enter a valid username (at least 5 characters).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Password validation (add your specific rules)
+            if (string.IsNullOrEmpty(textBox15.Text) || textBox15.Text.Length < 8)
+            {
+                MessageBox.Show("Please enter a valid password (at least 8 characters).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // FirstName validation
+            if (string.IsNullOrEmpty(textBox14.Text) || !IsValidName(textBox14.Text))
+            {
+                MessageBox.Show("Please enter a valid first name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // LastName validation
+            if (string.IsNullOrEmpty(textBox13.Text) || !IsValidName(textBox13.Text))
+            {
+                MessageBox.Show("Please enter a valid last name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+
+            // Address validation
+            if (string.IsNullOrEmpty(textBox12.Text))
+            {
+                MessageBox.Show("Please enter a valid address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // City validation
+            if (string.IsNullOrEmpty(textBox11.Text))
+            {
+                MessageBox.Show("Please enter a valid city.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Region validation
+            if (string.IsNullOrEmpty(textBox10.Text))
+            {
+                MessageBox.Show("Please enter a valid region.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // MobileNumber validation (add your specific rules)
+            if (string.IsNullOrEmpty(textBox9.Text) || !IsValidPhoneNumber(textBox9.Text))
+            {
+                MessageBox.Show("Please enter a valid mobile number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Type validation
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a valid type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // Add more validation rules for other fields as needed
+
+            return true; // All validation passed
+        }
+
+        // Example email validation method (you can replace it with your specific validation logic)
+        private bool IsValidEmail(string email)
+        {
+            // Add your email validation logic here
+            return email.Contains('@') && email.Contains('.');
+        }
+
+        // Example phone number validation method (you can replace it with your specific validation logic)
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Add your phone number validation logic here
+            // For a simple example, checking if the phone number contains only digits
+            return phoneNumber.All(char.IsDigit);
+        }
+
 
 
         private void ResizeAndSetImage(string imagePath)
@@ -539,8 +610,20 @@ namespace Desktop_Windwos_form_application
             return new Random().Next(10000, 99999);
         }
 
+
+        #endregion
+
+        #region Using Items
+
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
+
+
+            if (!ValidateInput())
+            {
+                return; // Stop execution if validation fails
+            }
+
             id = GenerateItemId();
 
             UserDTO data = new UserDTO
@@ -583,9 +666,42 @@ namespace Desktop_Windwos_form_application
             }
 
         }
-        #endregion
 
-        #region Using Items
+
+        private async void btnAddImage_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.Title = "Select an Image";
+                    openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png";
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string fileName = Path.GetFileName(openFileDialog.FileName);
+
+                        // Pass the file stream and file name to the method handling image upload
+                        using (Stream stream = File.OpenRead(openFileDialog.FileName))
+                        {
+                            await UploadImage(stream, fileName);
+
+                            // Resize the image and assign it to the PictureBox
+
+                        }
+                    }
+                    ResizeAndSetImage(openFileDialog.FileName);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that may occur during file picking or upload
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
 
         private void previewPictureBox_Click(object sender, EventArgs e)
         {

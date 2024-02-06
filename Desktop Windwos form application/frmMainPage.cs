@@ -1,19 +1,20 @@
-﻿using Desktop_application;
+﻿#region Using Directives
+
+using Desktop_application;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmMainPage: Form
     {
+        #region Uisng Variables
         public int loggingTo = 0;
         private static int pageNumber = 1; // Current page number
         private int itemsPerPage = 25; // Number of items per page
@@ -49,12 +50,16 @@ namespace Desktop_Windwos_form_application
         private BindingSource bindingSource3;
         private BindingSource bindingSource4;
         private ToolStripMenuItem helpToolStripMenuItem;
+        #endregion
+        #region Using Constructor
         public frmMainPage(int logging)
         {
             InitializeComponent();
             loggingTo = logging;
 
         }
+        #endregion
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -109,7 +114,7 @@ namespace Desktop_Windwos_form_application
             this.helpToolStripMenuItem});
             this.File.Location = new System.Drawing.Point(0, 0);
             this.File.Name = "File";
-            this.File.Size = new System.Drawing.Size(1224, 24);
+            this.File.Size = new System.Drawing.Size(1275, 24);
             this.File.TabIndex = 1;
             this.File.Text = "menuStrip2";
             this.File.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.File_ItemClicked);
@@ -143,7 +148,7 @@ namespace Desktop_Windwos_form_application
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1224, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1275, 31);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -318,7 +323,7 @@ namespace Desktop_Windwos_form_application
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productDataGridView.Location = new System.Drawing.Point(155, 91);
             this.productDataGridView.Name = "productDataGridView";
-            this.productDataGridView.Size = new System.Drawing.Size(1069, 406);
+            this.productDataGridView.Size = new System.Drawing.Size(978, 406);
             this.productDataGridView.TabIndex = 4;
             this.productDataGridView.Visible = false;
             this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productdataGrid_CellContentClick);
@@ -329,7 +334,7 @@ namespace Desktop_Windwos_form_application
             this.promotionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.promotionDataGridView.Location = new System.Drawing.Point(155, 91);
             this.promotionDataGridView.Name = "promotionDataGridView";
-            this.promotionDataGridView.Size = new System.Drawing.Size(1069, 393);
+            this.promotionDataGridView.Size = new System.Drawing.Size(978, 393);
             this.promotionDataGridView.TabIndex = 8;
             this.promotionDataGridView.Visible = false;
             this.promotionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.promotionDataGrid_CellContentClick);
@@ -370,7 +375,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmMainPage
             // 
-            this.ClientSize = new System.Drawing.Size(1224, 571);
+            this.ClientSize = new System.Drawing.Size(1275, 571);
             this.Controls.Add(this.btnAddNewBank);
             this.Controls.Add(this.btnAddNewPromotion);
             this.Controls.Add(this.btnAddNewProduct);
@@ -407,7 +412,8 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
-        
+        #endregion
+        #region Using Items
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (Sidepanel.Visible)
@@ -451,14 +457,13 @@ namespace Desktop_Windwos_form_application
 
                         int productId = Convert.ToInt32(productDataGridView.Rows[e.RowIndex].Cells["Id"].Value);
                         string name = Convert.ToString(productDataGridView.Rows[e.RowIndex].Cells["Names"].Value);
-                        decimal price = Convert.ToDecimal(productDataGridView.Rows[e.RowIndex].Cells["Price"].Value);
                         string description = Convert.ToString(productDataGridView.Rows[e.RowIndex].Cells["Descriptions"].Value);
                         bool isAvailable = Convert.ToBoolean(productDataGridView.Rows[e.RowIndex].Cells["IsAvalable"].Value);
                         DateTime expiryDate = Convert.ToDateTime(productDataGridView.Rows[e.RowIndex].Cells["ExpirDate"].Value);
                         string imageData = Convert.ToString(productDataGridView.Rows[e.RowIndex].Cells["ImageData"].Value);
 
                         // Open the edit form and pass the data
-                        frmEditProductForm editForm = new frmEditProductForm(productId, name, price, description, isAvailable, expiryDate, imageData);
+                        frmEditProductForm editForm = new frmEditProductForm(productId, name, description, isAvailable, expiryDate, imageData);
                         editForm.ShowDialog();
 
                         // Add your logic for View Details button click
@@ -585,7 +590,7 @@ namespace Desktop_Windwos_form_application
             this.bindingSource4.DataSource = banks;
             this.bankDataGridView.DataSource = this.bindingSource4;
 
-           
+
 
             bankDataGridView.Visible = true;
             productDataGridView.Visible = false;
@@ -617,7 +622,7 @@ namespace Desktop_Windwos_form_application
             this.productDataGridView.DataSource = this.bindingSource2;
         }
 
-            private async Task OnOption1Clicked()
+        private async Task OnOption1Clicked()
         {
 
 
@@ -655,9 +660,9 @@ namespace Desktop_Windwos_form_application
             txtPageNum.Text = pageNumber.ToString();
 
 
-           
 
-        
+
+
 
 
 
@@ -677,7 +682,7 @@ namespace Desktop_Windwos_form_application
 
                 // Reload data for the previous page
                 OnOptionClicked();
-             }
+            }
             UpdateButtonVisibility();
         }
 
@@ -686,9 +691,9 @@ namespace Desktop_Windwos_form_application
             totalProductsCount = await GetTotalProductsCount();
             maxPage = (int)Math.Ceiling((double)totalProductsCount / itemsPerPage);
             // Reload data for the next page
-            if (pageNumber < maxPage+1)
+            if (pageNumber < maxPage + 1)
             {
-                
+
                 // If there is no more data, disable the "Next" button
                 await OnOptionClicked();
                 pageNumber++; // Increment page number]
@@ -717,22 +722,7 @@ namespace Desktop_Windwos_form_application
             button1.Enabled = pageNumber > 1;
         }
 
-        private async Task<int> GetTotalProductsCount()
-        {
-            // Use your API call or database query to get the total count of products
-            // For example, with an HTTP call
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/product");
-            string content = await response.Content.ReadAsStringAsync();
 
-            // Deserialize the content to get the list of products
-            List<ProductDTO> products = JsonConvert.DeserializeObject<List<ProductDTO>>(content);
-
-            // Calculate and return the count of products
-            return products.Count;
-
-
-        }
 
         private void promotionDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -802,10 +792,10 @@ namespace Desktop_Windwos_form_application
                         bool isValid = Convert.ToBoolean(discountDataGridView.Rows[e.RowIndex].Cells["IsValid"].Value);
                         string paymentMethod = discountDataGridView.Rows[e.RowIndex].Cells["PaymentMethod"].Value.ToString();
 
-                        frmEditDiscount editForm = new frmEditDiscount(discountId , productId, discountNumber, startDate, endDate, isValid, paymentMethod, productname);
+                        frmEditDiscount editForm = new frmEditDiscount(discountId, productId, discountNumber, startDate, endDate, isValid, paymentMethod, productname);
                         editForm.ShowDialog();
-                        
-                        
+
+
                         // Add your logic for View Details button click
                     }
                     else if (columnName == "btnEdit")
@@ -936,5 +926,25 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+        #endregion
+        #region Using Method
+        private async Task<int> GetTotalProductsCount()
+        {
+            // Use your API call or database query to get the total count of products
+            // For example, with an HTTP call
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/product");
+            string content = await response.Content.ReadAsStringAsync();
+
+            // Deserialize the content to get the list of products
+            List<ProductDTO> products = JsonConvert.DeserializeObject<List<ProductDTO>>(content);
+
+            // Calculate and return the count of products
+            return products.Count;
+
+
+        } 
+        #endregion
+
     }
 }

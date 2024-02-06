@@ -1,4 +1,5 @@
-﻿#region Using Derective
+﻿#region Using Directives
+
 using System.Collections.Generic;
 using System.Net.Http;
 using System;
@@ -34,7 +35,7 @@ namespace Desktop_Windwos_form_application
         Dictionary<int, int> ItemQuntity = new Dictionary<int, int>();
         Dictionary<int, string> ItemName = new Dictionary<int, string>();
         private Dictionary<string, int> productIds = new Dictionary<string, int> { };
-        private Dictionary<string, decimal> productCosts = new Dictionary<string, decimal>();
+        private Dictionary<string, int> productCosts = new Dictionary<string, int>();
         private Dictionary<int, string> Product = new Dictionary<int, string>();
         public static int foundProductId = 0;
         private int quentity = 0;
@@ -67,14 +68,14 @@ namespace Desktop_Windwos_form_application
         private Button btnSubmit;
         private ListView ProductListView;
         public int loggingto;
-        #endregion
+        #endregion 
         #region Using Constructor
         public frmAddPurchase(int logging)
         {
             InitializeComponent();
             _httpClient = new HttpClient(); // Initialize _httpClient
 
-            productCosts = new Dictionary<string, decimal>();
+            productCosts = new Dictionary<string, int>();
             Product = new Dictionary<int, string>();
 
 
@@ -121,7 +122,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(500, 31);
+            this.lbHeadding.Location = new System.Drawing.Point(379, 9);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(136, 25);
             this.lbHeadding.TabIndex = 0;
@@ -371,7 +372,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddPurchase
             // 
-            this.ClientSize = new System.Drawing.Size(1199, 536);
+            this.ClientSize = new System.Drawing.Size(906, 536);
             this.Controls.Add(this.ProductListView);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.itemDataGridView);
@@ -421,8 +422,8 @@ namespace Desktop_Windwos_form_application
                     foreach (var product in products)
                     {
                         // Assuming 'product.Name' is the name and 'product.Price' is the price
-                        productCosts[product.Names] = product.Price;
                         Product[product.Id] = product.Names;
+                        productCosts[product.Names] = product.Id;
 
 
 
@@ -442,59 +443,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private void txtProductName_TextChanged(object sender, EventArgs e)
-        {
-            string searchText = txtProductName.Text;
-
-            if (string.IsNullOrWhiteSpace(searchText))
-            {
-                // Hide the suggestions when the search bar is empty
-                return;
-            }
-
-            var filteredProducts = productCosts.Keys
-             .Where(p => p.ToLower().Contains(searchText.ToLower()))
-             .ToList();
-
-            // Clear the existing items in the ListView
-            ProductListView.Items.Clear();
-
-            // Add each item to the ListView
-            foreach (var product in filteredProducts)
-            {
-                ProductListView.Items.Add(product);
-            }
-
-            // Show the suggestions list only when there are matching items
-
-        }
-
-
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            string data1 = txtProductName.Text;
-            string data2 = txtId.Text;
-            string data3 = txtPrice.Text;
-            string data4 = txtSellPrice.Text;
-            string data5 = txtQuentity.Text;
-
-            AddToDictionary();
-
-
-            // Add a new row to the DataGridView
-            itemDataGridView.Rows.Add(data1, data2, data3, data4, data5);
-
-            // Optionally, clear the text in the textboxes after adding the data
-            txtProductName.Clear();
-            txtId.Clear();
-            txtPrice.Clear();
-            txtSellPrice.Clear();
-            txtQuentity.Clear();
-            ProductListView.Items.Clear();
-
-
-        }
+       
 
         int counter = 1;
 
@@ -666,6 +615,10 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+
+        #endregion
+        #region Using Items
+
         private async void ProductListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ProductListView.SelectedItems.Count > 0)
@@ -698,6 +651,43 @@ namespace Desktop_Windwos_form_application
 
         private async void btnsubmit_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrWhiteSpace(txtBatchNumber.Text))
+            {
+                MessageBox.Show("Please enter a valid batch number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Supplier ID
+            if (!int.TryParse(txtSupplierId.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric supplier ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Total Amount
+            if (!decimal.TryParse(txtTotalAmount.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric total amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if Supplier ID is a string
+            if (txtSupplierId.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("Supplier ID cannot contain letters. Please enter a valid numeric supplier ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Check if Total Amount is a string
+            if (txtTotalAmount.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("Total Amount cannot contain letters. Please enter a valid numeric total amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
             string batchNumber = txtBatchNumber.Text;
             DateTime purchaseDate = purchaseDateTimePicker.Value;
             string customerId = txtSupplierId.Text;
@@ -756,12 +746,12 @@ namespace Desktop_Windwos_form_application
                 }
                 else
                 {
-                    // Handle failure, maybe log the error or show an error message
+                    MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions, log the exception details
+                MessageBox.Show("Error adding data. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -795,9 +785,95 @@ namespace Desktop_Windwos_form_application
             await CreateNewProducts(newProductIds, ItemId, ItemSellCost, ItemQuntity, ItemName);
 
 
-        } 
-        #endregion
-        #region Using Items
+        }
+
+
+        private void txtProductName_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtProductName.Text;
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // Hide the suggestions when the search bar is empty
+                return;
+            }
+
+            var filteredProducts = productCosts.Keys
+             .Where(p => p.ToLower().Contains(searchText.ToLower()))
+             .ToList();
+
+            // Clear the existing items in the ListView
+            ProductListView.Items.Clear();
+
+            // Add each item to the ListView
+            foreach (var product in filteredProducts)
+            {
+                ProductListView.Items.Add(product);
+            }
+
+            // Show the suggestions list only when there are matching items
+
+        }
+
+
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+            // Validate Product Name
+            if (string.IsNullOrWhiteSpace(txtProductName.Text))
+            {
+                MessageBox.Show("Please select a valid product name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Item Price
+            if (!decimal.TryParse(txtPrice.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric item price.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Item Sell Price
+            if (!decimal.TryParse(txtSellPrice.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric item sell price.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Validate Quantity
+            if (!int.TryParse(txtQuentity.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid numeric quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
+            string data1 = txtProductName.Text;
+            string data2 = txtId.Text;
+            string data3 = txtPrice.Text;
+            string data4 = txtSellPrice.Text;
+            string data5 = txtQuentity.Text;
+
+            AddToDictionary();
+
+
+            // Add a new row to the DataGridView
+            itemDataGridView.Rows.Add(data1, data2, data3, data4, data5);
+
+            // Optionally, clear the text in the textboxes after adding the data
+            txtProductName.Clear();
+            txtId.Clear();
+            txtPrice.Clear();
+            txtSellPrice.Clear();
+            txtQuentity.Clear();
+            ProductListView.Items.Clear();
+
+
+        }
+
+
         private void PurchaseDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
 

@@ -1,24 +1,31 @@
-﻿using System;
+﻿#region Using Directives
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmItemSelectionForm : Form
     {
+        #region Using Variable
         private ListBox listBox;
         private Button okButton;
         private Button cancelButton;
-
         public string SelectedItem { get; private set; }
+        #endregion
 
+        #region Using Constructor
         public frmItemSelectionForm(Dictionary<string, int> itemIdMap)
         {
             InitializeComponents(itemIdMap);
         }
+        #endregion
 
+        #region Using Initalize
         private void InitializeComponents(Dictionary<string, int> itemIdMap)
         {
             listBox = new ListBox();
@@ -53,11 +60,6 @@ namespace Desktop_Windwos_form_application
             CancelButton = cancelButton;
         }
 
-        private void OkButton_Click(object sender, EventArgs e)
-        {
-            SelectedItem = listBox.SelectedItem?.ToString();
-            Close(); // Close the form when OK is clicked
-        }
 
         private void InitializeComponent()
         {
@@ -67,14 +69,32 @@ namespace Desktop_Windwos_form_application
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "frmItemSelectionForm";
-            this.Load += new System.EventHandler(this.ItemSelectionForm_Load);
+            this.Load += new System.EventHandler(this.frmItemSelectionForm_Load);
             this.ResumeLayout(false);
 
         }
+        #endregion
+
+        #region Using Items
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            SelectedItem = listBox.SelectedItem?.ToString();
+            Close(); // Close the form when OK is clicked
+        }
+
+
 
         private void ItemSelectionForm_Load(object sender, EventArgs e)
         {
 
         }
+
+
+
+        private void frmItemSelectionForm_Load(object sender, EventArgs e)
+        {
+
+        } 
+        #endregion
     }
 }
