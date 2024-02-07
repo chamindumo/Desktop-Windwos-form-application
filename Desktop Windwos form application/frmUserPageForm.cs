@@ -59,6 +59,9 @@ namespace Desktop_Windwos_form_application
             FetchItemPrices();
             FetchProducts();
             FetchBankNames();
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick_2;
+            btnDelete_Click();
+
 
         }
         #endregion
@@ -402,6 +405,10 @@ namespace Desktop_Windwos_form_application
                 ProductDataGrid.Columns["Quantity"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);  // Set the font for the Quantity column
                 ProductDataGrid.Columns["UnitPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the UnitPrice column
                 ProductDataGrid.Columns["TotalPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the TotalPrice column
+
+
+               
+
             }
 
         }
@@ -532,7 +539,7 @@ namespace Desktop_Windwos_form_application
 
             await FetchDiscounts(paymentMethod);
             UpdateTotalCost();
-
+            itemIdCounts.Clear();
 
 
         }
@@ -563,36 +570,13 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private async void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click()
         {
-            // Prompt the user for username and password
-            string enteredUsername = PromptForInput("Enter Username:");
-            string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
-
-            HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
-
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
-
-                string userType;
-                if (userData.TryGetValue("type", out userType))
-                {
-                    if (userType == "user")
-                    {
-                        // Navigate to UserPage
-                        MessageBox.Show("Canceled. Invalid credentials. Unable to delete data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    }
-                    else if (userType == "admin")
-                    {
-                        // Delete all rows in the dataGridView1
-                        dataGridView1.Rows.Clear();
-                        MessageBox.Show("All data deleted successfully!");
-                    }
-                }
-            }
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
+            deleteButtonColumn.Name = "Delete";
+            deleteButtonColumn.Text = "Delete";
+            deleteButtonColumn.UseColumnTextForButtonValue = true;
+            ProductDataGrid.Columns.Add(deleteButtonColumn);
         }
 
 
@@ -600,7 +584,7 @@ namespace Desktop_Windwos_form_application
         private async void dataGridView1_CellContentClick_2(object sender, DataGridViewCellEventArgs e)
         {
             // Check if the clicked cell is in a valid range (avoiding header clicks)
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex == ProductDataGrid.Columns["Delete"].Index)
             {
                 // Prompt the user for username and password
                 string enteredUsername = PromptForInput("Enter Username:");
@@ -624,7 +608,6 @@ namespace Desktop_Windwos_form_application
                             // Navigate to UserPage
                             MessageBox.Show("Canceled. Invalid credentials. Unable to delete data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-
                         }
                         else if (userType == "admin")
                         {
@@ -633,12 +616,6 @@ namespace Desktop_Windwos_form_application
                         }
                     }
                 }
-
-
-
-
-
-
             }
         }
 
@@ -728,8 +705,42 @@ namespace Desktop_Windwos_form_application
 
         }
 
-        private void ProductDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void ProductDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Check if the clicked cell is in a valid range (avoiding header clicks)
+            if (e.RowIndex >= 0 && e.ColumnIndex == ProductDataGrid.Columns["Delete"].Index)
+            {
+                // Prompt the user for username and password
+                string enteredUsername = PromptForInput("Enter Username:");
+                string enteredPassword = PromptForInput("Enter Password:", true); // Use true for password input
+
+                HttpResponseMessage response = await client.PostAsync($"https://localhost:7141/Users/{enteredUsername}/{enteredPassword}", null);
+
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, string> userData = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonResponse);
+                    int logging = 1;
+                    string userType;
+                    if (userData.TryGetValue("type", out userType))
+                    {
+                        if (userType == "user")
+                        {
+
+                            // Navigate to UserPage
+                            MessageBox.Show("Canceled. Invalid credentials. Unable to delete data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else if (userType == "admin")
+                        {
+                            ProductDataGrid.Rows.RemoveAt(e.RowIndex);
+                            MessageBox.Show("Data deleted successfully!");
+                        }
+                    }
+                }
+            }
 
         }
 
@@ -893,7 +904,6 @@ namespace Desktop_Windwos_form_application
                         Price[itemId] = itemPrice;
                     }
 
-                    MessageBox.Show("Succes, product submit.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     decimal cash;
 
                     if (decimal.TryParse(txtAmount.Text, out cash))
@@ -930,6 +940,7 @@ namespace Desktop_Windwos_form_application
                     string toMail = Email;
                     Email = "";
                     SimpleFontResolver.GenerateAndDownloadPdf(toMail, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
+                    MessageBox.Show("Succes, product submit.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
 
 

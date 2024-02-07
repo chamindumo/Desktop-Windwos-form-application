@@ -88,7 +88,7 @@
             // 
             this.cmbPaymentMethode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPaymentMethode.FormattingEnabled = true;
-            this.cmbPaymentMethode.Location = new System.Drawing.Point(1085, 126);
+            this.cmbPaymentMethode.Location = new System.Drawing.Point(1131, 130);
             this.cmbPaymentMethode.Name = "cmbPaymentMethode";
             this.cmbPaymentMethode.Size = new System.Drawing.Size(197, 24);
             this.cmbPaymentMethode.TabIndex = 3;
@@ -101,7 +101,7 @@
             this.cmbPaymnttype.Items.AddRange(new object[] {
             "Cash",
             "Card"});
-            this.cmbPaymnttype.Location = new System.Drawing.Point(818, 126);
+            this.cmbPaymnttype.Location = new System.Drawing.Point(864, 130);
             this.cmbPaymnttype.Name = "cmbPaymnttype";
             this.cmbPaymnttype.Size = new System.Drawing.Size(192, 24);
             this.cmbPaymnttype.TabIndex = 4;
@@ -111,7 +111,7 @@
             // 
             this.lbLoyeltyCard.AutoSize = true;
             this.lbLoyeltyCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLoyeltyCard.Location = new System.Drawing.Point(815, 185);
+            this.lbLoyeltyCard.Location = new System.Drawing.Point(861, 189);
             this.lbLoyeltyCard.Name = "lbLoyeltyCard";
             this.lbLoyeltyCard.Size = new System.Drawing.Size(85, 17);
             this.lbLoyeltyCard.TabIndex = 5;
@@ -126,7 +126,7 @@
             "Phone Number",
             "Card Number",
             "No"});
-            this.cmbLoyeltyCard.Location = new System.Drawing.Point(818, 215);
+            this.cmbLoyeltyCard.Location = new System.Drawing.Point(864, 219);
             this.cmbLoyeltyCard.Name = "cmbLoyeltyCard";
             this.cmbLoyeltyCard.Size = new System.Drawing.Size(192, 24);
             this.cmbLoyeltyCard.TabIndex = 6;
@@ -135,7 +135,7 @@
             // txtAmount
             // 
             this.txtAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(818, 436);
+            this.txtAmount.Location = new System.Drawing.Point(864, 411);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(192, 23);
             this.txtAmount.TabIndex = 7;
@@ -144,7 +144,7 @@
             // txtExtraForCard
             // 
             this.txtExtraForCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtraForCard.Location = new System.Drawing.Point(818, 342);
+            this.txtExtraForCard.Location = new System.Drawing.Point(864, 317);
             this.txtExtraForCard.Name = "txtExtraForCard";
             this.txtExtraForCard.Size = new System.Drawing.Size(192, 23);
             this.txtExtraForCard.TabIndex = 8;
@@ -153,9 +153,9 @@
             // btnConform
             // 
             this.btnConform.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConform.Location = new System.Drawing.Point(1081, 210);
+            this.btnConform.Location = new System.Drawing.Point(1127, 205);
             this.btnConform.Name = "btnConform";
-            this.btnConform.Size = new System.Drawing.Size(201, 33);
+            this.btnConform.Size = new System.Drawing.Size(201, 38);
             this.btnConform.TabIndex = 9;
             this.btnConform.Text = "Conform";
             this.btnConform.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@
             // 
             // btnCheackOut
             // 
-            this.btnCheackOut.Location = new System.Drawing.Point(1085, 425);
+            this.btnCheackOut.Location = new System.Drawing.Point(1131, 389);
             this.btnCheackOut.Name = "btnCheackOut";
             this.btnCheackOut.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btnCheackOut.Size = new System.Drawing.Size(201, 45);
@@ -175,7 +175,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(305, 101);
+            this.btnAdd.Location = new System.Drawing.Point(305, 98);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(106, 36);
             this.btnAdd.TabIndex = 11;
@@ -252,7 +252,7 @@
             // txtCardNumber
             // 
             this.txtCardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCardNumber.Location = new System.Drawing.Point(1085, 342);
+            this.txtCardNumber.Location = new System.Drawing.Point(1131, 317);
             this.txtCardNumber.Name = "txtCardNumber";
             this.txtCardNumber.Size = new System.Drawing.Size(201, 23);
             this.txtCardNumber.TabIndex = 16;
@@ -284,7 +284,7 @@
             // 
             this.lbPaymentType.AutoSize = true;
             this.lbPaymentType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPaymentType.Location = new System.Drawing.Point(815, 94);
+            this.lbPaymentType.Location = new System.Drawing.Point(861, 98);
             this.lbPaymentType.Name = "lbPaymentType";
             this.lbPaymentType.Size = new System.Drawing.Size(94, 17);
             this.lbPaymentType.TabIndex = 19;
@@ -295,7 +295,7 @@
             // 
             this.lbPaymentMethod.AutoSize = true;
             this.lbPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPaymentMethod.Location = new System.Drawing.Point(1082, 94);
+            this.lbPaymentMethod.Location = new System.Drawing.Point(1128, 98);
             this.lbPaymentMethod.Name = "lbPaymentMethod";
             this.lbPaymentMethod.Size = new System.Drawing.Size(114, 17);
             this.lbPaymentMethod.TabIndex = 20;
@@ -306,7 +306,7 @@
             // 
             this.lbAmount.AutoSize = true;
             this.lbAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAmount.Location = new System.Drawing.Point(815, 400);
+            this.lbAmount.Location = new System.Drawing.Point(861, 375);
             this.lbAmount.Name = "lbAmount";
             this.lbAmount.Size = new System.Drawing.Size(56, 17);
             this.lbAmount.TabIndex = 21;
@@ -317,7 +317,7 @@
             // 
             this.lbCardNumber.AutoSize = true;
             this.lbCardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCardNumber.Location = new System.Drawing.Point(1082, 306);
+            this.lbCardNumber.Location = new System.Drawing.Point(1128, 284);
             this.lbCardNumber.Name = "lbCardNumber";
             this.lbCardNumber.Size = new System.Drawing.Size(96, 17);
             this.lbCardNumber.TabIndex = 22;
@@ -328,7 +328,7 @@
             // 
             this.lbExtraForCard.AutoSize = true;
             this.lbExtraForCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbExtraForCard.Location = new System.Drawing.Point(815, 309);
+            this.lbExtraForCard.Location = new System.Drawing.Point(861, 284);
             this.lbExtraForCard.Name = "lbExtraForCard";
             this.lbExtraForCard.Size = new System.Drawing.Size(93, 17);
             this.lbExtraForCard.TabIndex = 23;
@@ -378,7 +378,7 @@
             this.ProductDataGrid.Location = new System.Drawing.Point(34, 263);
             this.ProductDataGrid.MinimumSize = new System.Drawing.Size(30, 0);
             this.ProductDataGrid.Name = "ProductDataGrid";
-            this.ProductDataGrid.Size = new System.Drawing.Size(680, 316);
+            this.ProductDataGrid.Size = new System.Drawing.Size(780, 316);
             this.ProductDataGrid.TabIndex = 27;
             this.ProductDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductDataGrid_CellContentClick);
             // 
@@ -387,7 +387,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1344, 633);
+            this.ClientSize = new System.Drawing.Size(1365, 633);
             this.Controls.Add(this.ProductDataGrid);
             this.Controls.Add(this.btnAvalableProduct);
             this.Controls.Add(this.btnAddCustomer);

@@ -149,12 +149,12 @@ namespace Desktop_application
             // Call the method to generate PDF from HTML template
             byte[] pdfBytes = GenerateBill("Order Summary", userName, itemCounts, totalCost, productcost, productprice, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
             string toEmail = "janithramoramudali@gmail.com";
-            SendPdfByEmail(orderSummary, pdfBytes);
 
             // Save or send the generated PDF as needed
             string fileName = $"Bill_{DateTime.Now:yyyyMMddHHmmss}.pdf";
             string filePath = "C://Users/Chamindu/source/repos/Hello/Desktop-application/Desktop application/" + fileName; // Path to save the file
             File.WriteAllBytes(filePath, pdfBytes);
+            SendPdfByEmail(orderSummary, pdfBytes);
 
             Console.WriteLine("PDF generated and saved to desktop.");
 
