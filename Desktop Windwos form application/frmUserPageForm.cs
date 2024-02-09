@@ -47,6 +47,7 @@ namespace Desktop_Windwos_form_application
         public int availableQuantity = 0;
         public string name;
         public static string TmpName = "";
+        public static string TmpHtmlName = "";
         public int orderNumber = 0;
         public string Email;
         #endregion
@@ -61,8 +62,36 @@ namespace Desktop_Windwos_form_application
             FetchBankNames();
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_2;
             btnDelete_Click();
+            lbUserName.Text = username;
+            frmAvalableProduct avalableProduct = new frmAvalableProduct();
+
+            // Load the icon image
+            Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-search-50.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-logout-50.png"); // Replace "icon.png" with the actual file path
 
 
+            int newWidth = 15; // Set your desired width
+            int newHeight = 15; // Set your desired height
+            Bitmap resizedIcon = new Bitmap(icon, new Size(newWidth, newHeight));
+            Bitmap resizedIconLogout = new Bitmap(iconLogOut, new Size(newWidth, newHeight));
+
+            // Set the icon for the button
+            btnAvalableProduct.Image = resizedIcon;
+            btnBack.Image = resizedIconLogout;
+            // Show the form
+            avalableProduct.Show();
+            // Set the icon for the form (assuming you have an 'icon.png' file in your project)
+
+            Timer timer = new Timer();
+            timer.Interval = 1000; // Update every 1000 milliseconds (1 second)
+            timer.Tick += (timerSender, timerArgs) =>
+            {
+                // Update the time label
+                lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            };
+
+            // Start the timer
+            timer.Start();
         }
         #endregion
         #region Using Items
@@ -539,7 +568,6 @@ namespace Desktop_Windwos_form_application
 
             await FetchDiscounts(paymentMethod);
             UpdateTotalCost();
-            itemIdCounts.Clear();
 
 
         }
@@ -934,14 +962,15 @@ namespace Desktop_Windwos_form_application
 
                     decimal balance = Cash - totalCostPrice;
                     await GetTemplate();
-
+                    await GetHtmlemplate();
                     MessageBox.Show($"Blance: {balance}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     txtAmount.Clear();
                     string toMail = Email;
                     Email = "";
-                    SimpleFontResolver.GenerateAndDownloadPdf(toMail, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
+                    SimpleFontResolver.GenerateAndDownloadPdf(toMail, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName, TmpHtmlName);
                     MessageBox.Show("Succes, product submit.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
+                    itemIdCounts.Clear();
 
 
 
@@ -1147,6 +1176,39 @@ namespace Desktop_Windwos_form_application
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+
+
+
+        private static async Task GetHtmlemplate()
+        {
+
+            var httpClient = new HttpClient();
+
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync("https://localhost:7141/htmltemplates/Kiwi%20Suit%20Email%20Template");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var products = JsonConvert.DeserializeObject<HtmlTemplate>(content);
+                    string Htmltemplate = products.html_content;
+                    TmpHtmlName = Htmltemplate;
+
+
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to fetch data. Status code: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+
 
         private void UpdateTotalCost()
         {
@@ -1580,8 +1642,38 @@ namespace Desktop_Windwos_form_application
             {
                 // Handle exceptions
             }
-        } 
+        }
         #endregion
+
+        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbUserName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -79,6 +79,42 @@ namespace Desktop_application
             return items;
         }
 
+        private static string GenerateHtmlBill(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
+        {
+            // Retrieve items from the dictionaries
+
+            string htmlTemplatePath = TmpName;
+
+
+            List<Item> items = ExtractItems(itemCounts, productCost, productprice, itemSellPrice, itemPrice);
+            decimal calculatedTotalCost = totalCost;
+            string htmlContent = htmlTemplatePath;
+
+            // Replace user-related placeholders
+            htmlContent = htmlContent.Replace("[USER_NAME]", userName);
+            htmlContent = htmlContent.Replace("[ORDER_NUMBER]", orderNumber.ToString());
+            htmlContent = htmlContent.Replace("[CURRENT_DATE]", DateTime.Now.ToShortDateString());
+            // Add other replacements as needed...
+
+            // Replace item-related placeholders dynamically
+            string tableRows = "";
+            foreach (Item item in items)
+            {
+                tableRows += $"<tr><td>{item.Name}</td><td>{item.Quantity}</td><td>{item.UnitPrice}</td><td>{item.Amount}</td></tr>";
+            }
+
+            // Target the specific placeholder in your template (e.g., table body)
+            htmlContent = htmlContent.Replace("[]", tableRows);
+
+            // Calculate balance due
+            decimal balanceDue = calculatedTotalCost - cash;
+            htmlContent = htmlContent.Replace("[TOTAL_COST]", calculatedTotalCost.ToString());
+            htmlContent = htmlContent.Replace("[PAID_AMOUNT]", cash.ToString());
+            htmlContent = htmlContent.Replace("[BALANCE_DUE]", balanceDue.ToString());
+
+            // Return the generated HTML content
+            return htmlContent;
+        }
 
 
         private static byte[] GenerateBill(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
@@ -144,17 +180,17 @@ namespace Desktop_application
         }
 
 
-        public static async void GenerateAndDownloadPdf(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productcost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal Cash, int orderNumber, Dictionary<int, string> ItemSellprice, string TmpName)
+        public static async void GenerateAndDownloadPdf(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productcost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal Cash, int orderNumber, Dictionary<int, string> ItemSellprice, string TmpName , string TmpHtmlName)
         {
             // Call the method to generate PDF from HTML template
             byte[] pdfBytes = GenerateBill("Order Summary", userName, itemCounts, totalCost, productcost, productprice, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);
-            string toEmail = "janithramoramudali@gmail.com";
-
-            // Save or send the generated PDF as needed
             string fileName = $"Bill_{DateTime.Now:yyyyMMddHHmmss}.pdf";
             string filePath = "C://Users/Chamindu/source/repos/Hello/Desktop-application/Desktop application/" + fileName; // Path to save the file
             File.WriteAllBytes(filePath, pdfBytes);
-            SendPdfByEmail(orderSummary, pdfBytes);
+            string htmlContetnt = GenerateHtmlBill("Order Summary", userName, itemCounts, totalCost, productcost, productprice, itemPrice, Cash, orderNumber, ItemSellprice, TmpHtmlName);
+            // Save or send the generated PDF as needed
+
+            SendHtmlByEmail(orderSummary, htmlContetnt);
 
             Console.WriteLine("PDF generated and saved to desktop.");
 
@@ -164,7 +200,7 @@ namespace Desktop_application
 
 
 
-        private static void SendPdfByEmail(string toEmail, byte[] pdfBytes)
+        private static void SendHtmlByEmail(string toEmail, string htmlContent)
         {
             try
             {
@@ -184,13 +220,10 @@ namespace Desktop_application
                 mailMessage.From = new MailAddress("chamindumoramudali99@gmail.com"); // Update with your email address
                 mailMessage.To.Add(toEmail);
                 mailMessage.Subject = "Bill";
-                mailMessage.Body = "Please find attached your PDF invoice.";
 
-                // Attach the PDF file to the email
-                MemoryStream stream = new MemoryStream(pdfBytes);
-                Attachment attachment = new Attachment(stream, new ContentType(MediaTypeNames.Application.Pdf));
-                attachment.ContentDisposition.FileName = "Invoice.pdf";
-                mailMessage.Attachments.Add(attachment);
+                // Set the HTML content as the body of the email
+                mailMessage.Body = htmlContent;
+                mailMessage.IsBodyHtml = true; // Specify that the body contains HTML content
 
                 // Send the email
                 smtpClient.Send(mailMessage);
