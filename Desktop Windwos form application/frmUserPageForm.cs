@@ -23,7 +23,7 @@ namespace Desktop_Windwos_form_application
         private HttpClient client = new HttpClient();
         private static decimal totalCostPrice = 0;
         private List<int> ItemsId = new List<int>(); // List to store added items
-        private Dictionary<int, int> itemIdCounts = new Dictionary<int, int>(); // Dictionary to store item counts
+        private Dictionary<int, decimal> itemIdCounts = new Dictionary<int,decimal>(); // Dictionary to store item counts
 
         private List<string> dailyOrders = new List<string>(); // Define a list to store daily orders
         private Dictionary<string, decimal> productCosts = new Dictionary<string, decimal> { };
@@ -44,7 +44,7 @@ namespace Desktop_Windwos_form_application
         int bankId = 0;
         private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
         public string productName = "";
-        public int availableQuantity = 0;
+        public decimal availableQuantity = 0;
         public string name;
         public static string TmpName = "";
         public static string TmpHtmlName = "";
@@ -63,7 +63,6 @@ namespace Desktop_Windwos_form_application
             dataGridView1.CellContentClick += dataGridView1_CellContentClick_2;
             btnDelete_Click();
             lbUserName.Text = username;
-            frmAvalableProduct avalableProduct = new frmAvalableProduct();
 
             // Load the icon image
             Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-search-50.png"); // Replace "icon.png" with the actual file path
@@ -78,9 +77,7 @@ namespace Desktop_Windwos_form_application
             // Set the icon for the button
             btnAvalableProduct.Image = resizedIcon;
             btnBack.Image = resizedIconLogout;
-            // Show the form
-            avalableProduct.Show();
-            // Set the icon for the form (assuming you have an 'icon.png' file in your project)
+     
 
             Timer timer = new Timer();
             timer.Interval = 1000; // Update every 1000 milliseconds (1 second)
@@ -172,7 +169,7 @@ namespace Desktop_Windwos_form_application
                 return;
             }
 
-            if (!int.TryParse(txtQuentity.Text, out _))
+            if (!decimal.TryParse(txtQuentity.Text, out _))
             {
                 MessageBox.Show("Please enter a valid numeric Quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -198,14 +195,14 @@ namespace Desktop_Windwos_form_application
             string selectedProduct = txtProduct.Text;
 
             // Parse the quantity from textBox2.Text
-            if (!int.TryParse(txtQuentity.Text, out int quantity))
+            if (!decimal.TryParse(txtQuentity.Text, out decimal quantity))
             {
                 // Handle invalid quantity input
                 MessageBox.Show("Invalid Quentity. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            int quentity = 0;
+            decimal quentity = 0;
             var selectedProductItemIds = ItemSellprice.Where(x => x.Value == selectedProduct).Select(x => x.Key).ToList();
             var selectedProductItemPrice = Cost.Where(x => selectedProductItemIds.Contains(x.Key)).Select(x => x.Value).ToList();
             int selectedItemId = 0;
@@ -229,7 +226,7 @@ namespace Desktop_Windwos_form_application
                             if (Cost.TryGetValue(selectedItemId, out decimal selectedUnitPrice))
                             {
                                 // Update the DataGridView with the selected item
-                                if (!int.TryParse(txtQuentity.Text, out int count) || count <= 0)
+                                if (!decimal.TryParse(txtQuentity.Text, out decimal count) || count <= 0)
                                 {
                                     // Handle invalid input
                                     return;
@@ -257,7 +254,7 @@ namespace Desktop_Windwos_form_application
                                     quentity = availableQuantity - count;
 
                                     await UpdateProductStockQuantity(productId, selectedItemId, quentity, productName);
-                                    UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
+                                    UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice, selectedItemId);
 
                                 }
 
@@ -298,7 +295,7 @@ namespace Desktop_Windwos_form_application
                 if (Cost.TryGetValue(selectedItemId, out decimal selectedUnitPrice))
                 {
                     // Update the DataGridView with the selected item
-                    if (!int.TryParse(txtQuentity.Text, out int count) || count <= 0)
+                    if (!decimal.TryParse(txtQuentity.Text, out decimal count) || count <= 0)
                     {
                         // Handle invalid input
                         return;
@@ -326,7 +323,7 @@ namespace Desktop_Windwos_form_application
                         quentity = availableQuantity - count;
 
                         await UpdateProductStockQuantity(productId, selectedItemId, quentity, productName);
-                        UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice);
+                        UpdateDataGridView(selectedProduct, quantity, selectedUnitPrice, selectedItemId);
 
                     }
 
@@ -369,7 +366,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private void UpdateDataGridView(string selectedProduct, int quantity, decimal unitPrice)
+        private void UpdateDataGridView(string selectedProduct, decimal quantity, decimal unitPrice,int selectedItemId)
         {
             // Check if the item already exists in the DataGridView
             DataGridViewRow existingRow = null;
@@ -385,7 +382,7 @@ namespace Desktop_Windwos_form_application
             if (existingRow != null)
             {
                 // Item already exists, update quantity and total price
-                int existingQuantity = Convert.ToInt32(existingRow.Cells["Quantity"].Value);
+                decimal existingQuantity = Convert.ToInt32(existingRow.Cells["Quantity"].Value);
                 decimal existingTotalPrice = Convert.ToDecimal(existingRow.Cells["TotalPrice"].Value);
 
                 existingQuantity += quantity;
@@ -409,6 +406,7 @@ namespace Desktop_Windwos_form_application
                     // Item doesn't exist, add a new item
                     itemList.Add(new Item
                     {
+                        Itemnumber = selectedItemId,
                         ItemName = selectedProduct,
                         Quantity = quantity,
                         UnitPrice = unitPrice
@@ -446,8 +444,9 @@ namespace Desktop_Windwos_form_application
 
         public class Item
         {
+            public int Itemnumber { get; set; }
             public string ItemName { get; set; }
-            public int Quantity { get; set; }
+            public decimal Quantity { get; set; }
             public decimal UnitPrice { get; set; }
             public decimal TotalPrice => Quantity * UnitPrice;
         }
@@ -510,6 +509,35 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbUserName_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void lbLoyeltyCard_Click(object sender, EventArgs e)
         {
@@ -763,13 +791,22 @@ namespace Desktop_Windwos_form_application
                         }
                         else if (userType == "admin")
                         {
+                            DataGridViewRow selectedRow = ProductDataGrid.Rows[e.RowIndex];
+                            decimal selectedPrice = Convert.ToDecimal(selectedRow.Cells[4].Value);
+                            int itemId = Convert.ToInt32(selectedRow.Cells[1].Value);
+                            int selectedItemId = itemId;
+                            if (itemIdCounts.ContainsKey(selectedItemId))
+                            {
+                                itemIdCounts.Remove(selectedItemId);
+                            }
+                            Console.WriteLine(itemId);
+                            totalCostLabel.Text = (totalCostPrice - selectedPrice).ToString();
                             ProductDataGrid.Rows.RemoveAt(e.RowIndex);
                             MessageBox.Show("Data deleted successfully!");
                         }
                     }
                 }
             }
-
         }
 
         private void lbQuentity_Click(object sender, EventArgs e)
@@ -791,6 +828,14 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void btCalculator_Click(object sender, EventArgs e)
+        {
+            frmCalculatorForm calculatorForm = new frmCalculatorForm();
+            calculatorForm.ShowDialog();
+
+        }
+
         #endregion
         #region Using Method
         private string PromptForInput(string prompt, bool isPassword = false)
@@ -815,13 +860,6 @@ namespace Desktop_Windwos_form_application
             promptForm.ShowDialog();
 
             return textBox.Text;
-        }
-
-        private bool IsValidCredentials(string username, string password)
-        {
-            // Replace this with your authentication logic
-            // For simplicity, let's assume a hardcoded username and password
-            return username == "admin" && password == "password";
         }
 
         private async Task FetchDiscounts(string paymentMethode)
@@ -1100,7 +1138,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private decimal CalculateItemDiscount(int productId, int quantity)
+        private decimal CalculateItemDiscount(int productId, decimal quantity)
         {
             decimal itemDiscount = 0;
 
@@ -1240,17 +1278,7 @@ namespace Desktop_Windwos_form_application
 
             decimal totalAmount = 0;
 
-            // Calculate the total amount by summing up the TotalPrice for each row
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.Cells["TotalPrice"].Value != null)
-                {
-                    totalAmount += Convert.ToDecimal(row.Cells["TotalPrice"].Value);
-                }
-            }
-
-            // Display or use the totalAmount as needed
-            Console.WriteLine($"Total Amount: {totalAmount}");
+          
 
 
 
@@ -1259,7 +1287,7 @@ namespace Desktop_Windwos_form_application
             totalCostLabel.Text = totalCostPrice.ToString();
         }
 
-        private decimal CalculateItemPrice(int itemName, int count)
+        private decimal CalculateItemPrice(int itemName, decimal count)
         {
             if (!Cost.ContainsKey(itemName))
             {
@@ -1290,7 +1318,7 @@ namespace Desktop_Windwos_form_application
         }
 
 
-        private async Task<bool> IsQuantityAvailable(int productId, int selectedId, int requestedQuantity)
+        private async Task<bool> IsQuantityAvailable(int productId, int selectedId, decimal requestedQuantity)
         {
 
             using (HttpClient client = new HttpClient())
@@ -1377,7 +1405,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private async Task UpdateProductStockQuantity(int productId, int selectid, int availableQuantity, string productName)
+        private async Task UpdateProductStockQuantity(int productId, int selectid, decimal availableQuantity, string productName)
         {
 
             var client = new HttpClient();
@@ -1643,37 +1671,10 @@ namespace Desktop_Windwos_form_application
                 // Handle exceptions
             }
         }
+
         #endregion
 
-        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void lblTime_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbUserName_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 
 }

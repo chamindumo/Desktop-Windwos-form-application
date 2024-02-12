@@ -12,7 +12,7 @@ namespace Desktop_Windwos_form_application
 
         public decimal Price { get; set; }
         public int ProductId { get; set; }
-        public int StockQuantity { get; set; }
+        public decimal StockQuantity { get; set; }
         public string ProductName { get; set; }
     }
 }

@@ -229,6 +229,9 @@
     <Compile Include="BankModelDTO.cs" />
     <Compile Include="CustermerDTO.cs" />
     <Compile Include="Discount.cs" />
+    <Compile Include="frmCalculatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEditDiscount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAvalableProduct.resx">
       <DependentUpon>frmAvalableProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalculatorForm.resx">
+      <DependentUpon>frmCalculatorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditDiscount.resx">
       <DependentUpon>frmEditDiscount.cs</DependentUpon>

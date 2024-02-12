@@ -26,7 +26,7 @@ namespace Desktop_application
         public class Item
         {
             public string Name { get; set; }
-            public int Quantity { get; set; }
+            public decimal Quantity { get; set; }
             public decimal UnitPrice { get; set; }
             public decimal Amount { get; set; }
         }
@@ -35,14 +35,14 @@ namespace Desktop_application
 
 
 
-        private static List<Item> ExtractItems(Dictionary<int, int> itemCounts, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, Dictionary<int, string> itemSellPrice, decimal itemPrice)
+        private static List<Item> ExtractItems(Dictionary<int, decimal> itemCounts, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, Dictionary<int, string> itemSellPrice, decimal itemPrice)
         {
             List<Item> items = new List<Item>();
 
             foreach (var item in itemCounts)
             {
                 int itemId = item.Key;
-                int quantity = item.Value;
+                decimal quantity = item.Value;
                 decimal unitPrice = 0; // Default value
                 string itemName = "Unknown"; // Default value
                 decimal itemCost = 0;
@@ -79,7 +79,7 @@ namespace Desktop_application
             return items;
         }
 
-        private static string GenerateHtmlBill(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
+        private static string GenerateHtmlBill(string orderSummary, string userName, Dictionary<int, decimal> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
         {
             // Retrieve items from the dictionaries
 
@@ -117,7 +117,7 @@ namespace Desktop_application
         }
 
 
-        private static byte[] GenerateBill(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
+        private static byte[] GenerateBill(string orderSummary, string userName, Dictionary<int, decimal> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)
         {
             // Retrieve items from the dictionaries
 
@@ -180,7 +180,7 @@ namespace Desktop_application
         }
 
 
-        public static async void GenerateAndDownloadPdf(string orderSummary, string userName, Dictionary<int, int> itemCounts, decimal totalCost, Dictionary<int, decimal> productcost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal Cash, int orderNumber, Dictionary<int, string> ItemSellprice, string TmpName , string TmpHtmlName)
+        public static async void GenerateAndDownloadPdf(string orderSummary, string userName, Dictionary<int, decimal> itemCounts, decimal totalCost, Dictionary<int, decimal> productcost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal Cash, int orderNumber, Dictionary<int, string> ItemSellprice, string TmpName , string TmpHtmlName)
         {
             // Call the method to generate PDF from HTML template
             byte[] pdfBytes = GenerateBill("Order Summary", userName, itemCounts, totalCost, productcost, productprice, itemPrice, Cash, orderNumber, ItemSellprice, TmpName);

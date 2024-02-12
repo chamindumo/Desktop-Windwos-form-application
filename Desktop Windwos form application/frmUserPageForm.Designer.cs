@@ -58,12 +58,13 @@
             this.ProductDataGrid = new System.Windows.Forms.DataGridView();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbUserName = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbHeadder = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
-            this.lbUserName = new System.Windows.Forms.Label();
+            this.btCalculator = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
@@ -363,6 +364,38 @@
             this.panel1.Size = new System.Drawing.Size(1373, 89);
             this.panel1.TabIndex = 28;
             // 
+            // lbUserName
+            // 
+            this.lbUserName.AutoSize = true;
+            this.lbUserName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUserName.Location = new System.Drawing.Point(1187, 44);
+            this.lbUserName.Name = "lbUserName";
+            this.lbUserName.Size = new System.Drawing.Size(103, 19);
+            this.lbUserName.TabIndex = 30;
+            this.lbUserName.Text = "lbUserName";
+            this.lbUserName.Click += new System.EventHandler(this.lbUserName_Click);
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(648, 57);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(46, 17);
+            this.lblTime.TabIndex = 29;
+            this.lblTime.Text = "label2";
+            this.lblTime.Click += new System.EventHandler(this.lblTime_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(633, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 32);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Kiwi Suit";
+            // 
             // lbHeadder
             // 
             this.lbHeadder.AutoSize = true;
@@ -376,6 +409,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
+            this.panel2.Controls.Add(this.btCalculator);
             this.panel2.Controls.Add(this.btnAvalableProduct);
             this.panel2.Controls.Add(this.btnAddCustomer);
             this.panel2.Controls.Add(this.btnBack);
@@ -394,37 +428,15 @@
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // label1
+            // btCalculator
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(633, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 32);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "Kiwi Suit";
-            // 
-            // lblTime
-            // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(648, 57);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(46, 17);
-            this.lblTime.TabIndex = 29;
-            this.lblTime.Text = "label2";
-            this.lblTime.Click += new System.EventHandler(this.lblTime_Click);
-            // 
-            // lbUserName
-            // 
-            this.lbUserName.AutoSize = true;
-            this.lbUserName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserName.Location = new System.Drawing.Point(1187, 44);
-            this.lbUserName.Name = "lbUserName";
-            this.lbUserName.Size = new System.Drawing.Size(103, 19);
-            this.lbUserName.TabIndex = 30;
-            this.lbUserName.Text = "lbUserName";
-            this.lbUserName.Click += new System.EventHandler(this.lbUserName_Click);
+            this.btCalculator.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btCalculator.Location = new System.Drawing.Point(11, 157);
+            this.btCalculator.Name = "btCalculator";
+            this.btCalculator.Size = new System.Drawing.Size(44, 34);
+            this.btCalculator.TabIndex = 27;
+            this.btCalculator.UseVisualStyleBackColor = false;
+            this.btCalculator.Click += new System.EventHandler(this.btCalculator_Click);
             // 
             // frmUserPageForm
             // 
@@ -509,5 +521,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lbUserName;
+        private System.Windows.Forms.Button btCalculator;
     }
 }

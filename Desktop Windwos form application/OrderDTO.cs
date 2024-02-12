@@ -25,7 +25,7 @@ namespace Desktop_Windwos_form_application
         public int ItemId { get; set; }
         public int OrderId { get; set; }
         public string ProductName { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public decimal Price { get; set; }
         public string product_id { get; set; }
         public decimal Discount { get; set; }

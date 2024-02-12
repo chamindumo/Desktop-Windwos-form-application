@@ -546,7 +546,7 @@ namespace Desktop_Windwos_form_application
                         string content1 = await response1.Content.ReadAsStringAsync();
                         ProductItemDTO productStock = JsonConvert.DeserializeObject<ProductItemDTO>(content1);
 
-                        int availableQuantity = productStock.StockQuantity + quantity;
+                        decimal availableQuantity = productStock.StockQuantity + quantity;
 
                         ProductItemDTO formData = new ProductItemDTO
                         {
