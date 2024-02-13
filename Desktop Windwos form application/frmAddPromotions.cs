@@ -28,6 +28,8 @@ namespace Desktop_Windwos_form_application
         private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
         private Button button2;
         private ComboBox cmbPaymentMethode;
+        private TextBox txtLastlyModifiedBy;
+        private Label lblLastlyModified;
         public int loggingTo;
         #endregion
         #region Using Constructor
@@ -56,6 +58,8 @@ namespace Desktop_Windwos_form_application
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             this.cmbPaymentMethode = new System.Windows.Forms.ComboBox();
+            this.txtLastlyModifiedBy = new System.Windows.Forms.TextBox();
+            this.lblLastlyModified = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbHeadding
@@ -188,9 +192,29 @@ namespace Desktop_Windwos_form_application
             this.cmbPaymentMethode.TabIndex = 19;
             this.cmbPaymentMethode.SelectedIndexChanged += new System.EventHandler(this.cmbPaymentMethode_SelectedIndexChanged);
             // 
+            // txtLastlyModifiedBy
+            // 
+            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(210, 250);
+            this.txtLastlyModifiedBy.Name = "txtLastlyModifiedBy";
+            this.txtLastlyModifiedBy.Size = new System.Drawing.Size(196, 20);
+            this.txtLastlyModifiedBy.TabIndex = 20;
+            this.txtLastlyModifiedBy.TextChanged += new System.EventHandler(this.txtLastlyModifiedBy_TextChanged);
+            // 
+            // lblLastlyModified
+            // 
+            this.lblLastlyModified.AutoSize = true;
+            this.lblLastlyModified.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastlyModified.Location = new System.Drawing.Point(46, 253);
+            this.lblLastlyModified.Name = "lblLastlyModified";
+            this.lblLastlyModified.Size = new System.Drawing.Size(106, 17);
+            this.lblLastlyModified.TabIndex = 21;
+            this.lblLastlyModified.Text = "Lastly Modified:";
+            // 
             // frmAddPromotions
             // 
             this.ClientSize = new System.Drawing.Size(491, 376);
+            this.Controls.Add(this.lblLastlyModified);
+            this.Controls.Add(this.txtLastlyModifiedBy);
             this.Controls.Add(this.cmbPaymentMethode);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.endDateTimePicker);
@@ -258,7 +282,7 @@ namespace Desktop_Windwos_form_application
             }
         }
 
-        private async void SubmitFormToAPI(int billNumber, string paymentMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid)
+        private async void SubmitFormToAPI(int billNumber, string paymentMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid, string lastlyModified)
         {
 
             var formData = new
@@ -268,7 +292,11 @@ namespace Desktop_Windwos_form_application
                 DiscountNumber = discountNumber,
                 StartDate = startDate,
                 EndDate = endDate,
-                IsValid = isValid
+                IsValid = isValid,
+                LastModifiedBy = lastlyModified,
+                LastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
+
+
             };
 
             var jsonData = JsonConvert.SerializeObject(formData);
@@ -330,10 +358,10 @@ namespace Desktop_Windwos_form_application
             DateTime startDate = startDateTimePicker.Value;
             DateTime endDate = endDateTimePicker.Value;
             bool isValid = isValidRadioButton.Checked;
-
+            string lastmodified = txtLastlyModifiedBy.Text;
             // Perform actions with the retrieved values (e.g., send them to an API, process them, etc.)
             // For example:
-            SubmitFormToAPI(billNumber, paymentMethod, discountNumber, startDate, endDate, isValid);
+            SubmitFormToAPI(billNumber, paymentMethod, discountNumber, startDate, endDate, isValid, lastmodified);
 
         }
 
@@ -402,7 +430,15 @@ namespace Desktop_Windwos_form_application
         private void cmbPaymentMethode_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        } 
+        }
+
+        private void txtLastlyModifiedBy_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
+
+
     }
 }

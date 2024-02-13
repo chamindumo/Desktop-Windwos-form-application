@@ -28,17 +28,17 @@ namespace Desktop_Windwos_form_application
         Dictionary<int, int> ProductId = new Dictionary<int, int>();
         Dictionary<int, int> ItemId = new Dictionary<int, int>();
         Dictionary<int, decimal> ItemCost = new Dictionary<int, decimal>();
-        Dictionary<int, int> Quntity = new Dictionary<int, int>();
+        Dictionary<int, decimal> Quntity = new Dictionary<int, decimal>();
         Dictionary<int, decimal> ItemPrice = new Dictionary<int, decimal>();
         Dictionary<int, decimal> ItemSellprice = new Dictionary<int, decimal>();
         Dictionary<int, decimal> ItemSellCost = new Dictionary<int, decimal>();
-        Dictionary<int, int> ItemQuntity = new Dictionary<int, int>();
+        Dictionary<int, decimal> ItemQuntity = new Dictionary<int, decimal>();
         Dictionary<int, string> ItemName = new Dictionary<int, string>();
         private Dictionary<string, int> productIds = new Dictionary<string, int> { };
         private Dictionary<string, int> productCosts = new Dictionary<string, int>();
         private Dictionary<int, string> Product = new Dictionary<int, string>();
         public static int foundProductId = 0;
-        private int quentity = 0;
+        private decimal quentity = 0;
         private Label lbHeadding;
         private Label lbBatchName;
         private Label lbItemSellPrice;
@@ -454,7 +454,7 @@ namespace Desktop_Windwos_form_application
             // Retrieve data from UI elements
             string newProductName = txtProductName.Text;
             string productId = txtId.Text;
-            int quantity = Convert.ToInt32(txtQuentity.Text);
+            decimal quantity = Convert.ToDecimal(txtQuentity.Text);
             decimal itemPrice = Convert.ToDecimal(txtPrice.Text);
             decimal itemSellPrice = Convert.ToDecimal(txtSellPrice.Text);
             int batchnumber = Convert.ToInt32(txtBatchNumber.Text);
@@ -529,14 +529,14 @@ namespace Desktop_Windwos_form_application
             return _random.Next();
         }
 
-        private async Task UpdateProductStockQuantity(List<int> existingProductIds, Dictionary<int, int> ItemId, Dictionary<int, decimal> ItemSellCost, Dictionary<int, int> ItemQuentity, Dictionary<int, string> ItemName)
+        private async Task UpdateProductStockQuantity(List<int> existingProductIds, Dictionary<int, int> ItemId, Dictionary<int, decimal> ItemSellCost, Dictionary<int, decimal> ItemQuentity, Dictionary<int, string> ItemName)
         {
             using (HttpClient server = new HttpClient())
             {
                 foreach (var productId in existingProductIds)
                 {
                     string productName = ItemName[productId];
-                    int quantity = ItemQuentity[productId];
+                    decimal quantity = ItemQuentity[productId];
                     decimal price = ItemSellCost[productId];
                     int prodId = ItemId[productId];
                     HttpResponseMessage response1 = await server.GetAsync($"https://localhost:7141/productitem/{productId}/?price={price}");
@@ -570,14 +570,14 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private async Task CreateNewProducts(List<int> newProductIds, Dictionary<int, int> ItemId, Dictionary<int, decimal> ItemSellCost, Dictionary<int, int> ItemQuentity, Dictionary<int, string> ItemName)
+        private async Task CreateNewProducts(List<int> newProductIds, Dictionary<int, int> ItemId, Dictionary<int, decimal> ItemSellCost, Dictionary<int, decimal> ItemQuentity, Dictionary<int, string> ItemName)
         {
             using (HttpClient client = new HttpClient())
             {
                 foreach (var productId in newProductIds)
                 {
                     string productName = ItemName[productId];
-                    int quantity = ItemQuentity[productId];
+                    decimal quantity = ItemQuentity[productId];
                     decimal price = ItemSellCost[productId];
                     int prodId = ItemId[productId];
 
@@ -741,7 +741,7 @@ namespace Desktop_Windwos_form_application
                     purchaseDateTimePicker.Value = DateTime.Now; // Set it to the current date and time or any default value
                     txtSupplierId.Clear();
                     txtTotalAmount.Clear();
-
+                    itemDataGridView.Rows.Clear();
 
                 }
                 else
@@ -842,7 +842,7 @@ namespace Desktop_Windwos_form_application
             }
 
             // Validate Quantity
-            if (!int.TryParse(txtQuentity.Text, out _))
+            if (!decimal.TryParse(txtQuentity.Text, out _))
             {
                 MessageBox.Show("Please enter a valid numeric quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

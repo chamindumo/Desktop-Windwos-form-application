@@ -11,5 +11,7 @@ namespace Desktop_Windwos_form_application
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsValid { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

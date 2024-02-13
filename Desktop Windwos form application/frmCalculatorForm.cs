@@ -9,6 +9,9 @@ namespace Desktop_Windwos_form_application
 {
     public class frmCalculatorForm: Form
     {
+        private double currentResult = 0;
+        private char currentOperation = ' ';
+
         private TextBox textBox1;
         private Button btn2;
         private Button btn3;
@@ -24,6 +27,7 @@ namespace Desktop_Windwos_form_application
         private Button btnEqual;
         private Button btnDot;
         private Button btn0;
+        private Button btnReset;
         private Button btn1;
 
         public frmCalculatorForm()
@@ -49,13 +53,15 @@ namespace Desktop_Windwos_form_application
             this.btnEqual = new System.Windows.Forms.Button();
             this.btnDot = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(17, 35);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(318, 20);
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.textBox1.Size = new System.Drawing.Size(237, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -98,6 +104,7 @@ namespace Desktop_Windwos_form_application
             this.btnPluse.TabIndex = 4;
             this.btnPluse.Text = "+";
             this.btnPluse.UseVisualStyleBackColor = true;
+            this.btnPluse.Click += new System.EventHandler(this.btnPluse_Click);
             // 
             // btn4
             // 
@@ -138,6 +145,7 @@ namespace Desktop_Windwos_form_application
             this.btnMin.TabIndex = 8;
             this.btnMin.Text = "-";
             this.btnMin.UseVisualStyleBackColor = true;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
             // 
             // btn7
             // 
@@ -189,6 +197,7 @@ namespace Desktop_Windwos_form_application
             this.btnEqual.TabIndex = 13;
             this.btnEqual.Text = "=";
             this.btnEqual.UseVisualStyleBackColor = true;
+            this.btnEqual.Click += new System.EventHandler(this.btnEqual_Click);
             // 
             // btnDot
             // 
@@ -209,10 +218,22 @@ namespace Desktop_Windwos_form_application
             this.btn0.TabIndex = 15;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = true;
+            this.btn0.Click += new System.EventHandler(this.btn0_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(260, 35);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 16;
+            this.btnReset.Text = "<-";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // frmCalculatorForm
             // 
             this.ClientSize = new System.Drawing.Size(347, 261);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btn0);
             this.Controls.Add(this.btnDot);
             this.Controls.Add(this.btnEqual);
@@ -236,14 +257,20 @@ namespace Desktop_Windwos_form_application
 
         }
 
+
+        private void AppendDigit(string digit)
+        {
+            textBox1.Text += digit;
+        }
         private void A_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "8";
+            AppendDigit("8");
 
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            ProcessOperation('*');
 
         }
 
@@ -259,54 +286,161 @@ namespace Desktop_Windwos_form_application
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "1";
+            AppendDigit("1");
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "2";
+            AppendDigit("2");
 
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "3";
+            AppendDigit("3");
 
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "4";
+            AppendDigit("4");
 
         }
 
         private void btnDot_Click(object sender, EventArgs e)
         {
+            AppendDigit(".");
 
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "5";
+            AppendDigit("5");
 
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "6";
+            AppendDigit("6");
 
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "7";
+            AppendDigit("7");
 
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "9";
+            AppendDigit("9");
 
+        }
+
+        private void btnPluse_Click(object sender, EventArgs e)
+        {
+            ProcessOperation('+');
+
+        }
+
+        private void btnEqual_Click(object sender, EventArgs e)
+        {
+            PerformCalculation();
+
+        }
+
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            ProcessOperation('-');
+
+        }
+
+
+        private void ProcessOperation(char operation)
+        {
+            // Attempt to parse the text in textBox1 to a double
+            if (double.TryParse(textBox1.Text, out double enteredNumber))
+            {
+                // Perform the calculation based on the current operation
+                switch (currentOperation)
+                {
+                    case '+':
+                        currentResult += enteredNumber;
+                        break;
+                    case '-':
+                        currentResult -= enteredNumber;
+                        break;
+                    case '*':
+                        currentResult *= enteredNumber;
+                        break;
+                    default:
+                        currentResult = enteredNumber;
+                        break;
+                }
+
+                // Set the current operation for the next calculation
+                currentOperation = operation;
+
+                // Clear the TextBox for the next input
+                textBox1.Clear();
+            }
+            else
+            {
+                // Handle the case when the entered text is not a valid numeric value
+                // For example, display an error message or perform error handling.
+                // Example:
+                // MessageBox.Show("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        private void PerformCalculation()
+        {
+            // Attempt to parse the text in textBox1 to a double
+            if (double.TryParse(textBox1.Text, out double enteredNumber))
+            {
+                // Perform the final calculation based on the current operation
+                switch (currentOperation)
+                {
+                    case '+':
+                        currentResult += enteredNumber;
+                        break;
+                    case '-':
+                        currentResult -= enteredNumber;
+                        break;
+                    case '*':
+                        currentResult *= enteredNumber;
+                        break;
+                    default:
+                        currentResult = enteredNumber;
+                        break;
+                }
+
+                // Display the result in the TextBox
+                textBox1.Text = currentResult.ToString();
+
+                // Reset the current operation
+                currentOperation = ' ';
+            }
+            else
+            {
+                // Handle the case when the entered text is not a valid numeric value
+                // For example, display an error message or perform error handling.
+                // Example:
+                // MessageBox.Show("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+            AppendDigit("0");
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            currentResult = 0;
+            currentOperation = ' ';
+            textBox1.Clear();
         }
     }
 }

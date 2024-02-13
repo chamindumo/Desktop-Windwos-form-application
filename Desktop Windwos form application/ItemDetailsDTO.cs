@@ -14,7 +14,7 @@ namespace Desktop_Windwos_form_application
 
         public decimal ItemPrice { get; set; }
         public decimal ItemSellPrice { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
 
     }
 

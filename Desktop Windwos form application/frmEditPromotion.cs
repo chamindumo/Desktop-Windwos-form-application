@@ -23,6 +23,8 @@ namespace Desktop_Windwos_form_application
         private RadioButton isValidRadioButton;
         private Button btnSubmit;
         private Label lbisValid;
+        private TextBox txtLastlyModified;
+        private Label lblLastlyModified;
         public int billNumber;
         #endregion
 
@@ -60,6 +62,8 @@ namespace Desktop_Windwos_form_application
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.isValidRadioButton = new System.Windows.Forms.RadioButton();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtLastlyModified = new System.Windows.Forms.TextBox();
+            this.lblLastlyModified = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbHeadding
@@ -179,7 +183,7 @@ namespace Desktop_Windwos_form_application
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(295, 272);
+            this.btnSubmit.Location = new System.Drawing.Point(295, 314);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(85, 33);
             this.btnSubmit.TabIndex = 16;
@@ -187,9 +191,29 @@ namespace Desktop_Windwos_form_application
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // txtLastlyModified
+            // 
+            this.txtLastlyModified.Location = new System.Drawing.Point(238, 255);
+            this.txtLastlyModified.Name = "txtLastlyModified";
+            this.txtLastlyModified.Size = new System.Drawing.Size(249, 20);
+            this.txtLastlyModified.TabIndex = 17;
+            this.txtLastlyModified.TextChanged += new System.EventHandler(this.txtLastlyModified_TextChanged);
+            // 
+            // lblLastlyModified
+            // 
+            this.lblLastlyModified.AutoSize = true;
+            this.lblLastlyModified.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastlyModified.Location = new System.Drawing.Point(52, 256);
+            this.lblLastlyModified.Name = "lblLastlyModified";
+            this.lblLastlyModified.Size = new System.Drawing.Size(102, 17);
+            this.lblLastlyModified.TabIndex = 18;
+            this.lblLastlyModified.Text = "Lastly Modified";
+            // 
             // frmEditPromotion
             // 
             this.ClientSize = new System.Drawing.Size(675, 414);
+            this.Controls.Add(this.lblLastlyModified);
+            this.Controls.Add(this.txtLastlyModified);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.isValidRadioButton);
             this.Controls.Add(this.endDateTimePicker);
@@ -265,7 +289,7 @@ namespace Desktop_Windwos_form_application
             DateTime startDate = startDateTimePicker.Value;
             DateTime endDate = endDateTimePicker.Value;
             bool isValid = isValidRadioButton.Checked;
-
+            string lastlyModified = txtLastlyModified.Text;
             // Create an object to send to the API
             var formData = new
             {
@@ -274,7 +298,9 @@ namespace Desktop_Windwos_form_application
                 DiscountNumber = discountNumber,
                 StartDate = startDate,
                 EndDate = endDate,
-                IsValid = isValid
+                IsValid = isValid,
+                LastModifiedBy = lastlyModified,
+                LastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
             };
 
             // Convert the object to JSON
@@ -327,7 +353,13 @@ namespace Desktop_Windwos_form_application
         private void frmEditPromotion_Load(object sender, EventArgs e)
         {
 
-        } 
+        }
+        private void txtLastlyModified_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
+
+
     }
 }

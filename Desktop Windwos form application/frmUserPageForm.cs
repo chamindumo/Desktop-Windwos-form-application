@@ -67,24 +67,29 @@ namespace Desktop_Windwos_form_application
             // Load the icon image
             Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-search-50.png"); // Replace "icon.png" with the actual file path
             Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-logout-50.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconCalculator = new Bitmap("C://Users/Chamindu/Downloads/icons8-calculator-66.png"); // Replace "icon.png" with the actual file path
 
 
             int newWidth = 15; // Set your desired width
             int newHeight = 15; // Set your desired height
             Bitmap resizedIcon = new Bitmap(icon, new Size(newWidth, newHeight));
             Bitmap resizedIconLogout = new Bitmap(iconLogOut, new Size(newWidth, newHeight));
+            Bitmap resizedCalculator = new Bitmap(iconCalculator, new Size(newWidth, newHeight));
+
 
             // Set the icon for the button
             btnAvalableProduct.Image = resizedIcon;
             btnBack.Image = resizedIconLogout;
-     
+            btCalculator.Image = resizedCalculator;
 
-            Timer timer = new Timer();
+                   Timer timer = new Timer();
             timer.Interval = 1000; // Update every 1000 milliseconds (1 second)
             timer.Tick += (timerSender, timerArgs) =>
             {
                 // Update the time label
                 lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
+                lblDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
             };
 
             // Start the timer
@@ -1672,9 +1677,13 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+
         #endregion
 
-       
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 }

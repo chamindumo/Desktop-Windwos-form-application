@@ -63,8 +63,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbHeadder = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btCalculator = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
@@ -355,14 +356,16 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.lbUserName);
             this.panel1.Controls.Add(this.lblTime);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.lbHeadder);
             this.panel1.Location = new System.Drawing.Point(36, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1373, 89);
+            this.panel1.Size = new System.Drawing.Size(1373, 101);
             this.panel1.TabIndex = 28;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // lbUserName
             // 
@@ -379,7 +382,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(648, 57);
+            this.lblTime.Location = new System.Drawing.Point(648, 44);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(46, 17);
             this.lblTime.TabIndex = 29;
@@ -390,7 +393,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(633, 25);
+            this.label1.Location = new System.Drawing.Point(626, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 32);
             this.label1.TabIndex = 28;
@@ -418,6 +421,16 @@
             this.panel2.Size = new System.Drawing.Size(58, 691);
             this.panel2.TabIndex = 29;
             // 
+            // btCalculator
+            // 
+            this.btCalculator.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btCalculator.Location = new System.Drawing.Point(9, 157);
+            this.btCalculator.Name = "btCalculator";
+            this.btCalculator.Size = new System.Drawing.Size(44, 34);
+            this.btCalculator.TabIndex = 27;
+            this.btCalculator.UseVisualStyleBackColor = false;
+            this.btCalculator.Click += new System.EventHandler(this.btCalculator_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -428,15 +441,15 @@
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // btCalculator
+            // lblDate
             // 
-            this.btCalculator.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btCalculator.Location = new System.Drawing.Point(11, 157);
-            this.btCalculator.Name = "btCalculator";
-            this.btCalculator.Size = new System.Drawing.Size(44, 34);
-            this.btCalculator.TabIndex = 27;
-            this.btCalculator.UseVisualStyleBackColor = false;
-            this.btCalculator.Click += new System.EventHandler(this.btCalculator_Click);
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(648, 67);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(46, 17);
+            this.lblDate.TabIndex = 31;
+            this.lblDate.Text = "label2";
             // 
             // frmUserPageForm
             // 
@@ -522,5 +535,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lbUserName;
         private System.Windows.Forms.Button btCalculator;
+        private System.Windows.Forms.Label lblDate;
     }
 }

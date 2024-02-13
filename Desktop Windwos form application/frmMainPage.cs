@@ -182,7 +182,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(12, 379);
+            this.btnLogin.Location = new System.Drawing.Point(12, 393);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(112, 36);
             this.btnLogin.TabIndex = 10;
@@ -192,7 +192,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnPurchase
             // 
-            this.btnPurchase.Location = new System.Drawing.Point(12, 320);
+            this.btnPurchase.Location = new System.Drawing.Point(12, 334);
             this.btnPurchase.Name = "btnPurchase";
             this.btnPurchase.Size = new System.Drawing.Size(112, 36);
             this.btnPurchase.TabIndex = 9;
@@ -202,7 +202,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnNewUser
             // 
-            this.btnNewUser.Location = new System.Drawing.Point(12, 261);
+            this.btnNewUser.Location = new System.Drawing.Point(12, 275);
             this.btnNewUser.Name = "btnNewUser";
             this.btnNewUser.Size = new System.Drawing.Size(112, 36);
             this.btnNewUser.TabIndex = 8;
@@ -212,7 +212,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnBank
             // 
-            this.btnBank.Location = new System.Drawing.Point(12, 201);
+            this.btnBank.Location = new System.Drawing.Point(12, 215);
             this.btnBank.Name = "btnBank";
             this.btnBank.Size = new System.Drawing.Size(112, 36);
             this.btnBank.TabIndex = 7;
@@ -222,7 +222,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnDiscount
             // 
-            this.btnDiscount.Location = new System.Drawing.Point(12, 143);
+            this.btnDiscount.Location = new System.Drawing.Point(12, 157);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(112, 36);
             this.btnDiscount.TabIndex = 6;
@@ -232,7 +232,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnPromotions
             // 
-            this.btnPromotions.Location = new System.Drawing.Point(12, 81);
+            this.btnPromotions.Location = new System.Drawing.Point(12, 95);
             this.btnPromotions.Name = "btnPromotions";
             this.btnPromotions.Size = new System.Drawing.Size(112, 36);
             this.btnPromotions.TabIndex = 5;
@@ -242,7 +242,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnProducts
             // 
-            this.btnProducts.Location = new System.Drawing.Point(12, 21);
+            this.btnProducts.Location = new System.Drawing.Point(12, 35);
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.Size = new System.Drawing.Size(112, 36);
             this.btnProducts.TabIndex = 4;
@@ -354,7 +354,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.bankDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bankDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bankDataGridView.Location = new System.Drawing.Point(355, 91);
+            this.bankDataGridView.Location = new System.Drawing.Point(456, 91);
             this.bankDataGridView.Name = "bankDataGridView";
             this.bankDataGridView.Size = new System.Drawing.Size(268, 383);
             this.bankDataGridView.TabIndex = 10;
@@ -926,6 +926,10 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+        private void lbName_Click(object sender, EventArgs e)
+        {
+
+        }
         #endregion
         #region Using Method
         private async Task<int> GetTotalProductsCount()
@@ -943,8 +947,9 @@ namespace Desktop_Windwos_form_application
             return products.Count;
 
 
-        } 
+        }
         #endregion
 
+       
     }
 }
