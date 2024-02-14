@@ -507,16 +507,6 @@ namespace Desktop_Windwos_form_application
                 promotionDataGridView.Columns.Add(buttonColumn);
             }
 
-            if (!ColumnExists(promotionDataGridView, "btnEdit"))
-            {
-                DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
-                editButtonColumn.HeaderText = "Delete";
-                editButtonColumn.Text = "Delete";
-                editButtonColumn.Name = "btnEdit";
-                editButtonColumn.UseColumnTextForButtonValue = true;
-                promotionDataGridView.Columns.Add(editButtonColumn);
-                promotionDataGridView.CellContentClick += promotionDataGrid_CellContentClick;
-            }
 
             promotionDataGridView.Visible = true;
             productDataGridView.Visible = false;
@@ -560,17 +550,7 @@ namespace Desktop_Windwos_form_application
                 discountDataGridView.Columns.Add(buttonColumn);
             }
 
-            if (!ColumnExists(discountDataGridView, "btnEdit"))
-            {
-                DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
-                editButtonColumn.HeaderText = "Delete";
-                editButtonColumn.Text = "Delete";
-                editButtonColumn.Name = "btnEdit";
-                editButtonColumn.UseColumnTextForButtonValue = true;
-                discountDataGridView.Columns.Add(editButtonColumn);
-                discountDataGridView.CellContentClick += discountDataGrid_CellContentClick;
-            }
-
+           
             discountDataGridView.Visible = true;
             productDataGridView.Visible = false;
             promotionDataGridView.Visible = false;

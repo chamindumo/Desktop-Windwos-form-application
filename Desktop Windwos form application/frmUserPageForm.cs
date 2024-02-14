@@ -804,6 +804,7 @@ namespace Desktop_Windwos_form_application
                             {
                                 itemIdCounts.Remove(selectedItemId);
                             }
+                            ItemsId.Remove(selectedItemId);
                             Console.WriteLine(itemId);
                             totalCostLabel.Text = (totalCostPrice - selectedPrice).ToString();
                             ProductDataGrid.Rows.RemoveAt(e.RowIndex);

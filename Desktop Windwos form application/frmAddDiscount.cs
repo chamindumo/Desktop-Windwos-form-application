@@ -38,6 +38,8 @@ namespace Desktop_Windwos_form_application
         private System.Windows.Forms.Button button2;
         public string bankName = "";
         public string Namepro = "";
+        private TextBox txtLastlyModifiedperson;
+        private Label lblLastlyAddedPerson;
         public string Id;
         #endregion
 
@@ -75,6 +77,8 @@ namespace Desktop_Windwos_form_application
             this.isValidRadioButton = new System.Windows.Forms.RadioButton();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.txtLastlyModifiedperson = new System.Windows.Forms.TextBox();
+            this.lblLastlyAddedPerson = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -247,9 +251,29 @@ namespace Desktop_Windwos_form_application
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // txtLastlyModifiedperson
+            // 
+            this.txtLastlyModifiedperson.Location = new System.Drawing.Point(198, 372);
+            this.txtLastlyModifiedperson.Name = "txtLastlyModifiedperson";
+            this.txtLastlyModifiedperson.Size = new System.Drawing.Size(199, 20);
+            this.txtLastlyModifiedperson.TabIndex = 22;
+            this.txtLastlyModifiedperson.TextChanged += new System.EventHandler(this.txtLastlyModifiedperson_TextChanged);
+            // 
+            // lblLastlyAddedPerson
+            // 
+            this.lblLastlyAddedPerson.AutoSize = true;
+            this.lblLastlyAddedPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastlyAddedPerson.Location = new System.Drawing.Point(58, 372);
+            this.lblLastlyAddedPerson.Name = "lblLastlyAddedPerson";
+            this.lblLastlyAddedPerson.Size = new System.Drawing.Size(122, 17);
+            this.lblLastlyAddedPerson.TabIndex = 23;
+            this.lblLastlyAddedPerson.Text = "Lastly Edit Person";
+            // 
             // frmAddDiscount
             // 
             this.ClientSize = new System.Drawing.Size(563, 479);
+            this.Controls.Add(this.lblLastlyAddedPerson);
+            this.Controls.Add(this.txtLastlyModifiedperson);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.isValidRadioButton);
@@ -393,7 +417,9 @@ namespace Desktop_Windwos_form_application
                     StartDate = startDate,
                     EndDate = endDate,
                     PaymentMethod = bankName,
-                    IsValid = isValid
+                    IsValid = isValid,
+                    LastModifiedBy = txtLastlyModifiedperson.Text,
+                    LastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
                 };
 
                 // Serialize the discount data to JSON
@@ -542,7 +568,12 @@ namespace Desktop_Windwos_form_application
         private void textBox6_TextChanged(object sender, System.EventArgs e)
         {
 
-        } 
-        #endregion 
+        }
+        #endregion
+
+        private void txtLastlyModifiedperson_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

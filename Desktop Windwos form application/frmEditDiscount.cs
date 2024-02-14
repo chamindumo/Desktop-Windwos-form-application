@@ -43,6 +43,8 @@ namespace Desktop_Windwos_form_application
         private bool isValid;
         public string bankName = "";
         private System.Windows.Forms.Button btnSubmit;
+        private TextBox txtLastlyAddPerson;
+        private Label lblLastlyEditPerson;
         private int discountid;
         #endregion
 
@@ -90,6 +92,8 @@ namespace Desktop_Windwos_form_application
             this.endDateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.paymentMethodComboBox = new System.Windows.Forms.ComboBox();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtLastlyAddPerson = new System.Windows.Forms.TextBox();
+            this.lblLastlyEditPerson = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbHeadding
@@ -231,7 +235,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.isValidRadioButton.AutoSize = true;
             this.isValidRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.isValidRadioButton.Location = new System.Drawing.Point(235, 303);
+            this.isValidRadioButton.Location = new System.Drawing.Point(235, 309);
             this.isValidRadioButton.Name = "isValidRadioButton";
             this.isValidRadioButton.Size = new System.Drawing.Size(14, 13);
             this.isValidRadioButton.TabIndex = 15;
@@ -277,9 +281,29 @@ namespace Desktop_Windwos_form_application
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // txtLastlyAddPerson
+            // 
+            this.txtLastlyAddPerson.Location = new System.Drawing.Point(237, 339);
+            this.txtLastlyAddPerson.Name = "txtLastlyAddPerson";
+            this.txtLastlyAddPerson.Size = new System.Drawing.Size(247, 20);
+            this.txtLastlyAddPerson.TabIndex = 20;
+            this.txtLastlyAddPerson.TextChanged += new System.EventHandler(this.txtLastlyAddPerson_TextChanged);
+            // 
+            // lblLastlyEditPerson
+            // 
+            this.lblLastlyEditPerson.AutoSize = true;
+            this.lblLastlyEditPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastlyEditPerson.Location = new System.Drawing.Point(91, 342);
+            this.lblLastlyEditPerson.Name = "lblLastlyEditPerson";
+            this.lblLastlyEditPerson.Size = new System.Drawing.Size(143, 17);
+            this.lblLastlyEditPerson.TabIndex = 21;
+            this.lblLastlyEditPerson.Text = "Lastly Added Person:";
+            // 
             // frmEditDiscount
             // 
             this.ClientSize = new System.Drawing.Size(593, 445);
+            this.Controls.Add(this.lblLastlyEditPerson);
+            this.Controls.Add(this.txtLastlyAddPerson);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.paymentMethodComboBox);
             this.Controls.Add(this.endDateTimePicker2);
@@ -362,7 +386,9 @@ namespace Desktop_Windwos_form_application
                     ProductName = productName,
                     StartDate = startDate,
                     EndDate = endDate,
-                    IsValid = isValid
+                    IsValid = isValid,
+                    LastModifiedBy = txtLastlyAddPerson.Text,
+                    LastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
                 }), Encoding.UTF8, "application/json");
 
                 var response = await httpClient.PutAsync("https://localhost:7141/discounts/" + discountid, content);
@@ -541,7 +567,12 @@ namespace Desktop_Windwos_form_application
         private void isValidRadioButton_CheckedChanged(object sender, EventArgs e)
         {
 
-        } 
+        }
         #endregion
+
+        private void txtLastlyAddPerson_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -69,7 +69,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn1.Location = new System.Drawing.Point(17, 79);
             this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(75, 23);
+            this.btn1.Size = new System.Drawing.Size(60, 40);
             this.btn1.TabIndex = 1;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn2.Location = new System.Drawing.Point(98, 79);
             this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(75, 23);
+            this.btn2.Size = new System.Drawing.Size(61, 40);
             this.btn2.TabIndex = 2;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn3.Location = new System.Drawing.Point(179, 79);
             this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(75, 23);
+            this.btn3.Size = new System.Drawing.Size(58, 40);
             this.btn3.TabIndex = 3;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = true;
@@ -97,10 +97,10 @@ namespace Desktop_Windwos_form_application
             // 
             // btnPluse
             // 
-            this.btnPluse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPluse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPluse.Location = new System.Drawing.Point(260, 79);
             this.btnPluse.Name = "btnPluse";
-            this.btnPluse.Size = new System.Drawing.Size(75, 23);
+            this.btnPluse.Size = new System.Drawing.Size(60, 40);
             this.btnPluse.TabIndex = 4;
             this.btnPluse.Text = "+";
             this.btnPluse.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn4.Location = new System.Drawing.Point(17, 125);
             this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(75, 23);
+            this.btn4.Size = new System.Drawing.Size(60, 39);
             this.btn4.TabIndex = 5;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn5.Location = new System.Drawing.Point(98, 125);
             this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(75, 23);
+            this.btn5.Size = new System.Drawing.Size(61, 39);
             this.btn5.TabIndex = 6;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = true;
@@ -130,7 +130,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn6.Location = new System.Drawing.Point(179, 125);
             this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(75, 23);
+            this.btn6.Size = new System.Drawing.Size(58, 39);
             this.btn6.TabIndex = 7;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = true;
@@ -138,10 +138,10 @@ namespace Desktop_Windwos_form_application
             // 
             // btnMin
             // 
-            this.btnMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMin.Location = new System.Drawing.Point(260, 125);
             this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(75, 23);
+            this.btnMin.Size = new System.Drawing.Size(60, 39);
             this.btnMin.TabIndex = 8;
             this.btnMin.Text = "-";
             this.btnMin.UseVisualStyleBackColor = true;
@@ -151,7 +151,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn7.Location = new System.Drawing.Point(17, 170);
             this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(75, 23);
+            this.btn7.Size = new System.Drawing.Size(60, 37);
             this.btn7.TabIndex = 9;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = true;
@@ -161,7 +161,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn8.Location = new System.Drawing.Point(98, 170);
             this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(75, 23);
+            this.btn8.Size = new System.Drawing.Size(61, 37);
             this.btn8.TabIndex = 10;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn9.Location = new System.Drawing.Point(179, 170);
             this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(75, 23);
+            this.btn9.Size = new System.Drawing.Size(58, 37);
             this.btn9.TabIndex = 11;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = true;
@@ -179,10 +179,10 @@ namespace Desktop_Windwos_form_application
             // 
             // btnMulti
             // 
-            this.btnMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMulti.Location = new System.Drawing.Point(260, 170);
             this.btnMulti.Name = "btnMulti";
-            this.btnMulti.Size = new System.Drawing.Size(75, 23);
+            this.btnMulti.Size = new System.Drawing.Size(60, 37);
             this.btnMulti.TabIndex = 12;
             this.btnMulti.Text = "*";
             this.btnMulti.UseVisualStyleBackColor = true;
@@ -193,7 +193,7 @@ namespace Desktop_Windwos_form_application
             this.btnEqual.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEqual.Location = new System.Drawing.Point(260, 213);
             this.btnEqual.Name = "btnEqual";
-            this.btnEqual.Size = new System.Drawing.Size(75, 23);
+            this.btnEqual.Size = new System.Drawing.Size(60, 36);
             this.btnEqual.TabIndex = 13;
             this.btnEqual.Text = "=";
             this.btnEqual.UseVisualStyleBackColor = true;
@@ -201,10 +201,10 @@ namespace Desktop_Windwos_form_application
             // 
             // btnDot
             // 
-            this.btnDot.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDot.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDot.Location = new System.Drawing.Point(179, 213);
             this.btnDot.Name = "btnDot";
-            this.btnDot.Size = new System.Drawing.Size(75, 23);
+            this.btnDot.Size = new System.Drawing.Size(58, 36);
             this.btnDot.TabIndex = 14;
             this.btnDot.Text = ".";
             this.btnDot.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btn0.Location = new System.Drawing.Point(17, 213);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(156, 23);
+            this.btn0.Size = new System.Drawing.Size(142, 36);
             this.btn0.TabIndex = 15;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = true;
@@ -224,7 +224,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.btnReset.Location = new System.Drawing.Point(260, 35);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.Size = new System.Drawing.Size(60, 20);
             this.btnReset.TabIndex = 16;
             this.btnReset.Text = "<-";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -232,7 +232,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmCalculatorForm
             // 
-            this.ClientSize = new System.Drawing.Size(347, 261);
+            this.ClientSize = new System.Drawing.Size(339, 261);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btn0);
             this.Controls.Add(this.btnDot);
