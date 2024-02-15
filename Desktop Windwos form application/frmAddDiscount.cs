@@ -41,6 +41,8 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyModifiedperson;
         private Label lblLastlyAddedPerson;
         public string Id;
+        public string userName;
+
         #endregion
 
         #region using constructor
@@ -464,7 +466,7 @@ namespace Desktop_Windwos_form_application
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
+            frmMainPage mianPage = new frmMainPage(loggingTo, "admin");
             mianPage.Show();
             this.Hide();
         }

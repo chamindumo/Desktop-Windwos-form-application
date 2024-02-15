@@ -29,6 +29,8 @@ namespace Desktop_application
             public decimal Quantity { get; set; }
             public decimal UnitPrice { get; set; }
             public decimal Amount { get; set; }
+            public decimal Discount { get; set; }
+
         }
 
 
@@ -63,6 +65,7 @@ namespace Desktop_application
                 {
                     itemCost = cost;
                 }
+                decimal discount = CalculateDiscount(itemCost, quantity);
 
                 // Create an Item object and add it to the list
                 Item newItem = new Item
@@ -70,13 +73,23 @@ namespace Desktop_application
                     Name = itemName,
                     Quantity = quantity,
                     UnitPrice = unitPrice,
-                    Amount = itemCost// Calculate the amount
+                    Amount = itemCost,// Calculate the amount
+                    Discount = discount
+
                 };
 
                 items.Add(newItem);
             }
 
             return items;
+        }
+
+        private static decimal CalculateDiscount(decimal itemCost, decimal quantity)
+        {
+           
+            decimal discountPercentage = 10; 
+            decimal discount = (itemCost * quantity * discountPercentage) / 100;
+            return discount;
         }
 
         private static string GenerateHtmlBill(string orderSummary, string userName, Dictionary<int, decimal> itemCounts, decimal totalCost, Dictionary<int, decimal> productCost, Dictionary<int, decimal> productprice, decimal itemPrice, decimal cash, int orderNumber, Dictionary<int, string> itemSellPrice, string TmpName)

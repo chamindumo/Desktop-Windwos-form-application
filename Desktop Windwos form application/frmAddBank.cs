@@ -19,12 +19,15 @@ namespace Desktop_Windwos_form_application
         private TextBox txtBookName;
         private Button A;
         public int loggingTo;
+        public string userName;
+
         #endregion
         #region using constructor
-        public frmAddBank(int logging)
+        public frmAddBank(string username, int logging)
         {
             InitializeComponent();
             loggingTo = logging;
+            userName = username;
         }
 
         #endregion
@@ -216,7 +219,7 @@ namespace Desktop_Windwos_form_application
 
         private void btnBack(object sender, EventArgs e)
         {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
+            frmMainPage mianPage = new frmMainPage(loggingTo,userName);
             mianPage.Show();
             this.Hide();
         }

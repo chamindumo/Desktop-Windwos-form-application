@@ -69,7 +69,7 @@ namespace Desktop_Windwos_form_application
                     else if (userType == "admin")
                     {
 
-                        frmMainPage mianPage = new frmMainPage(logging);
+                        frmMainPage mianPage = new frmMainPage(logging,username);
                         mianPage.Show();
                         this.Hide();
                     }

@@ -68,11 +68,13 @@ namespace Desktop_Windwos_form_application
         private Button btnSubmit;
         private ListView ProductListView;
         public int loggingto;
+        public string userName;
         #endregion 
         #region Using Constructor
-        public frmAddPurchase(int logging)
+        public frmAddPurchase( string username, int logging)
         {
             InitializeComponent();
+            userName=username;
             _httpClient = new HttpClient(); // Initialize _httpClient
 
             productCosts = new Dictionary<string, int>();
@@ -421,12 +423,12 @@ namespace Desktop_Windwos_form_application
 
                     foreach (var product in products)
                     {
-                        // Assuming 'product.Name' is the name and 'product.Price' is the price
-                        Product[product.Id] = product.Names;
-                        productCosts[product.Names] = product.Id;
-
-
-
+                        if (product.IsAvalable)
+                        {
+                            // Assuming 'product.Name' is the name and 'product.Price' is the price
+                            Product[product.Id] = product.Names;
+                            productCosts[product.Names] = product.Id;
+                        }
                     }
 
                 }

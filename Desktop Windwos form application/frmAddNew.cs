@@ -655,7 +655,7 @@ namespace Desktop_Windwos_form_application
                     MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     id++;
 
-                    frmMainPage mianPage = new frmMainPage(loggingTo);
+                    frmMainPage mianPage = new frmMainPage(loggingTo, "admin");
                     mianPage.Show();
                     this.Hide();
                 }

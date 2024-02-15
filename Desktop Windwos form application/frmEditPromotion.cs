@@ -146,6 +146,7 @@ namespace Desktop_Windwos_form_application
             this.txtDiscountNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiscountNumber.Location = new System.Drawing.Point(238, 93);
             this.txtDiscountNumber.Name = "txtDiscountNumber";
+            this.txtDiscountNumber.ReadOnly = true;
             this.txtDiscountNumber.Size = new System.Drawing.Size(249, 23);
             this.txtDiscountNumber.TabIndex = 12;
             this.txtDiscountNumber.TextChanged += new System.EventHandler(this.txtDiscountNumber_TextChanged);

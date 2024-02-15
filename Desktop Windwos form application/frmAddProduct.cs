@@ -35,13 +35,15 @@ namespace Desktop_Windwos_form_application
         private Button button5;
         private Label lbHeadding;
         public int loggingTo = 0;
+        public string userName;
         #endregion
         #region Using Constructor
-        public frmAddProduct(int logging)
+        public frmAddProduct(string username, int logging)
         {
             InitializeComponent();
             loggingTo = logging;
             _httpClient = new HttpClient();
+            userName = username;    
         }
         #endregion
 
@@ -377,7 +379,7 @@ namespace Desktop_Windwos_form_application
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
+            frmMainPage mianPage = new frmMainPage(loggingTo, userName);
             mianPage.Show();
             this.Hide();
         }
@@ -470,7 +472,7 @@ namespace Desktop_Windwos_form_application
         private void button5_Click(object sender, System.EventArgs e)
         {
 
-            frmMainPage mianPage = new frmMainPage(loggingTo);
+            frmMainPage mianPage = new frmMainPage(loggingTo, userName);
             mianPage.Show();
             this.Hide();
         }

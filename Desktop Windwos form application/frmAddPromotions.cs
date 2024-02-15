@@ -31,11 +31,13 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyModifiedBy;
         private Label lblLastlyModified;
         public int loggingTo;
+        public string userName;
+
         #endregion
         #region Using Constructor
-        public frmAddPromotions(int logging)
+        public frmAddPromotions(string username,int logging)
         {
-
+            userName = username;
             loggingTo = logging;
             InitializeComponent();
             FetchBankNames();
@@ -335,7 +337,7 @@ namespace Desktop_Windwos_form_application
 
         private void btnBack(object sender, EventArgs e)
         {
-            frmMainPage mianPage = new frmMainPage(loggingTo);
+            frmMainPage mianPage = new frmMainPage(loggingTo,userName);
             mianPage.Show();
             this.Hide();
         }

@@ -59,7 +59,7 @@ namespace Desktop_Windwos_form_application
             this.discountid = discountId;
             txtProductId.Text = productId.ToString();
             paymentMethodComboBox.SelectedItem = paymentMethod;
-            txtDiscountId.Text = discountNumber.ToString();
+            txtDiscountId.Text = discountId.ToString();
             txtProductName.Text = productname.ToString();
             txtDiscountNumber.Text = discountNumber.ToString();
             startDateTimePicker.Value = startDate;
@@ -200,6 +200,7 @@ namespace Desktop_Windwos_form_application
             this.txtProductId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductId.Location = new System.Drawing.Point(235, 92);
             this.txtProductId.Name = "txtProductId";
+            this.txtProductId.ReadOnly = true;
             this.txtProductId.Size = new System.Drawing.Size(249, 23);
             this.txtProductId.TabIndex = 9;
             this.txtProductId.TextChanged += new System.EventHandler(this.txtProductId_TextChanged);
@@ -218,6 +219,7 @@ namespace Desktop_Windwos_form_application
             this.txtProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductName.Location = new System.Drawing.Point(235, 155);
             this.txtProductName.Name = "txtProductName";
+            this.txtProductName.ReadOnly = true;
             this.txtProductName.Size = new System.Drawing.Size(249, 23);
             this.txtProductName.TabIndex = 13;
             this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
@@ -227,6 +229,7 @@ namespace Desktop_Windwos_form_application
             this.txtDiscountId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDiscountId.Location = new System.Drawing.Point(235, 126);
             this.txtDiscountId.Name = "txtDiscountId";
+            this.txtDiscountId.ReadOnly = true;
             this.txtDiscountId.Size = new System.Drawing.Size(249, 23);
             this.txtDiscountId.TabIndex = 14;
             this.txtDiscountId.TextChanged += new System.EventHandler(this.txtDiscountId_TextChanged);
@@ -472,7 +475,7 @@ namespace Desktop_Windwos_form_application
 
             promotionId = int.Parse(txtProductId.Text);
             payMethod = paymentMethodComboBox.SelectedItem?.ToString();
-            discountNumber = decimal.Parse(txtDiscountId.Text);
+            discountNumber = decimal.Parse(txtDiscountNumber.Text);
             productName = txtProductName.Text;
             startDate = startDateTimePicker.Value;
             endDate = endDateTimePicker2.Value;
