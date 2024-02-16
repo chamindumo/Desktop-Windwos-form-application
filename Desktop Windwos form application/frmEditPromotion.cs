@@ -1,6 +1,8 @@
 ﻿#region Using Directives
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Forms; 
@@ -10,13 +12,14 @@ namespace Desktop_Windwos_form_application
 {
     public class frmEditPromotion: Form
     {
-        #region Uisng Variables
+        #region Using Variables
+        private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
+        private HttpClient client = new HttpClient();
         private Label lbHeadding;
         private Label lbPaymentMethod;
         private Label lbDiscountNumber;
         private Label lbStartDate;
         private Label lbEndDate;
-        private TextBox txtPaymentMethode;
         private TextBox txtDiscountNumber;
         private DateTimePicker startDateTimePicker;
         private DateTimePicker endDateTimePicker;
@@ -26,12 +29,16 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyModified;
         private Label lblLastlyModified;
         public int billNumber;
+        private ComboBox cmbSelectPayment;
+        private TextBox txtPaymentMethode;
+        public string userName;
         #endregion
 
         #region Using Constructor
 
-        public frmEditPromotion(string promotionid, string payMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid)
+        public frmEditPromotion(string promotionid, string payMethod, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid,string username)
         {
+            FetchBankNames();
             if (int.TryParse(promotionid, out int parsedBillNumber))
             {
                 billNumber = parsedBillNumber;
@@ -43,6 +50,8 @@ namespace Desktop_Windwos_form_application
             startDateTimePicker.Value = startDate;
             endDateTimePicker.Value = endDate;
             isValidRadioButton.Checked = isValid;
+            userName = username;
+            cmbSelectPayment.SelectedItem = payMethod;
         }
         #endregion
 
@@ -56,7 +65,6 @@ namespace Desktop_Windwos_form_application
             this.lbStartDate = new System.Windows.Forms.Label();
             this.lbEndDate = new System.Windows.Forms.Label();
             this.lbisValid = new System.Windows.Forms.Label();
-            this.txtPaymentMethode = new System.Windows.Forms.TextBox();
             this.txtDiscountNumber = new System.Windows.Forms.TextBox();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -64,6 +72,8 @@ namespace Desktop_Windwos_form_application
             this.btnSubmit = new System.Windows.Forms.Button();
             this.txtLastlyModified = new System.Windows.Forms.TextBox();
             this.lblLastlyModified = new System.Windows.Forms.Label();
+            this.cmbSelectPayment = new System.Windows.Forms.ComboBox();
+            this.txtPaymentMethode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lbHeadding
@@ -131,15 +141,6 @@ namespace Desktop_Windwos_form_application
             this.lbisValid.TabIndex = 6;
             this.lbisValid.Text = "Is Valid:";
             this.lbisValid.Click += new System.EventHandler(this.lbIsValid_Click);
-            // 
-            // txtPaymentMethode
-            // 
-            this.txtPaymentMethode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentMethode.Location = new System.Drawing.Point(238, 59);
-            this.txtPaymentMethode.Name = "txtPaymentMethode";
-            this.txtPaymentMethode.Size = new System.Drawing.Size(249, 23);
-            this.txtPaymentMethode.TabIndex = 7;
-            this.txtPaymentMethode.TextChanged += new System.EventHandler(this.txtPaymentMethode_TextChanged);
             // 
             // txtDiscountNumber
             // 
@@ -210,9 +211,28 @@ namespace Desktop_Windwos_form_application
             this.lblLastlyModified.TabIndex = 18;
             this.lblLastlyModified.Text = "Lastly Modified";
             // 
+            // cmbSelectPayment
+            // 
+            this.cmbSelectPayment.FormattingEnabled = true;
+            this.cmbSelectPayment.Location = new System.Drawing.Point(238, 61);
+            this.cmbSelectPayment.Name = "cmbSelectPayment";
+            this.cmbSelectPayment.Size = new System.Drawing.Size(249, 21);
+            this.cmbSelectPayment.TabIndex = 19;
+            this.cmbSelectPayment.SelectedIndexChanged += new System.EventHandler(this.cmbSelectPayment_SelectedIndexChanged);
+            // 
+            // txtPaymentMethode
+            // 
+            this.txtPaymentMethode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaymentMethode.Location = new System.Drawing.Point(238, 59);
+            this.txtPaymentMethode.Name = "txtPaymentMethode";
+            this.txtPaymentMethode.Size = new System.Drawing.Size(249, 23);
+            this.txtPaymentMethode.TabIndex = 7;
+            this.txtPaymentMethode.TextChanged += new System.EventHandler(this.txtPaymentMethode_TextChanged);
+            // 
             // frmEditPromotion
             // 
             this.ClientSize = new System.Drawing.Size(675, 414);
+            this.Controls.Add(this.cmbSelectPayment);
             this.Controls.Add(this.lblLastlyModified);
             this.Controls.Add(this.txtLastlyModified);
             this.Controls.Add(this.btnSubmit);
@@ -240,6 +260,10 @@ namespace Desktop_Windwos_form_application
 
         #region Using Items
 
+        private void cmbSelectPayment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         private void txtPaymentMethode_TextChanged(object sender, EventArgs e)
         {
 
@@ -285,7 +309,7 @@ namespace Desktop_Windwos_form_application
             }
 
 
-            string paymentMethod = txtPaymentMethode.Text;
+            string paymentMethod = cmbSelectPayment.SelectedItem?.ToString();
             decimal discountNumber = decimal.Parse(txtDiscountNumber.Text);
             DateTime startDate = startDateTimePicker.Value;
             DateTime endDate = endDateTimePicker.Value;
@@ -359,8 +383,40 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
         #endregion
 
+        #region Using Method
+        private async void FetchBankNames()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:7141/api/banks");
 
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var bankObjects = JsonConvert.DeserializeObject<List<BankModelDTO>>(content);
+
+                    // Extract bank names from bankObjects
+                    var bankNames = bankObjects.Select(bank => bank.BankName).ToList();
+                    // Bind the bank names to the Picker control
+                    cmbSelectPayment.DataSource = bankNames;
+                    foreach (var bank in bankObjects)
+                    {
+                        bankDictionary[bank.BankName] = bank.BankId; // Assuming BankId is the property representing the ID
+                    }
+                }
+                else
+                {
+                    // Handle the case where the response is unsuccessful
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+            }
+        } 
+        #endregion
     }
 }

@@ -32,7 +32,7 @@ namespace Desktop_Windwos_form_application
         private DateTimePicker EnterDateDateTimePicker;
         private RadioButton isAvalableRadioButton;
         private OpenFileDialog openFileDialog1;
-        private Button button5;
+        private Button btnBack;
         private Label lbHeadding;
         public int loggingTo = 0;
         public string userName;
@@ -68,7 +68,7 @@ namespace Desktop_Windwos_form_application
             this.EnterDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.isAvalableRadioButton = new System.Windows.Forms.RadioButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreviewPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -247,20 +247,20 @@ namespace Desktop_Windwos_form_application
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button5
+            // btnBack
             // 
-            this.button5.Location = new System.Drawing.Point(41, 12);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(48, 32);
-            this.button5.TabIndex = 27;
-            this.button5.Text = "<-\r\n";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnBack.Location = new System.Drawing.Point(41, 12);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(48, 32);
+            this.btnBack.TabIndex = 27;
+            this.btnBack.Text = "<-\r\n";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // frmAddProduct
             // 
             this.ClientSize = new System.Drawing.Size(604, 629);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.isAvalableRadioButton);
             this.Controls.Add(this.EnterDateDateTimePicker);
             this.Controls.Add(this.ImagePreviewPictureBox);
@@ -469,7 +469,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private void button5_Click(object sender, System.EventArgs e)
+        private void btnBack_Click(object sender, System.EventArgs e)
         {
 
             frmMainPage mianPage = new frmMainPage(loggingTo, userName);

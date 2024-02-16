@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿#region Using Derectives
+using System;
+using System.Windows.Forms; 
+#endregion
 
 namespace Desktop_Windwos_form_application
 {
     public class frmCalculatorForm: Form
     {
+        #region Using Variable
         private double currentResult = 0;
         private char currentOperation = ' ';
 
@@ -29,12 +28,14 @@ namespace Desktop_Windwos_form_application
         private Button btn0;
         private Button btnReset;
         private Button btn1;
-
+        #endregion
+        #region Using Constructor
         public frmCalculatorForm()
         {
             InitializeComponent();
         }
-
+        #endregion
+        #region Using Initalize
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -256,12 +257,22 @@ namespace Desktop_Windwos_form_application
             this.PerformLayout();
 
         }
+        #endregion
+        #region Using Items
 
-
-        private void AppendDigit(string digit)
+        private void btn0_Click(object sender, EventArgs e)
         {
-            textBox1.Text += digit;
+            AppendDigit("0");
+
         }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            currentResult = 0;
+            currentOperation = ' ';
+            textBox1.Clear();
+        }
+
         private void A_Click(object sender, EventArgs e)
         {
             AppendDigit("8");
@@ -354,8 +365,12 @@ namespace Desktop_Windwos_form_application
             ProcessOperation('-');
 
         }
-
-
+        #endregion
+        #region Using Method
+        private void AppendDigit(string digit)
+        {
+            textBox1.Text += digit;
+        }
         private void ProcessOperation(char operation)
         {
             // Attempt to parse the text in textBox1 to a double
@@ -428,19 +443,9 @@ namespace Desktop_Windwos_form_application
                 // Example:
                 // MessageBox.Show("Invalid input. Please enter a valid number.");
             }
-        }
+        } 
+        #endregion
 
-        private void btn0_Click(object sender, EventArgs e)
-        {
-            AppendDigit("0");
 
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            currentResult = 0;
-            currentOperation = ' ';
-            textBox1.Clear();
-        }
     }
 }

@@ -46,12 +46,13 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyAddPerson;
         private Label lblLastlyEditPerson;
         private int discountid;
+        public string userName;
         #endregion
 
 
 
         #region Using Constructor
-        public frmEditDiscount(int discountId, int productId, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid, string paymentMethod, string productname)
+        public frmEditDiscount(int discountId, int productId, decimal discountNumber, DateTime startDate, DateTime endDate, bool isValid, string paymentMethod, string productname, string username)
         {
             InitializeComponent();
             FetchBankNames();
@@ -65,6 +66,7 @@ namespace Desktop_Windwos_form_application
             startDateTimePicker.Value = startDate;
             endDateTimePicker2.Value = endDate;
             isValidRadioButton.Checked = isValid;
+            userName = username;
 
 
 
@@ -571,11 +573,15 @@ namespace Desktop_Windwos_form_application
         {
 
         }
-        #endregion
 
         private void txtLastlyAddPerson_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+
+        #endregion
+
+
     }
 }

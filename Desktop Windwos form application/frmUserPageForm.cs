@@ -371,90 +371,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private void UpdateDataGridView(string selectedProduct, decimal quantity, decimal unitPrice,int selectedItemId)
-        {
-            // Check if the item already exists in the DataGridView
-            DataGridViewRow existingRow = null;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.Cells["ItemName"].Value != null && row.Cells["ItemName"].Value.ToString() == selectedProduct)
-                {
-                    existingRow = row;
-                    break;
-                }
-            }
-
-            if (existingRow != null)
-            {
-                // Item already exists, update quantity and total price
-                decimal existingQuantity = Convert.ToInt32(existingRow.Cells["Quantity"].Value);
-                decimal existingTotalPrice = Convert.ToDecimal(existingRow.Cells["TotalPrice"].Value);
-
-                existingQuantity += quantity;
-                existingTotalPrice += quantity * unitPrice;
-
-                existingRow.Cells["Quantity"].Value = existingQuantity;
-                existingRow.Cells["TotalPrice"].Value = existingTotalPrice;
-            }
-            else
-            {
-                // Item doesn't exist, add a new row
-                Item existingItem = itemList.FirstOrDefault(item => item.ItemName == selectedProduct);
-
-                if (existingItem != null)
-                {
-                    // Item already exists, update quantity
-                    existingItem.Quantity += quantity;
-                }
-                else
-                {
-                    // Item doesn't exist, add a new item
-                    itemList.Add(new Item
-                    {
-                        Itemnumber = selectedItemId,
-                        ItemName = selectedProduct,
-                        Quantity = quantity,
-                        UnitPrice = unitPrice
-                    });
-                }
-
-                var bindingList = new BindingList<Item>(itemList);
-                var source = new BindingSource(bindingList, null);
-                bindingSource1.DataSource = source;
-                ProductDataGrid.DataSource = this.bindingSource1;
-
-
-                ProductDataGrid.Columns["ItemName"].Width = 200; 
-                ProductDataGrid.Columns["Quantity"].Width = 120;   // Set the width of the Quantity column
-                ProductDataGrid.Columns["UnitPrice"].Width = 150;  // Set the width of the UnitPrice column
-                ProductDataGrid.Columns["TotalPrice"].Width = 170;
-
-
-                ProductDataGrid.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold); // Set the font for column headers
-
-
-                ProductDataGrid.Columns["ItemName"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the ItemName column
-                ProductDataGrid.Columns["Quantity"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);  // Set the font for the Quantity column
-                ProductDataGrid.Columns["UnitPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the UnitPrice column
-                ProductDataGrid.Columns["TotalPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the TotalPrice column
-
-
-               
-
-            }
-
-        }
-
-        private BindingList<Item> itemList = new BindingList<Item>();
-
-        public class Item
-        {
-            public int Itemnumber { get; set; }
-            public string ItemName { get; set; }
-            public decimal Quantity { get; set; }
-            public decimal UnitPrice { get; set; }
-            public decimal TotalPrice => Quantity * UnitPrice;
-        }
+        
 
 
 
@@ -841,6 +758,10 @@ namespace Desktop_Windwos_form_application
             calculatorForm.ShowDialog();
 
         }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         #endregion
         #region Using Method
@@ -1035,6 +956,92 @@ namespace Desktop_Windwos_form_application
             {
             }
         }
+
+        private void UpdateDataGridView(string selectedProduct, decimal quantity, decimal unitPrice, int selectedItemId)
+        {
+            // Check if the item already exists in the DataGridView
+            DataGridViewRow existingRow = null;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["ItemName"].Value != null && row.Cells["ItemName"].Value.ToString() == selectedProduct)
+                {
+                    existingRow = row;
+                    break;
+                }
+            }
+
+            if (existingRow != null)
+            {
+                // Item already exists, update quantity and total price
+                decimal existingQuantity = Convert.ToInt32(existingRow.Cells["Quantity"].Value);
+                decimal existingTotalPrice = Convert.ToDecimal(existingRow.Cells["TotalPrice"].Value);
+
+                existingQuantity += quantity;
+                existingTotalPrice += quantity * unitPrice;
+
+                existingRow.Cells["Quantity"].Value = existingQuantity;
+                existingRow.Cells["TotalPrice"].Value = existingTotalPrice;
+            }
+            else
+            {
+                // Item doesn't exist, add a new row
+                Item existingItem = itemList.FirstOrDefault(item => item.ItemName == selectedProduct);
+
+                if (existingItem != null)
+                {
+                    // Item already exists, update quantity
+                    existingItem.Quantity += quantity;
+                }
+                else
+                {
+                    // Item doesn't exist, add a new item
+                    itemList.Add(new Item
+                    {
+                        Itemnumber = selectedItemId,
+                        ItemName = selectedProduct,
+                        Quantity = quantity,
+                        UnitPrice = unitPrice
+                    });
+                }
+
+                var bindingList = new BindingList<Item>(itemList);
+                var source = new BindingSource(bindingList, null);
+                bindingSource1.DataSource = source;
+                ProductDataGrid.DataSource = this.bindingSource1;
+
+
+                ProductDataGrid.Columns["ItemName"].Width = 200;
+                ProductDataGrid.Columns["Quantity"].Width = 120;   // Set the width of the Quantity column
+                ProductDataGrid.Columns["UnitPrice"].Width = 150;  // Set the width of the UnitPrice column
+                ProductDataGrid.Columns["TotalPrice"].Width = 170;
+
+
+                ProductDataGrid.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold); // Set the font for column headers
+
+
+                ProductDataGrid.Columns["ItemName"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the ItemName column
+                ProductDataGrid.Columns["Quantity"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular);  // Set the font for the Quantity column
+                ProductDataGrid.Columns["UnitPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the UnitPrice column
+                ProductDataGrid.Columns["TotalPrice"].DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Regular); // Set the font for the TotalPrice column
+
+
+
+
+            }
+
+        }
+
+        private BindingList<Item> itemList = new BindingList<Item>();
+
+        public class Item
+        {
+            public int Itemnumber { get; set; }
+            public string ItemName { get; set; }
+            public decimal Quantity { get; set; }
+            public decimal UnitPrice { get; set; }
+            public decimal TotalPrice => Quantity * UnitPrice;
+        }
+
 
         private async void PlaceOrder(int orderNumber)
         {
@@ -1681,10 +1688,7 @@ namespace Desktop_Windwos_form_application
 
         #endregion
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+     
     }
 
 }

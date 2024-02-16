@@ -75,6 +75,7 @@ namespace Desktop_Windwos_form_application
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.Sidepanel = new System.Windows.Forms.Panel();
+            this.lblUser = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnPurchase = new System.Windows.Forms.Button();
             this.btnNewUser = new System.Windows.Forms.Button();
@@ -96,7 +97,6 @@ namespace Desktop_Windwos_form_application
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
-            this.lblUser = new System.Windows.Forms.Label();
             this.File.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.Sidepanel.SuspendLayout();
@@ -185,6 +185,18 @@ namespace Desktop_Windwos_form_application
             this.Sidepanel.TabIndex = 3;
             this.Sidepanel.Visible = false;
             this.Sidepanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lblUser
+            // 
+            this.lblUser.AccessibleDescription = "";
+            this.lblUser.AutoSize = true;
+            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Location = new System.Drawing.Point(30, 37);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(64, 22);
+            this.lblUser.TabIndex = 11;
+            this.lblUser.Text = "label1";
+            this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // btnLogin
             // 
@@ -327,9 +339,9 @@ namespace Desktop_Windwos_form_application
             // 
             this.productDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productDataGridView.Location = new System.Drawing.Point(155, 91);
+            this.productDataGridView.Location = new System.Drawing.Point(260, 91);
             this.productDataGridView.Name = "productDataGridView";
-            this.productDataGridView.Size = new System.Drawing.Size(978, 406);
+            this.productDataGridView.Size = new System.Drawing.Size(913, 406);
             this.productDataGridView.TabIndex = 4;
             this.productDataGridView.Visible = false;
             this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productdataGrid_CellContentClick);
@@ -340,7 +352,7 @@ namespace Desktop_Windwos_form_application
             this.promotionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.promotionDataGridView.Location = new System.Drawing.Point(155, 91);
             this.promotionDataGridView.Name = "promotionDataGridView";
-            this.promotionDataGridView.Size = new System.Drawing.Size(978, 393);
+            this.promotionDataGridView.Size = new System.Drawing.Size(1098, 393);
             this.promotionDataGridView.TabIndex = 8;
             this.promotionDataGridView.Visible = false;
             this.promotionDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.promotionDataGrid_CellContentClick);
@@ -351,7 +363,7 @@ namespace Desktop_Windwos_form_application
             this.discountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.discountDataGridView.Location = new System.Drawing.Point(155, 91);
             this.discountDataGridView.Name = "discountDataGridView";
-            this.discountDataGridView.Size = new System.Drawing.Size(1069, 377);
+            this.discountDataGridView.Size = new System.Drawing.Size(1108, 377);
             this.discountDataGridView.TabIndex = 9;
             this.discountDataGridView.Visible = false;
             this.discountDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.discountDataGrid_CellContentClick);
@@ -378,18 +390,6 @@ namespace Desktop_Windwos_form_application
             // bindingSource4
             // 
             this.bindingSource4.CurrentChanged += new System.EventHandler(this.bindingSource4_CurrentChanged);
-            // 
-            // lblUser
-            // 
-            this.lblUser.AccessibleDescription = "";
-            this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.Location = new System.Drawing.Point(30, 37);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(43, 15);
-            this.lblUser.TabIndex = 11;
-            this.lblUser.Text = "label1";
-            this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // frmMainPage
             // 
@@ -482,7 +482,7 @@ namespace Desktop_Windwos_form_application
                         string imageData = Convert.ToString(productDataGridView.Rows[e.RowIndex].Cells["ImageData"].Value);
 
                         // Open the edit form and pass the data
-                        frmEditProductForm editForm = new frmEditProductForm(productId, name, description, isAvailable, expiryDate, imageData);
+                        frmEditProductForm editForm = new frmEditProductForm(productId, name, description, isAvailable, expiryDate, imageData,userName);
                         editForm.ShowDialog();
 
                         // Add your logic for View Details button click
@@ -504,35 +504,7 @@ namespace Desktop_Windwos_form_application
 
 
 
-        private async Task onOptionClicked1()
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/promotions");
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            BindingList<PromotionDTO> promotions = JsonConvert.DeserializeObject<BindingList<PromotionDTO>>(content);
-            this.bindingSource1.DataSource = promotions;
-            this.promotionDataGridView.DataSource = this.bindingSource1;
-
-
-            if (!ColumnExists(promotionDataGridView, "btnViewDetails"))
-            {
-                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                buttonColumn.HeaderText = "Edit";
-                buttonColumn.Text = "Edit";
-                buttonColumn.Name = "btnViewDetails";
-                buttonColumn.UseColumnTextForButtonValue = true;
-                promotionDataGridView.Columns.Add(buttonColumn);
-            }
-
-
-            promotionDataGridView.Visible = true;
-            productDataGridView.Visible = false;
-            discountDataGridView.Visible = false;
-            bankDataGridView.Visible = false;
-
-        }
+        
         private bool ColumnExists(DataGridView dataGridView, string columnName)
         {
             foreach (DataGridViewColumn column in dataGridView.Columns)
@@ -545,130 +517,7 @@ namespace Desktop_Windwos_form_application
             return false;
         }
 
-        private async Task onOptionClicked2()
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/discounts");
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            BindingList<Discount> promotions = JsonConvert.DeserializeObject<BindingList<Discount>>(content);
-
-            this.bindingSource3.DataSource = promotions;
-            this.discountDataGridView.DataSource = this.bindingSource3;
-
-
-
-            if (!ColumnExists(discountDataGridView, "btnViewDetails"))
-            {
-                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                buttonColumn.HeaderText = "Edit";
-                buttonColumn.Text = "Edit";
-                buttonColumn.Name = "btnViewDetails";
-                buttonColumn.UseColumnTextForButtonValue = true;
-                discountDataGridView.Columns.Add(buttonColumn);
-            }
-
-           
-            discountDataGridView.Visible = true;
-            productDataGridView.Visible = false;
-            promotionDataGridView.Visible = false;
-            bankDataGridView.Visible = false;
-
-        }
-
-
-        private async Task onOptionClicked3()
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/api/banks");
-
-            string content = await response.Content.ReadAsStringAsync();
-
-            BindingList<BankModelDTO> banks = JsonConvert.DeserializeObject<BindingList<BankModelDTO>>(content);
-            this.bindingSource4.DataSource = banks;
-            this.bankDataGridView.DataSource = this.bindingSource4;
-
-
-
-            bankDataGridView.Visible = true;
-            productDataGridView.Visible = false;
-            promotionDataGridView.Visible = false;
-            discountDataGridView.Visible = false;
-
-        }
-
-
-        private async Task OnOptionClicked()
-        {
-            productDataGridView.Rows.Clear();
-
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7141/Allproduct?pageNumber={pageNumber}&itemsPerPage={itemsPerPage}");
-
-            string content = await response.Content.ReadAsStringAsync();
-
-
-            BindingList<ProductDTO> products = JsonConvert.DeserializeObject<BindingList<ProductDTO>>(content);
-            // Create a dictionary to store the list of products
-            Dictionary<string, List<Dictionary<string, string>>> productDictionary = new Dictionary<string, List<Dictionary<string, string>>>();
-
-            // Convert each ProductData object into a dictionary and add it to the list
-
-
-            List<Dictionary<string, string>> productList = new List<Dictionary<string, string>>();
-            this.bindingSource2.DataSource = products;
-            this.productDataGridView.DataSource = this.bindingSource2;
-        }
-
-        private async Task OnOption1Clicked()
-        {
-
-
-
-            if (!ColumnExists(productDataGridView, "btnViewDetails"))
-            {
-                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-                buttonColumn.HeaderText = "Edit";
-                buttonColumn.Text = "Edit";
-                buttonColumn.Name = "btnViewDetails";
-                buttonColumn.UseColumnTextForButtonValue = true;
-                productDataGridView.Columns.Add(buttonColumn);
-            }
-
-            if (!ColumnExists(productDataGridView, "btnEdit"))
-            {
-                DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
-                editButtonColumn.HeaderText = "Promotion";
-                editButtonColumn.Text = "Promotion";
-                editButtonColumn.Name = "btnEdit";
-                editButtonColumn.UseColumnTextForButtonValue = true;
-                productDataGridView.Columns.Add(editButtonColumn);
-                productDataGridView.CellContentClick += productdataGrid_CellContentClick;
-
-            }
-            productDataGridView.Visible = true;
-            promotionDataGridView.Visible = false;
-            discountDataGridView.Visible = false;
-            bankDataGridView.Visible = false;
-
-
-            button1.Visible = true;
-            button2.Visible = true;
-            txtPageNum.Visible = true;
-            txtPageNum.Text = pageNumber.ToString();
-
-
-
-
-
-
-
-
-
-
-
-        }
+      
 
         private void btnPrv_Click(object sender, EventArgs e)
         {
@@ -744,7 +593,7 @@ namespace Desktop_Windwos_form_application
                         bool isValid = Convert.ToBoolean(promotionDataGridView.Rows[e.RowIndex].Cells["IsValid"].Value);
 
                         // Pass the additional data when creating the form
-                        frmEditPromotion editForm = new frmEditPromotion(promotionId, payMethod, discountNumber, startDate, endDate, isValid);
+                        frmEditPromotion editForm = new frmEditPromotion(promotionId, payMethod, discountNumber, startDate, endDate, isValid,userName);
                         editForm.ShowDialog();
                     }
                     else if (columnName == "btnEdit")
@@ -791,7 +640,7 @@ namespace Desktop_Windwos_form_application
                         bool isValid = Convert.ToBoolean(discountDataGridView.Rows[e.RowIndex].Cells["IsValid"].Value);
                         string paymentMethod = discountDataGridView.Rows[e.RowIndex].Cells["PaymentMethod"].Value.ToString();
 
-                        frmEditDiscount editForm = new frmEditDiscount(discountId, productId, discountNumber, startDate, endDate, isValid, paymentMethod, productname);
+                        frmEditDiscount editForm = new frmEditDiscount(discountId, productId, discountNumber, startDate, endDate, isValid, paymentMethod, productname,userName);
                         editForm.ShowDialog();
 
 
@@ -935,6 +784,154 @@ namespace Desktop_Windwos_form_application
         }
         #endregion
         #region Using Method
+
+
+        private async Task onOptionClicked2()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/discounts");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+            BindingList<Discount> promotions = JsonConvert.DeserializeObject<BindingList<Discount>>(content);
+
+            this.bindingSource3.DataSource = promotions;
+            this.discountDataGridView.DataSource = this.bindingSource3;
+
+
+
+            if (!ColumnExists(discountDataGridView, "btnViewDetails"))
+            {
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.HeaderText = "Edit";
+                buttonColumn.Text = "Edit";
+                buttonColumn.Name = "btnViewDetails";
+                buttonColumn.UseColumnTextForButtonValue = true;
+                discountDataGridView.Columns.Add(buttonColumn);
+            }
+
+
+            discountDataGridView.Visible = true;
+            productDataGridView.Visible = false;
+            promotionDataGridView.Visible = false;
+            bankDataGridView.Visible = false;
+
+        }
+
+
+        private async Task onOptionClicked3()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/api/banks");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+            BindingList<BankModelDTO> banks = JsonConvert.DeserializeObject<BindingList<BankModelDTO>>(content);
+            this.bindingSource4.DataSource = banks;
+            this.bankDataGridView.DataSource = this.bindingSource4;
+
+
+
+            bankDataGridView.Visible = true;
+            productDataGridView.Visible = false;
+            promotionDataGridView.Visible = false;
+            discountDataGridView.Visible = false;
+
+        }
+
+
+        private async Task OnOptionClicked()
+        {
+            productDataGridView.Rows.Clear();
+
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync($"https://localhost:7141/Allproduct?pageNumber={pageNumber}&itemsPerPage={itemsPerPage}");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+
+            BindingList<ProductDTO> products = JsonConvert.DeserializeObject<BindingList<ProductDTO>>(content);
+            // Create a dictionary to store the list of products
+            Dictionary<string, List<Dictionary<string, string>>> productDictionary = new Dictionary<string, List<Dictionary<string, string>>>();
+
+            // Convert each ProductData object into a dictionary and add it to the list
+
+
+            List<Dictionary<string, string>> productList = new List<Dictionary<string, string>>();
+            this.bindingSource2.DataSource = products;
+            this.productDataGridView.DataSource = this.bindingSource2;
+        }
+
+        private async Task OnOption1Clicked()
+        {
+
+
+
+            if (!ColumnExists(productDataGridView, "btnViewDetails"))
+            {
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.HeaderText = "Edit";
+                buttonColumn.Text = "Edit";
+                buttonColumn.Name = "btnViewDetails";
+                buttonColumn.UseColumnTextForButtonValue = true;
+                productDataGridView.Columns.Add(buttonColumn);
+            }
+
+            if (!ColumnExists(productDataGridView, "btnEdit"))
+            {
+                DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
+                editButtonColumn.HeaderText = "Promotion";
+                editButtonColumn.Text = "Promotion";
+                editButtonColumn.Name = "btnEdit";
+                editButtonColumn.UseColumnTextForButtonValue = true;
+                productDataGridView.Columns.Add(editButtonColumn);
+                productDataGridView.CellContentClick += productdataGrid_CellContentClick;
+
+            }
+            productDataGridView.Visible = true;
+            promotionDataGridView.Visible = false;
+            discountDataGridView.Visible = false;
+            bankDataGridView.Visible = false;
+
+
+            button1.Visible = true;
+            button2.Visible = true;
+            txtPageNum.Visible = true;
+            txtPageNum.Text = pageNumber.ToString();
+
+
+        }
+
+        private async Task onOptionClicked1()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7141/promotions");
+
+            string content = await response.Content.ReadAsStringAsync();
+
+            BindingList<PromotionDTO> promotions = JsonConvert.DeserializeObject<BindingList<PromotionDTO>>(content);
+            this.bindingSource1.DataSource = promotions;
+            this.promotionDataGridView.DataSource = this.bindingSource1;
+
+
+            if (!ColumnExists(promotionDataGridView, "btnViewDetails"))
+            {
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.HeaderText = "Edit";
+                buttonColumn.Text = "Edit";
+                buttonColumn.Name = "btnViewDetails";
+                buttonColumn.UseColumnTextForButtonValue = true;
+                promotionDataGridView.Columns.Add(buttonColumn);
+            }
+
+
+            promotionDataGridView.Visible = true;
+            productDataGridView.Visible = false;
+            discountDataGridView.Visible = false;
+            bankDataGridView.Visible = false;
+
+        }
+
         private async Task<int> GetTotalProductsCount()
         {
             // Use your API call or database query to get the total count of products

@@ -33,9 +33,10 @@ namespace Desktop_Windwos_form_application
         private Label lbEditProductExpiryDate;
         private HttpClient _httpClient;
         public string imageNameData;
+        public string userName;
         #endregion
         #region Using Constructor
-        public frmEditProductForm(int productId, string name, string description, bool isAvailable, DateTime expiryDate, string imageData)
+        public frmEditProductForm(int productId, string name, string description, bool isAvailable, DateTime expiryDate, string imageData,string username)
         {
             InitializeComponent();
             _httpClient = new HttpClient();
@@ -46,6 +47,7 @@ namespace Desktop_Windwos_form_application
             EnterDateTimePicker.Value = expiryDate;
             previewPictureBox1.Text = imageData;
             txtProductId.ReadOnly = true;
+            userName = username;
 
         }
 
