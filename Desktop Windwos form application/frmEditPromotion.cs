@@ -23,7 +23,6 @@ namespace Desktop_Windwos_form_application
         private TextBox txtDiscountNumber;
         private DateTimePicker startDateTimePicker;
         private DateTimePicker endDateTimePicker;
-        private RadioButton isValidRadioButton;
         private Button btnSubmit;
         private Label lbisValid;
         private TextBox txtLastlyModified;
@@ -31,6 +30,7 @@ namespace Desktop_Windwos_form_application
         public int billNumber;
         private ComboBox cmbSelectPayment;
         private TextBox txtPaymentMethode;
+        private CheckBox ckBoxisValidChecked;
         public string userName;
         #endregion
 
@@ -49,7 +49,7 @@ namespace Desktop_Windwos_form_application
             txtDiscountNumber.Text = discountNumber.ToString();
             startDateTimePicker.Value = startDate;
             endDateTimePicker.Value = endDate;
-            isValidRadioButton.Checked = isValid;
+            ckBoxisValidChecked.Checked = isValid;
             userName = username;
             cmbSelectPayment.SelectedItem = payMethod;
         }
@@ -68,12 +68,12 @@ namespace Desktop_Windwos_form_application
             this.txtDiscountNumber = new System.Windows.Forms.TextBox();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.isValidRadioButton = new System.Windows.Forms.RadioButton();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.txtLastlyModified = new System.Windows.Forms.TextBox();
             this.lblLastlyModified = new System.Windows.Forms.Label();
             this.cmbSelectPayment = new System.Windows.Forms.ComboBox();
             this.txtPaymentMethode = new System.Windows.Forms.TextBox();
+            this.ckBoxisValidChecked = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbHeadding
@@ -170,18 +170,6 @@ namespace Desktop_Windwos_form_application
             this.endDateTimePicker.TabIndex = 14;
             this.endDateTimePicker.ValueChanged += new System.EventHandler(this.endDateTimePicker2_ValueChanged);
             // 
-            // isValidRadioButton
-            // 
-            this.isValidRadioButton.AutoSize = true;
-            this.isValidRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.isValidRadioButton.Location = new System.Drawing.Point(238, 225);
-            this.isValidRadioButton.Name = "isValidRadioButton";
-            this.isValidRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.isValidRadioButton.TabIndex = 15;
-            this.isValidRadioButton.TabStop = true;
-            this.isValidRadioButton.UseVisualStyleBackColor = true;
-            this.isValidRadioButton.CheckedChanged += new System.EventHandler(this.isAvalableRadioButton_CheckedChanged);
-            // 
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -229,14 +217,24 @@ namespace Desktop_Windwos_form_application
             this.txtPaymentMethode.TabIndex = 7;
             this.txtPaymentMethode.TextChanged += new System.EventHandler(this.txtPaymentMethode_TextChanged);
             // 
+            // ckBoxisValidChecked
+            // 
+            this.ckBoxisValidChecked.AutoSize = true;
+            this.ckBoxisValidChecked.Location = new System.Drawing.Point(238, 218);
+            this.ckBoxisValidChecked.Name = "ckBoxisValidChecked";
+            this.ckBoxisValidChecked.Size = new System.Drawing.Size(15, 14);
+            this.ckBoxisValidChecked.TabIndex = 20;
+            this.ckBoxisValidChecked.UseVisualStyleBackColor = true;
+            this.ckBoxisValidChecked.CheckedChanged += new System.EventHandler(this.ckBoxisValidChecked_CheckedChanged);
+            // 
             // frmEditPromotion
             // 
             this.ClientSize = new System.Drawing.Size(675, 414);
+            this.Controls.Add(this.ckBoxisValidChecked);
             this.Controls.Add(this.cmbSelectPayment);
             this.Controls.Add(this.lblLastlyModified);
             this.Controls.Add(this.txtLastlyModified);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.isValidRadioButton);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.txtDiscountNumber);
@@ -289,7 +287,10 @@ namespace Desktop_Windwos_form_application
 
         }
 
+        private void ckBoxisValidChecked_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
 
 
 
@@ -313,7 +314,7 @@ namespace Desktop_Windwos_form_application
             decimal discountNumber = decimal.Parse(txtDiscountNumber.Text);
             DateTime startDate = startDateTimePicker.Value;
             DateTime endDate = endDateTimePicker.Value;
-            bool isValid = isValidRadioButton.Checked;
+            bool isValid = ckBoxisValidChecked.Checked;
             string lastlyModified = txtLastlyModified.Text;
             // Create an object to send to the API
             var formData = new
@@ -416,7 +417,9 @@ namespace Desktop_Windwos_form_application
             {
                 // Handle exceptions
             }
-        } 
+        }
         #endregion
+
+    
     }
 }

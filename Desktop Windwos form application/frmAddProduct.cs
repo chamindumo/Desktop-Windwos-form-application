@@ -30,11 +30,13 @@ namespace Desktop_Windwos_form_application
         private TextBox txtProductName;
         private PictureBox ImagePreviewPictureBox;
         private DateTimePicker EnterDateDateTimePicker;
-        private RadioButton isAvalableRadioButton;
         private OpenFileDialog openFileDialog1;
         private Button btnBack;
         private Label lbHeadding;
         public int loggingTo = 0;
+        private Label label1;
+        private TextBox txtLastlyModifiedBy;
+        private CheckBox chBoxIsValidChecked;
         public string userName;
         #endregion
         #region Using Constructor
@@ -66,9 +68,11 @@ namespace Desktop_Windwos_form_application
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.ImagePreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.EnterDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.isAvalableRadioButton = new System.Windows.Forms.RadioButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnBack = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtLastlyModifiedBy = new System.Windows.Forms.TextBox();
+            this.chBoxIsValidChecked = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreviewPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,7 +167,7 @@ namespace Desktop_Windwos_form_application
             // btnAddProduct
             // 
             this.btnAddProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnAddProduct.Location = new System.Drawing.Point(90, 546);
+            this.btnAddProduct.Location = new System.Drawing.Point(91, 571);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(111, 35);
             this.btnAddProduct.TabIndex = 13;
@@ -173,7 +177,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnRest
             // 
-            this.btnRest.Location = new System.Drawing.Point(219, 546);
+            this.btnRest.Location = new System.Drawing.Point(220, 571);
             this.btnRest.Name = "btnRest";
             this.btnRest.Size = new System.Drawing.Size(111, 35);
             this.btnRest.TabIndex = 14;
@@ -183,7 +187,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(350, 546);
+            this.btnCancel.Location = new System.Drawing.Point(351, 571);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(111, 35);
             this.btnCancel.TabIndex = 15;
@@ -217,9 +221,9 @@ namespace Desktop_Windwos_form_application
             // 
             // ImagePreviewPictureBox
             // 
-            this.ImagePreviewPictureBox.Location = new System.Drawing.Point(153, 301);
+            this.ImagePreviewPictureBox.Location = new System.Drawing.Point(169, 301);
             this.ImagePreviewPictureBox.Name = "ImagePreviewPictureBox";
-            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(269, 191);
+            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(240, 144);
             this.ImagePreviewPictureBox.TabIndex = 23;
             this.ImagePreviewPictureBox.TabStop = false;
             this.ImagePreviewPictureBox.Click += new System.EventHandler(this.ImagePreviewPictureBox_Click);
@@ -231,17 +235,6 @@ namespace Desktop_Windwos_form_application
             this.EnterDateDateTimePicker.Size = new System.Drawing.Size(224, 20);
             this.EnterDateDateTimePicker.TabIndex = 24;
             this.EnterDateDateTimePicker.ValueChanged += new System.EventHandler(this.EnterDateTimePicker_ValueChanged);
-            // 
-            // isAvalableRadioButton
-            // 
-            this.isAvalableRadioButton.AutoSize = true;
-            this.isAvalableRadioButton.Location = new System.Drawing.Point(169, 193);
-            this.isAvalableRadioButton.Name = "isAvalableRadioButton";
-            this.isAvalableRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.isAvalableRadioButton.TabIndex = 25;
-            this.isAvalableRadioButton.TabStop = true;
-            this.isAvalableRadioButton.UseVisualStyleBackColor = true;
-            this.isAvalableRadioButton.CheckedChanged += new System.EventHandler(this.IsAvalableRadioButton_CheckedChanged);
             // 
             // openFileDialog1
             // 
@@ -257,11 +250,42 @@ namespace Desktop_Windwos_form_application
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(36, 485);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 17);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Lastly modified by";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // txtLastlyModifiedBy
+            // 
+            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(169, 484);
+            this.txtLastlyModifiedBy.Name = "txtLastlyModifiedBy";
+            this.txtLastlyModifiedBy.Size = new System.Drawing.Size(224, 20);
+            this.txtLastlyModifiedBy.TabIndex = 29;
+            this.txtLastlyModifiedBy.TextChanged += new System.EventHandler(this.txtLastlyModifiedBy_TextChanged);
+            // 
+            // chBoxIsValidChecked
+            // 
+            this.chBoxIsValidChecked.AutoSize = true;
+            this.chBoxIsValidChecked.Location = new System.Drawing.Point(169, 195);
+            this.chBoxIsValidChecked.Name = "chBoxIsValidChecked";
+            this.chBoxIsValidChecked.Size = new System.Drawing.Size(15, 14);
+            this.chBoxIsValidChecked.TabIndex = 30;
+            this.chBoxIsValidChecked.UseVisualStyleBackColor = true;
+            this.chBoxIsValidChecked.CheckedChanged += new System.EventHandler(this.chBoxIsValidChecked_CheckedChanged);
+            // 
             // frmAddProduct
             // 
             this.ClientSize = new System.Drawing.Size(604, 629);
+            this.Controls.Add(this.chBoxIsValidChecked);
+            this.Controls.Add(this.txtLastlyModifiedBy);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.isAvalableRadioButton);
             this.Controls.Add(this.EnterDateDateTimePicker);
             this.Controls.Add(this.ImagePreviewPictureBox);
             this.Controls.Add(this.txtProductName);
@@ -366,12 +390,22 @@ namespace Desktop_Windwos_form_application
 
 
         #region Using Items
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLastlyModifiedBy_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtProductId.Clear();
             txtProductName.Clear();
             txtDescription.Clear();
-            isAvalableRadioButton.Checked = false; // Set to initial state
+            chBoxIsValidChecked.Checked = false; // Set to initial state
             EnterDateDateTimePicker.Value = DateTime.Now;
 
         }
@@ -427,9 +461,12 @@ namespace Desktop_Windwos_form_application
                     id = productId,
                     names = txtProductName.Text,
                     descriptions = txtDescription.Text,
-                    isAvalable = isAvalableRadioButton.Checked, // Get the boolean value
+                    isAvalable = chBoxIsValidChecked.Checked, // Get the boolean value
                     expirDate = EnterDateDateTimePicker.Value,
-                    imageData = imageNameData
+                    imageData = imageNameData,
+                    lastModifiedPerson = txtLastlyModifiedBy.Text,
+                    lastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
+
 
                 };
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(requestData);
@@ -444,7 +481,7 @@ namespace Desktop_Windwos_form_application
                     txtProductId.Clear();
                     txtProductName.Clear();
                     txtDescription.Clear();
-                    isAvalableRadioButton.Checked = false; // Set to initial state
+                    chBoxIsValidChecked.Checked = false; // Set to initial state
                     EnterDateDateTimePicker.Value = DateTime.Now; // Set to current date and time
 
                     // Optionally, provide feedback to the user or navigate back to the previous page
@@ -608,7 +645,13 @@ namespace Desktop_Windwos_form_application
         private void EnterDateTimePicker_ValueChanged(object sender, System.EventArgs e)
         {
 
-        } 
+        }
+
         #endregion
+
+        private void chBoxIsValidChecked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace Desktop_Windwos_form_application
         public bool IsAvalable { get; set; }
         public DateTime ExpirDate { get; set; }
         public string ImageData { get; set; }
+        public string LastModifiedPerson { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

@@ -22,7 +22,6 @@ namespace Desktop_Windwos_form_application
         private Label lbDiscount;
         private Button btnSubmit;
         private TextBox txtDiscountNumber;
-        private RadioButton isValidRadioButton;
         private DateTimePicker startDateTimePicker;
         private DateTimePicker endDateTimePicker;
         private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
@@ -31,6 +30,7 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyModifiedBy;
         private Label lblLastlyModified;
         public int loggingTo;
+        private CheckBox chBoxValidate;
         public string userName;
 
         #endregion
@@ -55,20 +55,20 @@ namespace Desktop_Windwos_form_application
             this.lbDiscount = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.txtDiscountNumber = new System.Windows.Forms.TextBox();
-            this.isValidRadioButton = new System.Windows.Forms.RadioButton();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             this.cmbPaymentMethode = new System.Windows.Forms.ComboBox();
             this.txtLastlyModifiedBy = new System.Windows.Forms.TextBox();
             this.lblLastlyModified = new System.Windows.Forms.Label();
+            this.chBoxValidate = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbHeadding
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(220, 18);
+            this.lbHeadding.Location = new System.Drawing.Point(201, 18);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(141, 25);
             this.lbHeadding.TabIndex = 0;
@@ -148,17 +148,6 @@ namespace Desktop_Windwos_form_application
             this.txtDiscountNumber.TabIndex = 14;
             this.txtDiscountNumber.TextChanged += new System.EventHandler(this.txtDiscountNumber_TextChanged);
             // 
-            // isValidRadioButton
-            // 
-            this.isValidRadioButton.AutoSize = true;
-            this.isValidRadioButton.Location = new System.Drawing.Point(206, 222);
-            this.isValidRadioButton.Name = "isValidRadioButton";
-            this.isValidRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.isValidRadioButton.TabIndex = 15;
-            this.isValidRadioButton.TabStop = true;
-            this.isValidRadioButton.UseVisualStyleBackColor = true;
-            this.isValidRadioButton.CheckedChanged += new System.EventHandler(this.isValidradioButton_CheckedChanged);
-            // 
             // startDateTimePicker
             // 
             this.startDateTimePicker.Location = new System.Drawing.Point(206, 154);
@@ -196,7 +185,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtLastlyModifiedBy
             // 
-            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(210, 250);
+            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(206, 252);
             this.txtLastlyModifiedBy.Name = "txtLastlyModifiedBy";
             this.txtLastlyModifiedBy.Size = new System.Drawing.Size(196, 20);
             this.txtLastlyModifiedBy.TabIndex = 20;
@@ -212,16 +201,26 @@ namespace Desktop_Windwos_form_application
             this.lblLastlyModified.TabIndex = 21;
             this.lblLastlyModified.Text = "Lastly Modified:";
             // 
+            // chBoxValidate
+            // 
+            this.chBoxValidate.AutoSize = true;
+            this.chBoxValidate.Location = new System.Drawing.Point(206, 223);
+            this.chBoxValidate.Name = "chBoxValidate";
+            this.chBoxValidate.Size = new System.Drawing.Size(15, 14);
+            this.chBoxValidate.TabIndex = 22;
+            this.chBoxValidate.UseVisualStyleBackColor = true;
+            this.chBoxValidate.CheckedChanged += new System.EventHandler(this.chBoxValidate_CheckedChanged);
+            // 
             // frmAddPromotions
             // 
             this.ClientSize = new System.Drawing.Size(491, 376);
+            this.Controls.Add(this.chBoxValidate);
             this.Controls.Add(this.lblLastlyModified);
             this.Controls.Add(this.txtLastlyModifiedBy);
             this.Controls.Add(this.cmbPaymentMethode);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
-            this.Controls.Add(this.isValidRadioButton);
             this.Controls.Add(this.txtDiscountNumber);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.lbDiscount);
@@ -317,7 +316,7 @@ namespace Desktop_Windwos_form_application
                 txtDiscountNumber.Clear();
                 startDateTimePicker.Value = DateTime.Now; // Set to current date and time
                 endDateTimePicker.Value = DateTime.Now; // Set to current date and time
-                isValidRadioButton.Checked = false; // Set to initial state
+                chBoxValidate.Checked = false; // Set to initial state
                 MessageBox.Show("Data added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -359,7 +358,7 @@ namespace Desktop_Windwos_form_application
             decimal discountNumber = decimal.Parse(txtDiscountNumber.Text); // Assuming discount number is an integer
             DateTime startDate = startDateTimePicker.Value;
             DateTime endDate = endDateTimePicker.Value;
-            bool isValid = isValidRadioButton.Checked;
+            bool isValid = chBoxValidate.Checked;
             string lastmodified = txtLastlyModifiedBy.Text;
             // Perform actions with the retrieved values (e.g., send them to an API, process them, etc.)
             // For example:
@@ -439,8 +438,12 @@ namespace Desktop_Windwos_form_application
 
         }
 
+
         #endregion
 
+        private void chBoxValidate_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

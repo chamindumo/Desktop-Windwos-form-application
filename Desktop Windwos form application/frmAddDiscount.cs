@@ -32,7 +32,6 @@ namespace Desktop_Windwos_form_application
         private Dictionary<string, int> bankDictionary = new Dictionary<string, int>();
         private DateTimePicker startDateTimePicker;
         private DateTimePicker endDateTimePicker;
-        private RadioButton isValidRadioButton;
         private Dictionary<string, decimal> productPromotion = new Dictionary<string, decimal>();
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button button2;
@@ -41,6 +40,7 @@ namespace Desktop_Windwos_form_application
         private TextBox txtLastlyModifiedperson;
         private Label lblLastlyAddedPerson;
         public string Id;
+        private CheckBox ckBoxIsValidChecked;
         public string userName;
 
         #endregion
@@ -76,11 +76,11 @@ namespace Desktop_Windwos_form_application
             this.cmbPaymentMethode = new System.Windows.Forms.ComboBox();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.isValidRadioButton = new System.Windows.Forms.RadioButton();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.txtLastlyModifiedperson = new System.Windows.Forms.TextBox();
             this.lblLastlyAddedPerson = new System.Windows.Forms.Label();
+            this.ckBoxIsValidChecked = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -220,17 +220,6 @@ namespace Desktop_Windwos_form_application
             this.endDateTimePicker.TabIndex = 18;
             this.endDateTimePicker.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
             // 
-            // isValidRadioButton
-            // 
-            this.isValidRadioButton.AutoSize = true;
-            this.isValidRadioButton.Location = new System.Drawing.Point(198, 328);
-            this.isValidRadioButton.Name = "isValidRadioButton";
-            this.isValidRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.isValidRadioButton.TabIndex = 19;
-            this.isValidRadioButton.TabStop = true;
-            this.isValidRadioButton.UseVisualStyleBackColor = true;
-            this.isValidRadioButton.CheckedChanged += new System.EventHandler(this.rbIsValid_CheckedChanged);
-            // 
             // btnSubmit
             // 
             this.btnSubmit.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -271,14 +260,24 @@ namespace Desktop_Windwos_form_application
             this.lblLastlyAddedPerson.TabIndex = 23;
             this.lblLastlyAddedPerson.Text = "Lastly Edit Person";
             // 
+            // ckBoxIsValidChecked
+            // 
+            this.ckBoxIsValidChecked.AutoSize = true;
+            this.ckBoxIsValidChecked.Location = new System.Drawing.Point(198, 329);
+            this.ckBoxIsValidChecked.Name = "ckBoxIsValidChecked";
+            this.ckBoxIsValidChecked.Size = new System.Drawing.Size(15, 14);
+            this.ckBoxIsValidChecked.TabIndex = 24;
+            this.ckBoxIsValidChecked.UseVisualStyleBackColor = true;
+            this.ckBoxIsValidChecked.CheckedChanged += new System.EventHandler(this.ckBoxIsValidChecked_CheckedChanged);
+            // 
             // frmAddDiscount
             // 
             this.ClientSize = new System.Drawing.Size(563, 479);
+            this.Controls.Add(this.ckBoxIsValidChecked);
             this.Controls.Add(this.lblLastlyAddedPerson);
             this.Controls.Add(this.txtLastlyModifiedperson);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.isValidRadioButton);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.cmbPaymentMethode);
@@ -357,7 +356,7 @@ namespace Desktop_Windwos_form_application
             txtDiscountNumber.Clear();
             startDateTimePicker.Value = DateTime.Now; // Set to current date and time
             endDateTimePicker.Value = DateTime.Now; // Set to current date and time
-            isValidRadioButton.Checked = false; // Set to initial state
+            ckBoxIsValidChecked.Checked = false; // Set to initial state
             cmbPaymentMethode.SelectedIndex = -1; // Clear the selected item in the combo box
         }
 
@@ -374,7 +373,7 @@ namespace Desktop_Windwos_form_application
                 decimal discountNumber = decimal.Parse(txtDiscountNumber.Text);
                 DateTime startDate = startDateTimePicker.Value;
                 DateTime endDate = endDateTimePicker.Value;
-                bool isValid = isValidRadioButton.Checked;
+                bool isValid = ckBoxIsValidChecked.Checked;
 
                 string bankName = "ALL"; // Default value
 
@@ -573,6 +572,10 @@ namespace Desktop_Windwos_form_application
 
         }
 
+        private void ckBoxIsValidChecked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
 
 

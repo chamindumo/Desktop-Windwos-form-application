@@ -25,7 +25,6 @@ namespace Desktop_Windwos_form_application
         private TextBox txtProductId;
         private TextBox txtDescription;
         private TextBox txtProductName;
-        private RadioButton isAvalableRadioButton;
         private PictureBox previewPictureBox1;
         private Button btnAddImage;
         private DateTimePicker EnterDateTimePicker;
@@ -33,6 +32,9 @@ namespace Desktop_Windwos_form_application
         private Label lbEditProductExpiryDate;
         private HttpClient _httpClient;
         public string imageNameData;
+        private TextBox txtEditBy;
+        private Label label1;
+        private CheckBox ckBoxisValidChecked;
         public string userName;
         #endregion
         #region Using Constructor
@@ -43,7 +45,7 @@ namespace Desktop_Windwos_form_application
             txtProductId.Text = productId.ToString();
             txtProductName.Text = name;
             txtDescription.Text = description;
-            isAvalableRadioButton.Checked = isAvailable;
+            ckBoxisValidChecked.Checked = isAvailable;
             EnterDateTimePicker.Value = expiryDate;
             previewPictureBox1.Text = imageData;
             txtProductId.ReadOnly = true;
@@ -65,11 +67,13 @@ namespace Desktop_Windwos_form_application
             this.txtProductId = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
-            this.isAvalableRadioButton = new System.Windows.Forms.RadioButton();
             this.previewPictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddImage = new System.Windows.Forms.Button();
             this.EnterDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtEditBy = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ckBoxisValidChecked = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.previewPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,23 +181,11 @@ namespace Desktop_Windwos_form_application
             this.txtProductName.TabIndex = 14;
             this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
             // 
-            // isAvalableRadioButton
-            // 
-            this.isAvalableRadioButton.AutoSize = true;
-            this.isAvalableRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.isAvalableRadioButton.Location = new System.Drawing.Point(230, 207);
-            this.isAvalableRadioButton.Name = "isAvalableRadioButton";
-            this.isAvalableRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.isAvalableRadioButton.TabIndex = 15;
-            this.isAvalableRadioButton.TabStop = true;
-            this.isAvalableRadioButton.UseVisualStyleBackColor = true;
-            this.isAvalableRadioButton.CheckedChanged += new System.EventHandler(this.isAvalableRadioButton_CheckedChanged);
-            // 
             // previewPictureBox1
             // 
             this.previewPictureBox1.Location = new System.Drawing.Point(230, 335);
             this.previewPictureBox1.Name = "previewPictureBox1";
-            this.previewPictureBox1.Size = new System.Drawing.Size(302, 181);
+            this.previewPictureBox1.Size = new System.Drawing.Size(230, 148);
             this.previewPictureBox1.TabIndex = 16;
             this.previewPictureBox1.TabStop = false;
             this.previewPictureBox1.Click += new System.EventHandler(this.previewPictureBox_Click);
@@ -220,7 +212,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(349, 581);
+            this.btnSubmit.Location = new System.Drawing.Point(349, 604);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(111, 48);
             this.btnSubmit.TabIndex = 19;
@@ -228,14 +220,44 @@ namespace Desktop_Windwos_form_application
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // txtEditBy
+            // 
+            this.txtEditBy.Location = new System.Drawing.Point(230, 531);
+            this.txtEditBy.Name = "txtEditBy";
+            this.txtEditBy.Size = new System.Drawing.Size(252, 20);
+            this.txtEditBy.TabIndex = 20;
+            this.txtEditBy.TextChanged += new System.EventHandler(this.txtEditBy_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(65, 532);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 17);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Edit by";
+            // 
+            // ckBoxisValidChecked
+            // 
+            this.ckBoxisValidChecked.AutoSize = true;
+            this.ckBoxisValidChecked.Location = new System.Drawing.Point(230, 216);
+            this.ckBoxisValidChecked.Name = "ckBoxisValidChecked";
+            this.ckBoxisValidChecked.Size = new System.Drawing.Size(15, 14);
+            this.ckBoxisValidChecked.TabIndex = 22;
+            this.ckBoxisValidChecked.UseVisualStyleBackColor = true;
+            this.ckBoxisValidChecked.CheckedChanged += new System.EventHandler(this.ckBoxisValidChecked_CheckedChanged);
+            // 
             // frmEditProductForm
             // 
             this.ClientSize = new System.Drawing.Size(822, 664);
+            this.Controls.Add(this.ckBoxisValidChecked);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtEditBy);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.EnterDateTimePicker);
             this.Controls.Add(this.btnAddImage);
             this.Controls.Add(this.previewPictureBox1);
-            this.Controls.Add(this.isAvalableRadioButton);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtProductId);
@@ -297,7 +319,7 @@ namespace Desktop_Windwos_form_application
             int productId = Convert.ToInt32(txtProductId.Text);
             string name = txtProductName.Text;
             string description = txtDescription.Text;
-            bool isAvailable = isAvalableRadioButton.Checked;
+            bool isAvailable = ckBoxisValidChecked.Checked;
             DateTime expiryDate = EnterDateTimePicker.Value;
             // Assuming you have the image data as a base64 string
             string imageData1 = imageNameData; // Implement this function
@@ -310,7 +332,9 @@ namespace Desktop_Windwos_form_application
                 descriptions = description,
                 isAvalable = isAvailable,
                 expirDate = expiryDate,
-                imageData = imageData1
+                imageData = imageData1,
+                lastModifiedPerson = txtEditBy.Text,
+                lastModifiedDate = DateTime.Now.ToString("yyyy-MM-dd")
             };
 
 
@@ -455,6 +479,16 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+
+        private void txtEditBy_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ckBoxisValidChecked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
         #endregion
         #region Using Method
         private async Task UploadImage(Stream stream, string fileName)
@@ -516,7 +550,10 @@ namespace Desktop_Windwos_form_application
                 // Handle any exceptions that may occur during image resizing
                 MessageBox.Show($"Error resizing image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        } 
+        }
+
         #endregion
+
+       
     }
 }
