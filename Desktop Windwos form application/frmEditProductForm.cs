@@ -50,6 +50,17 @@ namespace Desktop_Windwos_form_application
             previewPictureBox1.Text = imageData;
             txtProductId.ReadOnly = true;
             userName = username;
+            Bitmap iconAddImage = new Bitmap("C://Users/Chamindu/Downloads/icons8-image-48.png"); // Replace "icon.png" with the actual file path
+
+
+            int newWidth = 23; // Set your desired width
+            int newHeight = 23; // Set your desired height
+
+            Bitmap resizedImage = new Bitmap(iconAddImage, new Size(newWidth, newHeight));
+
+
+            // Set the icon for the button
+            btnAddImage.Image = resizedImage;
 
         }
 
@@ -114,11 +125,11 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbEditProductIsAvalable.AutoSize = true;
             this.lbEditProductIsAvalable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEditProductIsAvalable.Location = new System.Drawing.Point(65, 203);
+            this.lbEditProductIsAvalable.Location = new System.Drawing.Point(65, 204);
             this.lbEditProductIsAvalable.Name = "lbEditProductIsAvalable";
             this.lbEditProductIsAvalable.Size = new System.Drawing.Size(132, 17);
             this.lbEditProductIsAvalable.TabIndex = 3;
-            this.lbEditProductIsAvalable.Text = "Product isAvailable;";
+            this.lbEditProductIsAvalable.Text = "Product is Available";
             this.lbEditProductIsAvalable.Click += new System.EventHandler(this.lbProductIsAvalable);
             // 
             // lbEditProductName
@@ -195,9 +206,8 @@ namespace Desktop_Windwos_form_application
             this.btnAddImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddImage.Location = new System.Drawing.Point(230, 275);
             this.btnAddImage.Name = "btnAddImage";
-            this.btnAddImage.Size = new System.Drawing.Size(90, 34);
+            this.btnAddImage.Size = new System.Drawing.Size(56, 37);
             this.btnAddImage.TabIndex = 17;
-            this.btnAddImage.Text = "Add Image";
             this.btnAddImage.UseVisualStyleBackColor = true;
             this.btnAddImage.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -222,9 +232,9 @@ namespace Desktop_Windwos_form_application
             // 
             // txtEditBy
             // 
-            this.txtEditBy.Location = new System.Drawing.Point(230, 531);
+            this.txtEditBy.Location = new System.Drawing.Point(221, 531);
             this.txtEditBy.Name = "txtEditBy";
-            this.txtEditBy.Size = new System.Drawing.Size(252, 20);
+            this.txtEditBy.Size = new System.Drawing.Size(261, 20);
             this.txtEditBy.TabIndex = 20;
             this.txtEditBy.TextChanged += new System.EventHandler(this.txtEditBy_TextChanged);
             // 
@@ -241,7 +251,7 @@ namespace Desktop_Windwos_form_application
             // ckBoxisValidChecked
             // 
             this.ckBoxisValidChecked.AutoSize = true;
-            this.ckBoxisValidChecked.Location = new System.Drawing.Point(230, 216);
+            this.ckBoxisValidChecked.Location = new System.Drawing.Point(230, 206);
             this.ckBoxisValidChecked.Name = "ckBoxisValidChecked";
             this.ckBoxisValidChecked.Size = new System.Drawing.Size(15, 14);
             this.ckBoxisValidChecked.TabIndex = 22;

@@ -106,7 +106,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.A.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.A.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A.Location = new System.Drawing.Point(120, 313);
+            this.A.Location = new System.Drawing.Point(171, 309);
             this.A.Name = "A";
             this.A.Size = new System.Drawing.Size(174, 44);
             this.A.TabIndex = 6;

@@ -45,7 +45,27 @@ namespace Desktop_Windwos_form_application
             InitializeComponent();
             loggingTo = logging;
             _httpClient = new HttpClient();
-            userName = username;    
+            userName = username;
+
+            Bitmap iconAddProduct = new Bitmap("C://Users/Chamindu/Downloads/icons8-add-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconResetProduct = new Bitmap("C://Users/Chamindu/Downloads/icons8-reset-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconCancelProduct = new Bitmap("C://Users/Chamindu/Downloads/icons8-cancel-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconAddImage = new Bitmap("C://Users/Chamindu/Downloads/icons8-image-48.png"); // Replace "icon.png" with the actual file path
+
+            int newWidth = 23; // Set your desired width
+            int newHeight = 23; // Set your desired height
+
+            Bitmap resizedProduct = new Bitmap(iconAddProduct, new Size(newWidth, newHeight));
+            Bitmap resizedResetProduct = new Bitmap(iconResetProduct, new Size(newWidth, newHeight));
+            Bitmap resizedCancelProduct = new Bitmap(iconCancelProduct, new Size(newWidth, newHeight));
+            Bitmap resizedImage = new Bitmap(iconAddImage, new Size(newWidth, newHeight));
+
+
+            btnImage.Image = resizedImage;
+
+            btnAddProduct.Image = resizedProduct;
+            btnRest.Image = resizedResetProduct;
+            btnCancel.Image = resizedCancelProduct;
         }
         #endregion
 
@@ -81,7 +101,7 @@ namespace Desktop_Windwos_form_application
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHeadding.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbHeadding.Location = new System.Drawing.Point(191, 13);
+            this.lbHeadding.Location = new System.Drawing.Point(267, 9);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(120, 25);
             this.lbHeadding.TabIndex = 0;
@@ -158,40 +178,36 @@ namespace Desktop_Windwos_form_application
             // 
             this.btnImage.Location = new System.Drawing.Point(169, 255);
             this.btnImage.Name = "btnImage";
-            this.btnImage.Size = new System.Drawing.Size(85, 40);
+            this.btnImage.Size = new System.Drawing.Size(55, 40);
             this.btnImage.TabIndex = 12;
-            this.btnImage.Text = "Add Image";
             this.btnImage.UseVisualStyleBackColor = true;
             this.btnImage.Click += new System.EventHandler(this.btnAddImage);
             // 
             // btnAddProduct
             // 
             this.btnAddProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnAddProduct.Location = new System.Drawing.Point(91, 571);
+            this.btnAddProduct.Location = new System.Drawing.Point(197, 564);
             this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(111, 35);
+            this.btnAddProduct.Size = new System.Drawing.Size(57, 42);
             this.btnAddProduct.TabIndex = 13;
-            this.btnAddProduct.Text = "Add Product";
             this.btnAddProduct.UseVisualStyleBackColor = false;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
             // btnRest
             // 
-            this.btnRest.Location = new System.Drawing.Point(220, 571);
+            this.btnRest.Location = new System.Drawing.Point(272, 564);
             this.btnRest.Name = "btnRest";
-            this.btnRest.Size = new System.Drawing.Size(111, 35);
+            this.btnRest.Size = new System.Drawing.Size(59, 42);
             this.btnRest.TabIndex = 14;
-            this.btnRest.Text = "Reset";
             this.btnRest.UseVisualStyleBackColor = true;
             this.btnRest.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(351, 571);
+            this.btnCancel.Location = new System.Drawing.Point(351, 564);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(111, 35);
+            this.btnCancel.Size = new System.Drawing.Size(58, 42);
             this.btnCancel.TabIndex = 15;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 

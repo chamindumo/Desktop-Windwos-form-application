@@ -53,6 +53,17 @@ namespace Desktop_Windwos_form_application
             _httpClient = new HttpClient();
             loggingTo = logging;
             InitializeComponent();
+            Bitmap iconAddImage = new Bitmap("C://Users/Chamindu/Downloads/icons8-image-48.png"); // Replace "icon.png" with the actual file path
+
+
+            int newWidth = 15; // Set your desired width
+            int newHeight = 15; // Set your desired height
+           
+            Bitmap resizedImage = new Bitmap(iconAddImage, new Size(newWidth, newHeight));
+
+
+            // Set the icon for the button
+            button2.Image = resizedImage;
         }
         #endregion
 
@@ -353,7 +364,6 @@ namespace Desktop_Windwos_form_application
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 37);
             this.button2.TabIndex = 31;
-            this.button2.Text = "Add Image";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnAddImage_Click);
             // 

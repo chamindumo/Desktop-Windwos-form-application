@@ -65,13 +65,13 @@ namespace Desktop_Windwos_form_application
             lbUserName.Text = username;
 
             // Load the icon image
-            Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-search-50.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-logout-50.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconCalculator = new Bitmap("C://Users/Chamindu/Downloads/icons8-calculator-66.png"); // Replace "icon.png" with the actual file path
+            Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-analyze-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconCalculator = new Bitmap("C://Users/Chamindu/Downloads/icons8-estimate-48.png"); // Replace "icon.png" with the actual file path
 
 
-            int newWidth = 15; // Set your desired width
-            int newHeight = 15; // Set your desired height
+            int newWidth = 23; // Set your desired width
+            int newHeight = 23; // Set your desired height
             Bitmap resizedIcon = new Bitmap(icon, new Size(newWidth, newHeight));
             Bitmap resizedIconLogout = new Bitmap(iconLogOut, new Size(newWidth, newHeight));
             Bitmap resizedCalculator = new Bitmap(iconCalculator, new Size(newWidth, newHeight));
@@ -1686,9 +1686,13 @@ namespace Desktop_Windwos_form_application
         }
 
 
+
         #endregion
 
-     
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

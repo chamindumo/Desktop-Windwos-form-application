@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms; 
@@ -24,8 +25,6 @@ namespace Desktop_Windwos_form_application
         private MenuStrip File;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
         private Panel Sidepanel;
         private Button btnLogin;
         private Button btnPurchase;
@@ -51,6 +50,8 @@ namespace Desktop_Windwos_form_application
         private BindingSource bindingSource4;
         private ToolStripMenuItem helpToolStripMenuItem;
         private Label lblUser;
+        private Panel panel1;
+        private Button btnMenu;
         public string userName;
         #endregion
         #region Using Constructor
@@ -60,20 +61,55 @@ namespace Desktop_Windwos_form_application
             loggingTo = logging;
             userName = username;
             lblUser.Text = userName;
+            Bitmap iconProduct = new Bitmap("C://Users/Chamindu/Downloads/icons8-products-16.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconpromotion = new Bitmap("C://Users/Chamindu/Downloads/icons8-promotion-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconDiscount = new Bitmap("C://Users/Chamindu/Downloads/icons8-huge-sale-64.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconBank = new Bitmap("C://Users/Chamindu/Downloads/icons8-bank-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconNewUser = new Bitmap("C://Users/Chamindu/Downloads/icons8-add-user-male-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconPurchas = new Bitmap("C://Users/Chamindu/Downloads/icons8-purchase-for-euro-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconMenu = new Bitmap("C://Users/Chamindu/Downloads/icons8-menu-48.png"); // Replace "icon.png" with the actual file path
 
+            int newWidth = 23; // Set your desired width
+            int newHeight = 23; // Set your desired height
+      
+            Bitmap resizedProduct = new Bitmap(iconProduct, new Size(newWidth, newHeight));
+            Bitmap resizedPrmotion = new Bitmap(iconpromotion, new Size(newWidth, newHeight));
+            Bitmap resizedDiscount = new Bitmap(iconDiscount, new Size(newWidth, newHeight));
+            Bitmap resizedBank = new Bitmap(iconBank, new Size(newWidth, newHeight));
+            Bitmap resizedNewUser = new Bitmap(iconNewUser, new Size(newWidth, newHeight));
+            Bitmap Purchas = new Bitmap(iconPurchas, new Size(newWidth, newHeight));
+            Bitmap LogOut = new Bitmap(iconLogOut, new Size(newWidth, newHeight));
+            Bitmap Menu = new Bitmap(iconMenu, new Size(newWidth, newHeight));
+
+
+
+
+
+
+
+
+
+            // Set the icon for the button
+
+            btnProducts.Image = resizedProduct;
+            btnPromotions.Image = resizedPrmotion;
+            btnDiscount.Image = resizedDiscount;
+            btnBank.Image = resizedBank;
+            btnNewUser.Image = resizedNewUser;
+            btnPurchase.Image = Purchas;
+            btnLogin.Image = LogOut;
+            btnMenu.Image = Menu;
         }
         #endregion
         #region Using Initalize
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainPage));
             this.File = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.Sidepanel = new System.Windows.Forms.Panel();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -97,8 +133,9 @@ namespace Desktop_Windwos_form_application
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMenu = new System.Windows.Forms.Button();
             this.File.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.Sidepanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
@@ -108,6 +145,7 @@ namespace Desktop_Windwos_form_application
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // File
@@ -145,32 +183,9 @@ namespace Desktop_Windwos_form_application
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1275, 31);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // Sidepanel
             // 
-            this.Sidepanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Sidepanel.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Sidepanel.Controls.Add(this.lblUser);
             this.Sidepanel.Controls.Add(this.btnLogin);
             this.Sidepanel.Controls.Add(this.btnPurchase);
@@ -179,9 +194,9 @@ namespace Desktop_Windwos_form_application
             this.Sidepanel.Controls.Add(this.btnDiscount);
             this.Sidepanel.Controls.Add(this.btnPromotions);
             this.Sidepanel.Controls.Add(this.btnProducts);
-            this.Sidepanel.Location = new System.Drawing.Point(0, 56);
+            this.Sidepanel.Location = new System.Drawing.Point(0, 78);
             this.Sidepanel.Name = "Sidepanel";
-            this.Sidepanel.Size = new System.Drawing.Size(137, 701);
+            this.Sidepanel.Size = new System.Drawing.Size(84, 679);
             this.Sidepanel.TabIndex = 3;
             this.Sidepanel.Visible = false;
             this.Sidepanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
@@ -190,144 +205,139 @@ namespace Desktop_Windwos_form_application
             // 
             this.lblUser.AccessibleDescription = "";
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.Location = new System.Drawing.Point(30, 37);
+            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Location = new System.Drawing.Point(12, 35);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(64, 22);
+            this.lblUser.Size = new System.Drawing.Size(52, 18);
             this.lblUser.TabIndex = 11;
             this.lblUser.Text = "label1";
             this.lblUser.Click += new System.EventHandler(this.lblUser_Click);
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(12, 464);
+            this.btnLogin.Location = new System.Drawing.Point(12, 462);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(112, 36);
+            this.btnLogin.Size = new System.Drawing.Size(52, 36);
             this.btnLogin.TabIndex = 10;
-            this.btnLogin.Text = "LogOut";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogging_Click);
             // 
             // btnPurchase
             // 
-            this.btnPurchase.Location = new System.Drawing.Point(12, 405);
+            this.btnPurchase.Location = new System.Drawing.Point(12, 404);
             this.btnPurchase.Name = "btnPurchase";
-            this.btnPurchase.Size = new System.Drawing.Size(112, 36);
+            this.btnPurchase.Size = new System.Drawing.Size(52, 36);
             this.btnPurchase.TabIndex = 9;
-            this.btnPurchase.Text = "Purchase";
             this.btnPurchase.UseVisualStyleBackColor = true;
             this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
             // btnNewUser
             // 
-            this.btnNewUser.Location = new System.Drawing.Point(12, 346);
+            this.btnNewUser.Location = new System.Drawing.Point(12, 345);
             this.btnNewUser.Name = "btnNewUser";
-            this.btnNewUser.Size = new System.Drawing.Size(112, 36);
+            this.btnNewUser.Size = new System.Drawing.Size(52, 36);
             this.btnNewUser.TabIndex = 8;
-            this.btnNewUser.Text = "New User";
             this.btnNewUser.UseVisualStyleBackColor = true;
             this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
             // 
             // btnBank
             // 
-            this.btnBank.Location = new System.Drawing.Point(12, 286);
+            this.btnBank.Location = new System.Drawing.Point(12, 285);
             this.btnBank.Name = "btnBank";
-            this.btnBank.Size = new System.Drawing.Size(112, 36);
+            this.btnBank.Size = new System.Drawing.Size(52, 36);
             this.btnBank.TabIndex = 7;
-            this.btnBank.Text = "Bank";
             this.btnBank.UseVisualStyleBackColor = true;
             this.btnBank.Click += new System.EventHandler(this.btnBank_Click);
             // 
             // btnDiscount
             // 
-            this.btnDiscount.Location = new System.Drawing.Point(12, 228);
+            this.btnDiscount.Location = new System.Drawing.Point(12, 227);
             this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(112, 36);
+            this.btnDiscount.Size = new System.Drawing.Size(52, 36);
             this.btnDiscount.TabIndex = 6;
-            this.btnDiscount.Text = "Discount";
             this.btnDiscount.UseVisualStyleBackColor = true;
             this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
             // 
             // btnPromotions
             // 
-            this.btnPromotions.Location = new System.Drawing.Point(12, 166);
+            this.btnPromotions.Location = new System.Drawing.Point(12, 165);
             this.btnPromotions.Name = "btnPromotions";
-            this.btnPromotions.Size = new System.Drawing.Size(112, 36);
+            this.btnPromotions.Size = new System.Drawing.Size(52, 36);
             this.btnPromotions.TabIndex = 5;
-            this.btnPromotions.Text = "Promotions";
             this.btnPromotions.UseVisualStyleBackColor = true;
             this.btnPromotions.Click += new System.EventHandler(this.btnPromotions_Click);
             // 
             // btnProducts
             // 
-            this.btnProducts.Location = new System.Drawing.Point(12, 106);
+            this.btnProducts.Location = new System.Drawing.Point(12, 105);
             this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(112, 36);
+            this.btnProducts.Size = new System.Drawing.Size(52, 36);
             this.btnProducts.TabIndex = 4;
-            this.btnProducts.Text = "Products";
             this.btnProducts.UseVisualStyleBackColor = true;
             this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(558, 532);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(605, 557);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(35, 27);
             this.button1.TabIndex = 5;
-            this.button1.Text = "Previous";
+            this.button1.Text = "<-";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.btnPrv_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(702, 531);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(709, 557);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(35, 27);
             this.button2.TabIndex = 6;
-            this.button2.Text = "Next";
+            this.button2.Text = "->";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // txtPageNum
             // 
-            this.txtPageNum.Location = new System.Drawing.Point(656, 531);
+            this.txtPageNum.Location = new System.Drawing.Point(663, 561);
             this.txtPageNum.Name = "txtPageNum";
             this.txtPageNum.ReadOnly = true;
-            this.txtPageNum.Size = new System.Drawing.Size(26, 20);
+            this.txtPageNum.Size = new System.Drawing.Size(17, 23);
             this.txtPageNum.TabIndex = 7;
             this.txtPageNum.Visible = false;
             this.txtPageNum.TextChanged += new System.EventHandler(this.txtPageNum_TextChanged);
             // 
             // btnAddNewProduct
             // 
-            this.btnAddNewProduct.Location = new System.Drawing.Point(54, 27);
+            this.btnAddNewProduct.Location = new System.Drawing.Point(131, 9);
             this.btnAddNewProduct.Name = "btnAddNewProduct";
-            this.btnAddNewProduct.Size = new System.Drawing.Size(107, 23);
+            this.btnAddNewProduct.Size = new System.Drawing.Size(118, 36);
             this.btnAddNewProduct.TabIndex = 0;
-            this.btnAddNewProduct.Text = "Add New Product";
+            this.btnAddNewProduct.Text = "+ Add Product";
             this.btnAddNewProduct.UseVisualStyleBackColor = true;
             this.btnAddNewProduct.Click += new System.EventHandler(this.btnAddNewProduct_Click);
             // 
             // btnAddNewPromotion
             // 
-            this.btnAddNewPromotion.Location = new System.Drawing.Point(187, 27);
+            this.btnAddNewPromotion.Location = new System.Drawing.Point(321, 9);
             this.btnAddNewPromotion.Name = "btnAddNewPromotion";
-            this.btnAddNewPromotion.Size = new System.Drawing.Size(111, 23);
+            this.btnAddNewPromotion.Size = new System.Drawing.Size(134, 36);
             this.btnAddNewPromotion.TabIndex = 11;
-            this.btnAddNewPromotion.Text = "Add new Promotion";
+            this.btnAddNewPromotion.Text = "+ Add Promotion";
             this.btnAddNewPromotion.UseVisualStyleBackColor = true;
             this.btnAddNewPromotion.Click += new System.EventHandler(this.btnAddNewPromotion_Click);
             // 
             // btnAddNewBank
             // 
-            this.btnAddNewBank.Location = new System.Drawing.Point(328, 27);
+            this.btnAddNewBank.Location = new System.Drawing.Point(524, 9);
             this.btnAddNewBank.Name = "btnAddNewBank";
-            this.btnAddNewBank.Size = new System.Drawing.Size(111, 23);
+            this.btnAddNewBank.Size = new System.Drawing.Size(131, 36);
             this.btnAddNewBank.TabIndex = 13;
-            this.btnAddNewBank.Text = "Add New Bank";
+            this.btnAddNewBank.Text = "+ Add Bank";
             this.btnAddNewBank.UseVisualStyleBackColor = true;
             this.btnAddNewBank.Click += new System.EventHandler(this.btnAddNewBank_Click);
             // 
@@ -339,7 +349,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.productDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productDataGridView.Location = new System.Drawing.Point(260, 91);
+            this.productDataGridView.Location = new System.Drawing.Point(258, 143);
             this.productDataGridView.Name = "productDataGridView";
             this.productDataGridView.Size = new System.Drawing.Size(913, 406);
             this.productDataGridView.TabIndex = 4;
@@ -350,7 +360,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.promotionDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.promotionDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.promotionDataGridView.Location = new System.Drawing.Point(155, 91);
+            this.promotionDataGridView.Location = new System.Drawing.Point(153, 143);
             this.promotionDataGridView.Name = "promotionDataGridView";
             this.promotionDataGridView.Size = new System.Drawing.Size(1098, 393);
             this.promotionDataGridView.TabIndex = 8;
@@ -361,7 +371,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.discountDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.discountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.discountDataGridView.Location = new System.Drawing.Point(155, 91);
+            this.discountDataGridView.Location = new System.Drawing.Point(153, 143);
             this.discountDataGridView.Name = "discountDataGridView";
             this.discountDataGridView.Size = new System.Drawing.Size(1108, 377);
             this.discountDataGridView.TabIndex = 9;
@@ -372,7 +382,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.bankDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bankDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bankDataGridView.Location = new System.Drawing.Point(456, 91);
+            this.bankDataGridView.Location = new System.Drawing.Point(454, 143);
             this.bankDataGridView.Name = "bankDataGridView";
             this.bankDataGridView.Size = new System.Drawing.Size(268, 383);
             this.bankDataGridView.TabIndex = 10;
@@ -391,12 +401,31 @@ namespace Desktop_Windwos_form_application
             // 
             this.bindingSource4.CurrentChanged += new System.EventHandler(this.bindingSource4_CurrentChanged);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel1.Controls.Add(this.btnMenu);
+            this.panel1.Controls.Add(this.btnAddNewProduct);
+            this.panel1.Controls.Add(this.btnAddNewBank);
+            this.panel1.Controls.Add(this.btnAddNewPromotion);
+            this.panel1.Location = new System.Drawing.Point(0, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1445, 55);
+            this.panel1.TabIndex = 14;
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Location = new System.Drawing.Point(16, 9);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(50, 36);
+            this.btnMenu.TabIndex = 14;
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // frmMainPage
             // 
-            this.ClientSize = new System.Drawing.Size(1275, 571);
-            this.Controls.Add(this.btnAddNewBank);
-            this.Controls.Add(this.btnAddNewPromotion);
-            this.Controls.Add(this.btnAddNewProduct);
+            this.ClientSize = new System.Drawing.Size(1275, 596);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.bankDataGridView);
             this.Controls.Add(this.discountDataGridView);
             this.Controls.Add(this.promotionDataGridView);
@@ -405,8 +434,8 @@ namespace Desktop_Windwos_form_application
             this.Controls.Add(this.button1);
             this.Controls.Add(this.productDataGridView);
             this.Controls.Add(this.Sidepanel);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.File);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "frmMainPage";
@@ -415,8 +444,6 @@ namespace Desktop_Windwos_form_application
             this.Load += new System.EventHandler(this.frmMainPage_Load);
             this.File.ResumeLayout(false);
             this.File.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.Sidepanel.ResumeLayout(false);
             this.Sidepanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -427,6 +454,7 @@ namespace Desktop_Windwos_form_application
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -782,6 +810,19 @@ namespace Desktop_Windwos_form_application
         {
 
         }
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            if (Sidepanel.Visible)
+            {
+                // If it's visible, hide it
+                Sidepanel.Visible = false;
+            }
+            else
+            {
+                // If it's hidden, show it
+                Sidepanel.Visible = true;
+            }
+        }
         #endregion
         #region Using Method
 
@@ -949,8 +990,9 @@ namespace Desktop_Windwos_form_application
 
         }
 
+
         #endregion
 
-        
+       
     }
 }
