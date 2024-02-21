@@ -160,7 +160,10 @@ namespace Desktop_Windwos_form_application
 
 
 
+        private void txtDiscount_TextChanged(object sender, EventArgs e)
+        {
 
+        }
 
 
 
@@ -525,12 +528,13 @@ namespace Desktop_Windwos_form_application
         private async void btnCheackOut_Click(object sender, EventArgs e)
         {
 
+
             
-             
-            orderNumber = GenerateOrderId();
+           orderNumber = GenerateOrderId();
             PlaceOrder(orderNumber);
             txtExtraForCard.Text = "";
             Cash = 0;
+            txtDiscount.Text = "";
             ItemsId.Clear();
             txtCardNumber.Text = "";
             totalCostLabel.Clear();
@@ -763,6 +767,16 @@ namespace Desktop_Windwos_form_application
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         #endregion
         #region Using Method
         private string PromptForInput(string prompt, bool isPassword = false)
@@ -930,6 +944,7 @@ namespace Desktop_Windwos_form_application
                     await GetHtmlemplate();
                     MessageBox.Show($"Blance: {balance}", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     txtAmount.Clear();
+                    txtDiscount.Text = "";
                     string toMail = Email;
                     Email = "";
                     SimpleFontResolver.GenerateAndDownloadPdf(toMail, name, itemIdCounts, totalCostPrice, Cost, Price, itemPrice, Cash, orderNumber, ItemSellprice, TmpName, TmpHtmlName);
@@ -1280,12 +1295,12 @@ namespace Desktop_Windwos_form_application
                 {
                     decimal discount = promotion.Value;
                     totalCost -= (totalCost * discount / 100); // Deduct the discount from the total cost
-
                 }
                 else if (promotion.Key == "loyalty card")
                 {
                     decimal discount = promotion.Value;
                     totalCost -= (totalCost * discount / 100); // Deduct the loyalty card discount from the total cost
+
                 }
             }
 
@@ -1309,6 +1324,7 @@ namespace Desktop_Windwos_form_application
 
             decimal itemTotalPrice = Cost[itemName] * count;
 
+
             if (productDiscounts.ContainsKey(productItemIds[itemName]))
             {
                 // Get all discounts associated with the product ID
@@ -1324,6 +1340,7 @@ namespace Desktop_Windwos_form_application
 
                 decimal discountedTotalPrice = itemTotalPrice - totalDiscount;
 
+                txtDiscount.Text = totalDiscount.ToString();
                 return discountedTotalPrice;
             }
 
@@ -1687,12 +1704,11 @@ namespace Desktop_Windwos_form_application
 
 
 
+
+
         #endregion
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 
 }
