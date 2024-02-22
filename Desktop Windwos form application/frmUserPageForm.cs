@@ -65,9 +65,9 @@ namespace Desktop_Windwos_form_application
             lbUserName.Text = username;
 
             // Load the icon image
-            Bitmap icon = new Bitmap("C://Users/Chamindu/Downloads/icons8-analyze-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconCalculator = new Bitmap("C://Users/Chamindu/Downloads/icons8-estimate-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap icon = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-analyze-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconCalculator = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-estimate-48.png"); // Replace "icon.png" with the actual file path
 
 
             int newWidth = 23; // Set your desired width
@@ -1706,9 +1706,13 @@ namespace Desktop_Windwos_form_application
 
 
 
+
         #endregion
 
-        
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -246,10 +246,10 @@ namespace Desktop_Windwos_form_application
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(221, 647);
+            this.button1.Location = new System.Drawing.Point(184, 638);
             this.button1.Margin = new System.Windows.Forms.Padding(20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 37);
+            this.button1.Size = new System.Drawing.Size(121, 37);
             this.button1.TabIndex = 13;
             this.button1.Text = "Submit";
             this.button1.UseVisualStyleBackColor = true;
@@ -394,7 +394,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(239, 27);
+            this.lbHeadding.Location = new System.Drawing.Point(215, 27);
             this.lbHeadding.Margin = new System.Windows.Forms.Padding(20);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(138, 25);
@@ -404,7 +404,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddNew
             // 
-            this.ClientSize = new System.Drawing.Size(581, 704);
+            this.ClientSize = new System.Drawing.Size(527, 704);
             this.Controls.Add(this.lbHeadding);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.comboBox1);

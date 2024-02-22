@@ -68,7 +68,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbBankId.AutoSize = true;
             this.lbBankId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBankId.Location = new System.Drawing.Point(44, 162);
+            this.lbBankId.Location = new System.Drawing.Point(44, 106);
             this.lbBankId.Name = "lbBankId";
             this.lbBankId.Size = new System.Drawing.Size(57, 17);
             this.lbBankId.TabIndex = 2;
@@ -79,7 +79,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbBankName.AutoSize = true;
             this.lbBankName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBankName.Location = new System.Drawing.Point(44, 200);
+            this.lbBankName.Location = new System.Drawing.Point(44, 144);
             this.lbBankName.Name = "lbBankName";
             this.lbBankName.Size = new System.Drawing.Size(81, 17);
             this.lbBankName.TabIndex = 3;
@@ -88,7 +88,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtBankId
             // 
-            this.txtBankId.Location = new System.Drawing.Point(171, 162);
+            this.txtBankId.Location = new System.Drawing.Point(171, 106);
             this.txtBankId.Name = "txtBankId";
             this.txtBankId.Size = new System.Drawing.Size(221, 20);
             this.txtBankId.TabIndex = 4;
@@ -96,7 +96,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtBookName
             // 
-            this.txtBookName.Location = new System.Drawing.Point(171, 200);
+            this.txtBookName.Location = new System.Drawing.Point(171, 144);
             this.txtBookName.Name = "txtBookName";
             this.txtBookName.Size = new System.Drawing.Size(221, 20);
             this.txtBookName.TabIndex = 5;
@@ -106,7 +106,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.A.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.A.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.A.Location = new System.Drawing.Point(171, 309);
+            this.A.Location = new System.Drawing.Point(171, 216);
             this.A.Name = "A";
             this.A.Size = new System.Drawing.Size(174, 44);
             this.A.TabIndex = 6;
@@ -116,7 +116,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddBank
             // 
-            this.ClientSize = new System.Drawing.Size(508, 516);
+            this.ClientSize = new System.Drawing.Size(489, 300);
             this.Controls.Add(this.A);
             this.Controls.Add(this.txtBookName);
             this.Controls.Add(this.txtBankId);

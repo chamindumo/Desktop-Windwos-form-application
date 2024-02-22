@@ -32,7 +32,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(181, 144);
+            this.btnSubmit.Location = new System.Drawing.Point(105, 106);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(101, 39);
             this.btnSubmit.TabIndex = 0;
@@ -44,7 +44,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(160, 37);
+            this.lbHeadding.Location = new System.Drawing.Point(85, 23);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(164, 17);
             this.lbHeadding.TabIndex = 1;
@@ -53,7 +53,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtVerificationCode
             // 
-            this.txtVerificationCode.Location = new System.Drawing.Point(141, 87);
+            this.txtVerificationCode.Location = new System.Drawing.Point(66, 62);
             this.txtVerificationCode.Name = "txtVerificationCode";
             this.txtVerificationCode.Size = new System.Drawing.Size(199, 20);
             this.txtVerificationCode.TabIndex = 2;
@@ -61,7 +61,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmInputDialogForm
             // 
-            this.ClientSize = new System.Drawing.Size(499, 214);
+            this.ClientSize = new System.Drawing.Size(342, 166);
             this.Controls.Add(this.txtVerificationCode);
             this.Controls.Add(this.lbHeadding);
             this.Controls.Add(this.btnSubmit);

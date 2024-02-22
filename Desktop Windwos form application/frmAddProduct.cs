@@ -86,13 +86,13 @@ namespace Desktop_Windwos_form_application
             this.txtProductId = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
-            this.ImagePreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.EnterDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnBack = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLastlyModifiedBy = new System.Windows.Forms.TextBox();
             this.chBoxIsValidChecked = new System.Windows.Forms.CheckBox();
+            this.ImagePreviewPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImagePreviewPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,7 +101,7 @@ namespace Desktop_Windwos_form_application
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHeadding.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.lbHeadding.Location = new System.Drawing.Point(267, 9);
+            this.lbHeadding.Location = new System.Drawing.Point(174, 19);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(120, 25);
             this.lbHeadding.TabIndex = 0;
@@ -112,7 +112,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbProductId.AutoSize = true;
             this.lbProductId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProductId.Location = new System.Drawing.Point(38, 99);
+            this.lbProductId.Location = new System.Drawing.Point(38, 70);
             this.lbProductId.Name = "lbProductId";
             this.lbProductId.Size = new System.Drawing.Size(72, 17);
             this.lbProductId.TabIndex = 1;
@@ -123,7 +123,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbAddImage.AutoSize = true;
             this.lbAddImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAddImage.Location = new System.Drawing.Point(38, 261);
+            this.lbAddImage.Location = new System.Drawing.Point(38, 232);
             this.lbAddImage.Name = "lbAddImage";
             this.lbAddImage.Size = new System.Drawing.Size(75, 17);
             this.lbAddImage.TabIndex = 6;
@@ -134,7 +134,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbEnterDate.AutoSize = true;
             this.lbEnterDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEnterDate.Location = new System.Drawing.Point(38, 225);
+            this.lbEnterDate.Location = new System.Drawing.Point(38, 196);
             this.lbEnterDate.Name = "lbEnterDate";
             this.lbEnterDate.Size = new System.Drawing.Size(76, 17);
             this.lbEnterDate.TabIndex = 7;
@@ -145,7 +145,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbIsAvalable.AutoSize = true;
             this.lbIsAvalable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIsAvalable.Location = new System.Drawing.Point(38, 193);
+            this.lbIsAvalable.Location = new System.Drawing.Point(38, 164);
             this.lbIsAvalable.Name = "lbIsAvalable";
             this.lbIsAvalable.Size = new System.Drawing.Size(79, 17);
             this.lbIsAvalable.TabIndex = 8;
@@ -156,7 +156,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbDescription.AutoSize = true;
             this.lbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDescription.Location = new System.Drawing.Point(38, 165);
+            this.lbDescription.Location = new System.Drawing.Point(38, 136);
             this.lbDescription.Name = "lbDescription";
             this.lbDescription.Size = new System.Drawing.Size(79, 17);
             this.lbDescription.TabIndex = 9;
@@ -167,7 +167,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbProductName.AutoSize = true;
             this.lbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProductName.Location = new System.Drawing.Point(38, 133);
+            this.lbProductName.Location = new System.Drawing.Point(38, 104);
             this.lbProductName.Name = "lbProductName";
             this.lbProductName.Size = new System.Drawing.Size(98, 17);
             this.lbProductName.TabIndex = 11;
@@ -176,7 +176,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnImage
             // 
-            this.btnImage.Location = new System.Drawing.Point(169, 255);
+            this.btnImage.Location = new System.Drawing.Point(169, 226);
             this.btnImage.Name = "btnImage";
             this.btnImage.Size = new System.Drawing.Size(55, 40);
             this.btnImage.TabIndex = 12;
@@ -186,7 +186,7 @@ namespace Desktop_Windwos_form_application
             // btnAddProduct
             // 
             this.btnAddProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnAddProduct.Location = new System.Drawing.Point(197, 564);
+            this.btnAddProduct.Location = new System.Drawing.Point(145, 493);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(57, 42);
             this.btnAddProduct.TabIndex = 13;
@@ -195,7 +195,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnRest
             // 
-            this.btnRest.Location = new System.Drawing.Point(272, 564);
+            this.btnRest.Location = new System.Drawing.Point(235, 493);
             this.btnRest.Name = "btnRest";
             this.btnRest.Size = new System.Drawing.Size(59, 42);
             this.btnRest.TabIndex = 14;
@@ -204,7 +204,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(351, 564);
+            this.btnCancel.Location = new System.Drawing.Point(322, 493);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(58, 42);
             this.btnCancel.TabIndex = 15;
@@ -213,7 +213,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtProductId
             // 
-            this.txtProductId.Location = new System.Drawing.Point(169, 99);
+            this.txtProductId.Location = new System.Drawing.Point(169, 70);
             this.txtProductId.Name = "txtProductId";
             this.txtProductId.Size = new System.Drawing.Size(224, 20);
             this.txtProductId.TabIndex = 16;
@@ -221,32 +221,23 @@ namespace Desktop_Windwos_form_application
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(169, 165);
+            this.txtDescription.Location = new System.Drawing.Point(169, 136);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(395, 20);
+            this.txtDescription.Size = new System.Drawing.Size(224, 20);
             this.txtDescription.TabIndex = 20;
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(169, 130);
+            this.txtProductName.Location = new System.Drawing.Point(169, 101);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(224, 20);
             this.txtProductName.TabIndex = 22;
             this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
             // 
-            // ImagePreviewPictureBox
-            // 
-            this.ImagePreviewPictureBox.Location = new System.Drawing.Point(169, 301);
-            this.ImagePreviewPictureBox.Name = "ImagePreviewPictureBox";
-            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(240, 144);
-            this.ImagePreviewPictureBox.TabIndex = 23;
-            this.ImagePreviewPictureBox.TabStop = false;
-            this.ImagePreviewPictureBox.Click += new System.EventHandler(this.ImagePreviewPictureBox_Click);
-            // 
             // EnterDateDateTimePicker
             // 
-            this.EnterDateDateTimePicker.Location = new System.Drawing.Point(169, 225);
+            this.EnterDateDateTimePicker.Location = new System.Drawing.Point(169, 196);
             this.EnterDateDateTimePicker.Name = "EnterDateDateTimePicker";
             this.EnterDateDateTimePicker.Size = new System.Drawing.Size(224, 20);
             this.EnterDateDateTimePicker.TabIndex = 24;
@@ -270,7 +261,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 485);
+            this.label1.Location = new System.Drawing.Point(36, 434);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 17);
             this.label1.TabIndex = 28;
@@ -279,7 +270,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtLastlyModifiedBy
             // 
-            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(169, 484);
+            this.txtLastlyModifiedBy.Location = new System.Drawing.Point(169, 433);
             this.txtLastlyModifiedBy.Name = "txtLastlyModifiedBy";
             this.txtLastlyModifiedBy.Size = new System.Drawing.Size(224, 20);
             this.txtLastlyModifiedBy.TabIndex = 29;
@@ -288,16 +279,25 @@ namespace Desktop_Windwos_form_application
             // chBoxIsValidChecked
             // 
             this.chBoxIsValidChecked.AutoSize = true;
-            this.chBoxIsValidChecked.Location = new System.Drawing.Point(169, 195);
+            this.chBoxIsValidChecked.Location = new System.Drawing.Point(169, 166);
             this.chBoxIsValidChecked.Name = "chBoxIsValidChecked";
             this.chBoxIsValidChecked.Size = new System.Drawing.Size(15, 14);
             this.chBoxIsValidChecked.TabIndex = 30;
             this.chBoxIsValidChecked.UseVisualStyleBackColor = true;
             this.chBoxIsValidChecked.CheckedChanged += new System.EventHandler(this.chBoxIsValidChecked_CheckedChanged);
             // 
+            // ImagePreviewPictureBox
+            // 
+            this.ImagePreviewPictureBox.Location = new System.Drawing.Point(169, 286);
+            this.ImagePreviewPictureBox.Name = "ImagePreviewPictureBox";
+            this.ImagePreviewPictureBox.Size = new System.Drawing.Size(224, 129);
+            this.ImagePreviewPictureBox.TabIndex = 23;
+            this.ImagePreviewPictureBox.TabStop = false;
+            this.ImagePreviewPictureBox.Click += new System.EventHandler(this.ImagePreviewPictureBox_Click);
+            // 
             // frmAddProduct
             // 
-            this.ClientSize = new System.Drawing.Size(604, 629);
+            this.ClientSize = new System.Drawing.Size(478, 564);
             this.Controls.Add(this.chBoxIsValidChecked);
             this.Controls.Add(this.txtLastlyModifiedBy);
             this.Controls.Add(this.label1);

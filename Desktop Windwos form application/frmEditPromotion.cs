@@ -229,7 +229,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmEditPromotion
             // 
-            this.ClientSize = new System.Drawing.Size(675, 414);
+            this.ClientSize = new System.Drawing.Size(630, 373);
             this.Controls.Add(this.ckBoxisValidChecked);
             this.Controls.Add(this.cmbSelectPayment);
             this.Controls.Add(this.lblLastlyModified);

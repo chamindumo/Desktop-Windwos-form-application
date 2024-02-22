@@ -53,7 +53,6 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.btnAvalableProduct = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.ProductDataGrid = new System.Windows.Forms.DataGridView();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -63,23 +62,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbHeadder = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblCalculator = new System.Windows.Forms.Label();
+            this.lblAvalable = new System.Windows.Forms.Label();
+            this.lblAddCustermer = new System.Windows.Forms.Label();
             this.btCalculator = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbUserTotal = new System.Windows.Forms.Label();
             this.txtDiscount = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.lbUserTotal = new System.Windows.Forms.Label();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProduct
             // 
+            this.txtProduct.BackColor = System.Drawing.SystemColors.Window;
             this.txtProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProduct.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtProduct.Location = new System.Drawing.Point(56, 144);
             this.txtProduct.Name = "txtProduct";
             this.txtProduct.Size = new System.Drawing.Size(156, 23);
@@ -88,7 +93,9 @@
             // 
             // txtQuentity
             // 
+            this.txtQuentity.BackColor = System.Drawing.SystemColors.Window;
             this.txtQuentity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuentity.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtQuentity.Location = new System.Drawing.Point(224, 144);
             this.txtQuentity.Name = "txtQuentity";
             this.txtQuentity.Size = new System.Drawing.Size(58, 23);
@@ -97,7 +104,9 @@
             // 
             // cmbPaymentMethode
             // 
+            this.cmbPaymentMethode.BackColor = System.Drawing.SystemColors.Window;
             this.cmbPaymentMethode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPaymentMethode.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.cmbPaymentMethode.FormattingEnabled = true;
             this.cmbPaymentMethode.Location = new System.Drawing.Point(1115, 181);
             this.cmbPaymentMethode.Name = "cmbPaymentMethode";
@@ -107,7 +116,9 @@
             // 
             // cmbPaymnttype
             // 
+            this.cmbPaymnttype.BackColor = System.Drawing.SystemColors.Window;
             this.cmbPaymnttype.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbPaymnttype.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.cmbPaymnttype.FormattingEnabled = true;
             this.cmbPaymnttype.Items.AddRange(new object[] {
             "Cash",
@@ -121,17 +132,20 @@
             // lbLoyeltyCard
             // 
             this.lbLoyeltyCard.AutoSize = true;
-            this.lbLoyeltyCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLoyeltyCard.BackColor = System.Drawing.Color.Transparent;
+            this.lbLoyeltyCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLoyeltyCard.Location = new System.Drawing.Point(878, 223);
             this.lbLoyeltyCard.Name = "lbLoyeltyCard";
-            this.lbLoyeltyCard.Size = new System.Drawing.Size(85, 17);
+            this.lbLoyeltyCard.Size = new System.Drawing.Size(65, 11);
             this.lbLoyeltyCard.TabIndex = 5;
             this.lbLoyeltyCard.Text = "Loyalty card";
             this.lbLoyeltyCard.Click += new System.EventHandler(this.lbLoyeltyCard_Click);
             // 
             // cmbLoyeltyCard
             // 
+            this.cmbLoyeltyCard.BackColor = System.Drawing.SystemColors.Window;
             this.cmbLoyeltyCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbLoyeltyCard.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.cmbLoyeltyCard.FormattingEnabled = true;
             this.cmbLoyeltyCard.Items.AddRange(new object[] {
             "Phone Number",
@@ -145,7 +159,9 @@
             // 
             // txtAmount
             // 
+            this.txtAmount.BackColor = System.Drawing.SystemColors.Window;
             this.txtAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmount.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtAmount.Location = new System.Drawing.Point(881, 426);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(192, 23);
@@ -154,7 +170,9 @@
             // 
             // txtExtraForCard
             // 
+            this.txtExtraForCard.BackColor = System.Drawing.SystemColors.Window;
             this.txtExtraForCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExtraForCard.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtExtraForCard.Location = new System.Drawing.Point(881, 343);
             this.txtExtraForCard.Name = "txtExtraForCard";
             this.txtExtraForCard.Size = new System.Drawing.Size(192, 23);
@@ -163,17 +181,19 @@
             // 
             // btnConform
             // 
+            this.btnConform.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnConform.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConform.Location = new System.Drawing.Point(1115, 241);
             this.btnConform.Name = "btnConform";
             this.btnConform.Size = new System.Drawing.Size(201, 38);
             this.btnConform.TabIndex = 9;
             this.btnConform.Text = "Conform";
-            this.btnConform.UseVisualStyleBackColor = true;
+            this.btnConform.UseVisualStyleBackColor = false;
             this.btnConform.Click += new System.EventHandler(this.btnConform_Click);
             // 
             // btnCheackOut
             // 
+            this.btnCheackOut.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnCheackOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheackOut.Location = new System.Drawing.Point(1115, 411);
             this.btnCheackOut.Name = "btnCheackOut";
@@ -181,27 +201,29 @@
             this.btnCheackOut.Size = new System.Drawing.Size(201, 40);
             this.btnCheackOut.TabIndex = 10;
             this.btnCheackOut.Text = "Check Out";
-            this.btnCheackOut.UseVisualStyleBackColor = true;
+            this.btnCheackOut.UseVisualStyleBackColor = false;
             this.btnCheackOut.Click += new System.EventHandler(this.btnCheackOut_Click);
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(317, 134);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(74, 33);
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lstProduct
             // 
+            this.lstProduct.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lstProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstProduct.HideSelection = false;
             this.lstProduct.Location = new System.Drawing.Point(58, 181);
             this.lstProduct.Name = "lstProduct";
-            this.lstProduct.Size = new System.Drawing.Size(156, 98);
+            this.lstProduct.Size = new System.Drawing.Size(156, 76);
             this.lstProduct.TabIndex = 13;
             this.lstProduct.UseCompatibleStateImageBehavior = false;
             this.lstProduct.SelectedIndexChanged += new System.EventHandler(this.lstProduct_SelectedIndexChanged);
@@ -209,7 +231,7 @@
             // totalCostLabel
             // 
             this.totalCostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalCostLabel.Location = new System.Drawing.Point(657, 5);
+            this.totalCostLabel.Location = new System.Drawing.Point(657, 11);
             this.totalCostLabel.Name = "totalCostLabel";
             this.totalCostLabel.ReadOnly = true;
             this.totalCostLabel.Size = new System.Drawing.Size(102, 26);
@@ -219,7 +241,9 @@
             // 
             // txtCardNumber
             // 
+            this.txtCardNumber.BackColor = System.Drawing.SystemColors.Window;
             this.txtCardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCardNumber.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txtCardNumber.Location = new System.Drawing.Point(1115, 343);
             this.txtCardNumber.Name = "txtCardNumber";
             this.txtCardNumber.Size = new System.Drawing.Size(201, 23);
@@ -229,10 +253,11 @@
             // lbTotal
             // 
             this.lbTotal.AutoSize = true;
-            this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotal.Location = new System.Drawing.Point(55, 110);
             this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(57, 17);
+            this.lbTotal.Size = new System.Drawing.Size(43, 11);
             this.lbTotal.TabIndex = 17;
             this.lbTotal.Text = "Product";
             this.lbTotal.Click += new System.EventHandler(this.lbProduct_Click);
@@ -240,10 +265,11 @@
             // lbQentity
             // 
             this.lbQentity.AutoSize = true;
-            this.lbQentity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbQentity.BackColor = System.Drawing.Color.Transparent;
+            this.lbQentity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbQentity.Location = new System.Drawing.Point(221, 110);
             this.lbQentity.Name = "lbQentity";
-            this.lbQentity.Size = new System.Drawing.Size(61, 17);
+            this.lbQentity.Size = new System.Drawing.Size(46, 11);
             this.lbQentity.TabIndex = 18;
             this.lbQentity.Text = "Quantity";
             this.lbQentity.Click += new System.EventHandler(this.lbQuentity_Click);
@@ -251,10 +277,11 @@
             // lbPaymentType
             // 
             this.lbPaymentType.AutoSize = true;
-            this.lbPaymentType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPaymentType.BackColor = System.Drawing.Color.Transparent;
+            this.lbPaymentType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPaymentType.Location = new System.Drawing.Point(878, 149);
             this.lbPaymentType.Name = "lbPaymentType";
-            this.lbPaymentType.Size = new System.Drawing.Size(94, 17);
+            this.lbPaymentType.Size = new System.Drawing.Size(71, 11);
             this.lbPaymentType.TabIndex = 19;
             this.lbPaymentType.Text = "Payment type";
             this.lbPaymentType.Click += new System.EventHandler(this.lbPaymentType_Click);
@@ -262,10 +289,11 @@
             // lbPaymentMethod
             // 
             this.lbPaymentMethod.AutoSize = true;
-            this.lbPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPaymentMethod.BackColor = System.Drawing.Color.Transparent;
+            this.lbPaymentMethod.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPaymentMethod.Location = new System.Drawing.Point(1112, 150);
             this.lbPaymentMethod.Name = "lbPaymentMethod";
-            this.lbPaymentMethod.Size = new System.Drawing.Size(114, 17);
+            this.lbPaymentMethod.Size = new System.Drawing.Size(85, 11);
             this.lbPaymentMethod.TabIndex = 20;
             this.lbPaymentMethod.Text = "Payment Method";
             this.lbPaymentMethod.Click += new System.EventHandler(this.lbpaymentMethode_Click);
@@ -273,10 +301,11 @@
             // lbAmount
             // 
             this.lbAmount.AutoSize = true;
-            this.lbAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAmount.BackColor = System.Drawing.Color.Transparent;
+            this.lbAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAmount.Location = new System.Drawing.Point(885, 390);
             this.lbAmount.Name = "lbAmount";
-            this.lbAmount.Size = new System.Drawing.Size(56, 17);
+            this.lbAmount.Size = new System.Drawing.Size(41, 11);
             this.lbAmount.TabIndex = 21;
             this.lbAmount.Text = "Amount";
             this.lbAmount.Click += new System.EventHandler(this.lbAmount_Click);
@@ -284,10 +313,11 @@
             // lbCardNumber
             // 
             this.lbCardNumber.AutoSize = true;
-            this.lbCardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCardNumber.BackColor = System.Drawing.Color.Transparent;
+            this.lbCardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCardNumber.Location = new System.Drawing.Point(1112, 303);
             this.lbCardNumber.Name = "lbCardNumber";
-            this.lbCardNumber.Size = new System.Drawing.Size(96, 17);
+            this.lbCardNumber.Size = new System.Drawing.Size(72, 11);
             this.lbCardNumber.TabIndex = 22;
             this.lbCardNumber.Text = " Card Number";
             this.lbCardNumber.Click += new System.EventHandler(this.lbCardNumber_Click);
@@ -295,10 +325,11 @@
             // lbExtraForCard
             // 
             this.lbExtraForCard.AutoSize = true;
-            this.lbExtraForCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbExtraForCard.BackColor = System.Drawing.Color.Transparent;
+            this.lbExtraForCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbExtraForCard.Location = new System.Drawing.Point(878, 303);
             this.lbExtraForCard.Name = "lbExtraForCard";
-            this.lbExtraForCard.Size = new System.Drawing.Size(93, 17);
+            this.lbExtraForCard.Size = new System.Drawing.Size(71, 11);
             this.lbExtraForCard.TabIndex = 23;
             this.lbExtraForCard.Text = "Extra for card";
             this.lbExtraForCard.Click += new System.EventHandler(this.lbExtraForCard_Click);
@@ -316,7 +347,7 @@
             // btnAddCustomer
             // 
             this.btnAddCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddCustomer.Location = new System.Drawing.Point(9, 55);
+            this.btnAddCustomer.Location = new System.Drawing.Point(9, 49);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(44, 34);
             this.btnAddCustomer.TabIndex = 25;
@@ -327,31 +358,28 @@
             // btnAvalableProduct
             // 
             this.btnAvalableProduct.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnAvalableProduct.Location = new System.Drawing.Point(9, 107);
+            this.btnAvalableProduct.Location = new System.Drawing.Point(9, 138);
             this.btnAvalableProduct.Name = "btnAvalableProduct";
             this.btnAvalableProduct.Size = new System.Drawing.Size(44, 34);
             this.btnAvalableProduct.TabIndex = 26;
             this.btnAvalableProduct.UseVisualStyleBackColor = false;
             this.btnAvalableProduct.Click += new System.EventHandler(this.btnAvalableProducts_Click_1);
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // ProductDataGrid
             // 
             this.ProductDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ProductDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ProductDataGrid.Location = new System.Drawing.Point(56, 286);
+            this.ProductDataGrid.Location = new System.Drawing.Point(56, 263);
             this.ProductDataGrid.MinimumSize = new System.Drawing.Size(30, 0);
             this.ProductDataGrid.Name = "ProductDataGrid";
-            this.ProductDataGrid.Size = new System.Drawing.Size(780, 316);
+            this.ProductDataGrid.Size = new System.Drawing.Size(780, 323);
             this.ProductDataGrid.TabIndex = 27;
             this.ProductDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductDataGrid_CellContentClick);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.BackgroundImage = global::Desktop_Windwos_form_application.Properties.Resources.pexels_codioful__formerly_gradienta__7134994;
             this.panel1.Controls.Add(this.lblDate);
             this.panel1.Controls.Add(this.lbUserName);
             this.panel1.Controls.Add(this.lblTime);
@@ -366,6 +394,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
+            this.lblDate.BackColor = System.Drawing.Color.Transparent;
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.Location = new System.Drawing.Point(658, 40);
             this.lblDate.Name = "lblDate";
@@ -376,6 +405,7 @@
             // lbUserName
             // 
             this.lbUserName.AutoSize = true;
+            this.lbUserName.BackColor = System.Drawing.Color.Transparent;
             this.lbUserName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbUserName.Location = new System.Drawing.Point(1173, 38);
             this.lbUserName.Name = "lbUserName";
@@ -387,6 +417,7 @@
             // lblTime
             // 
             this.lblTime.AutoSize = true;
+            this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.Location = new System.Drawing.Point(658, 66);
             this.lblTime.Name = "lblTime";
@@ -398,6 +429,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(631, 6);
             this.label1.Name = "label1";
@@ -409,6 +441,7 @@
             // lbHeadder
             // 
             this.lbHeadder.AutoSize = true;
+            this.lbHeadder.BackColor = System.Drawing.Color.Transparent;
             this.lbHeadder.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHeadder.Location = new System.Drawing.Point(31, 25);
             this.lbHeadder.Name = "lbHeadder";
@@ -419,6 +452,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
+            this.panel2.BackgroundImage = global::Desktop_Windwos_form_application.Properties.Resources.pexels_codioful__formerly_gradienta__7130488;
+            this.panel2.Controls.Add(this.lblCalculator);
+            this.panel2.Controls.Add(this.lblAvalable);
+            this.panel2.Controls.Add(this.lblAddCustermer);
             this.panel2.Controls.Add(this.btCalculator);
             this.panel2.Controls.Add(this.btnAvalableProduct);
             this.panel2.Controls.Add(this.btnAddCustomer);
@@ -428,10 +465,43 @@
             this.panel2.Size = new System.Drawing.Size(58, 691);
             this.panel2.TabIndex = 29;
             // 
+            // lblCalculator
+            // 
+            this.lblCalculator.AutoSize = true;
+            this.lblCalculator.BackColor = System.Drawing.Color.Transparent;
+            this.lblCalculator.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblCalculator.Location = new System.Drawing.Point(6, 260);
+            this.lblCalculator.Name = "lblCalculator";
+            this.lblCalculator.Size = new System.Drawing.Size(54, 13);
+            this.lblCalculator.TabIndex = 30;
+            this.lblCalculator.Text = "Calculator";
+            // 
+            // lblAvalable
+            // 
+            this.lblAvalable.AutoSize = true;
+            this.lblAvalable.BackColor = System.Drawing.Color.Transparent;
+            this.lblAvalable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblAvalable.Location = new System.Drawing.Point(6, 175);
+            this.lblAvalable.Name = "lblAvalable";
+            this.lblAvalable.Size = new System.Drawing.Size(48, 13);
+            this.lblAvalable.TabIndex = 29;
+            this.lblAvalable.Text = "Avalable";
+            // 
+            // lblAddCustermer
+            // 
+            this.lblAddCustermer.AutoSize = true;
+            this.lblAddCustermer.BackColor = System.Drawing.Color.Transparent;
+            this.lblAddCustermer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblAddCustermer.Location = new System.Drawing.Point(6, 86);
+            this.lblAddCustermer.Name = "lblAddCustermer";
+            this.lblAddCustermer.Size = new System.Drawing.Size(51, 13);
+            this.lblAddCustermer.TabIndex = 28;
+            this.lblAddCustermer.Text = "Customer";
+            // 
             // btCalculator
             // 
             this.btCalculator.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btCalculator.Location = new System.Drawing.Point(9, 157);
+            this.btCalculator.Location = new System.Drawing.Point(9, 220);
             this.btCalculator.Name = "btCalculator";
             this.btCalculator.Size = new System.Drawing.Size(44, 34);
             this.btCalculator.TabIndex = 27;
@@ -450,43 +520,34 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(196)))), ((int)(((byte)(202)))));
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.txtDiscount);
             this.panel3.Controls.Add(this.totalCostLabel);
             this.panel3.Controls.Add(this.lbUserTotal);
-            this.panel3.Location = new System.Drawing.Point(55, 608);
+            this.panel3.Location = new System.Drawing.Point(55, 592);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(781, 115);
+            this.panel3.Size = new System.Drawing.Size(781, 131);
             this.panel3.TabIndex = 31;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 51);
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(15, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 17;
             this.label2.Text = "Total Discount";
-            // 
-            // lbUserTotal
-            // 
-            this.lbUserTotal.AutoSize = true;
-            this.lbUserTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUserTotal.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbUserTotal.Location = new System.Drawing.Point(3, 11);
-            this.lbUserTotal.Name = "lbUserTotal";
-            this.lbUserTotal.Size = new System.Drawing.Size(48, 17);
-            this.lbUserTotal.TabIndex = 14;
-            this.lbUserTotal.Text = "Total :";
-            this.lbUserTotal.Click += new System.EventHandler(this.lbTotal_Click);
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtDiscount
             // 
             this.txtDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiscount.Location = new System.Drawing.Point(657, 42);
+            this.txtDiscount.Location = new System.Drawing.Point(657, 55);
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.ReadOnly = true;
             this.txtDiscount.Size = new System.Drawing.Size(102, 26);
@@ -494,11 +555,30 @@
             this.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtDiscount.TextChanged += new System.EventHandler(this.txtDiscount_TextChanged);
             // 
+            // lbUserTotal
+            // 
+            this.lbUserTotal.AutoSize = true;
+            this.lbUserTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lbUserTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUserTotal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbUserTotal.Location = new System.Drawing.Point(15, 11);
+            this.lbUserTotal.Name = "lbUserTotal";
+            this.lbUserTotal.Size = new System.Drawing.Size(48, 17);
+            this.lbUserTotal.TabIndex = 14;
+            this.lbUserTotal.Text = "Total :";
+            this.lbUserTotal.Click += new System.EventHandler(this.lbTotal_Click);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
             // frmUserPageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BackgroundImage = global::Desktop_Windwos_form_application.Properties.Resources.pexels_nothing_ahead_86704941;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1365, 685);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.dataGridView1);
@@ -528,14 +608,15 @@
             this.Name = "frmUserPageForm";
             this.Text = "Kiwi Suit";
             this.Load += new System.EventHandler(this.UserPageForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProductDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,5 +664,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbUserTotal;
         private System.Windows.Forms.TextBox txtDiscount;
+        private System.Windows.Forms.Label lblAvalable;
+        private System.Windows.Forms.Label lblAddCustermer;
+        private System.Windows.Forms.Label lblCalculator;
     }
 }

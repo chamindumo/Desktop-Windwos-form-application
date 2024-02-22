@@ -52,6 +52,12 @@ namespace Desktop_Windwos_form_application
         private Label lblUser;
         private Panel panel1;
         private Button btnMenu;
+        private Label lblPromotion;
+        private Label lblDiscount;
+        private Label lblBank;
+        private Label lblNewUser;
+        private Label LblPurchace;
+        private Label lblProduct;
         public string userName;
         #endregion
         #region Using Constructor
@@ -61,14 +67,14 @@ namespace Desktop_Windwos_form_application
             loggingTo = logging;
             userName = username;
             lblUser.Text = userName;
-            Bitmap iconProduct = new Bitmap("C://Users/Chamindu/Downloads/icons8-products-16.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconpromotion = new Bitmap("C://Users/Chamindu/Downloads/icons8-promotion-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconDiscount = new Bitmap("C://Users/Chamindu/Downloads/icons8-huge-sale-64.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconBank = new Bitmap("C://Users/Chamindu/Downloads/icons8-bank-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconNewUser = new Bitmap("C://Users/Chamindu/Downloads/icons8-add-user-male-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconPurchas = new Bitmap("C://Users/Chamindu/Downloads/icons8-purchase-for-euro-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/Downloads/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
-            Bitmap iconMenu = new Bitmap("C://Users/Chamindu/Downloads/icons8-menu-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconProduct = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-products-16.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconpromotion = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-promotion-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconDiscount = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-huge-sale-64.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconBank = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-bank-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconNewUser = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-add-user-male-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconPurchas = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-purchase-for-euro-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconLogOut = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-log-out-48.png"); // Replace "icon.png" with the actual file path
+            Bitmap iconMenu = new Bitmap("C://Users/Chamindu/source/repos/Desktop Windwos form application/Desktop Windwos form application/Icons/icons8-menu-48.png"); // Replace "icon.png" with the actual file path
 
             int newWidth = 23; // Set your desired width
             int newHeight = 23; // Set your desired height
@@ -93,6 +99,9 @@ namespace Desktop_Windwos_form_application
             // Set the icon for the button
 
             btnProducts.Image = resizedProduct;
+
+
+
             btnPromotions.Image = resizedPrmotion;
             btnDiscount.Image = resizedDiscount;
             btnBank.Image = resizedBank;
@@ -111,6 +120,12 @@ namespace Desktop_Windwos_form_application
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Sidepanel = new System.Windows.Forms.Panel();
+            this.lblPromotion = new System.Windows.Forms.Label();
+            this.lblDiscount = new System.Windows.Forms.Label();
+            this.lblBank = new System.Windows.Forms.Label();
+            this.lblNewUser = new System.Windows.Forms.Label();
+            this.LblPurchace = new System.Windows.Forms.Label();
+            this.lblProduct = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnPurchase = new System.Windows.Forms.Button();
@@ -125,27 +140,27 @@ namespace Desktop_Windwos_form_application
             this.btnAddNewProduct = new System.Windows.Forms.Button();
             this.btnAddNewPromotion = new System.Windows.Forms.Button();
             this.btnAddNewBank = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.promotionDataGridView = new System.Windows.Forms.DataGridView();
             this.discountDataGridView = new System.Windows.Forms.DataGridView();
             this.bankDataGridView = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMenu = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnMenu = new System.Windows.Forms.Button();
             this.File.SuspendLayout();
             this.Sidepanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.promotionDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bankDataGridView)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // File
@@ -157,7 +172,7 @@ namespace Desktop_Windwos_form_application
             this.helpToolStripMenuItem});
             this.File.Location = new System.Drawing.Point(0, 0);
             this.File.Name = "File";
-            this.File.Size = new System.Drawing.Size(1275, 24);
+            this.File.Size = new System.Drawing.Size(1319, 24);
             this.File.TabIndex = 1;
             this.File.Text = "menuStrip2";
             this.File.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.File_ItemClicked);
@@ -186,6 +201,12 @@ namespace Desktop_Windwos_form_application
             // Sidepanel
             // 
             this.Sidepanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.Sidepanel.Controls.Add(this.lblPromotion);
+            this.Sidepanel.Controls.Add(this.lblDiscount);
+            this.Sidepanel.Controls.Add(this.lblBank);
+            this.Sidepanel.Controls.Add(this.lblNewUser);
+            this.Sidepanel.Controls.Add(this.LblPurchace);
+            this.Sidepanel.Controls.Add(this.lblProduct);
             this.Sidepanel.Controls.Add(this.lblUser);
             this.Sidepanel.Controls.Add(this.btnLogin);
             this.Sidepanel.Controls.Add(this.btnPurchase);
@@ -201,12 +222,66 @@ namespace Desktop_Windwos_form_application
             this.Sidepanel.Visible = false;
             this.Sidepanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // lblPromotion
+            // 
+            this.lblPromotion.AutoSize = true;
+            this.lblPromotion.Location = new System.Drawing.Point(5, 175);
+            this.lblPromotion.Name = "lblPromotion";
+            this.lblPromotion.Size = new System.Drawing.Size(72, 17);
+            this.lblPromotion.TabIndex = 17;
+            this.lblPromotion.Text = "Promotion";
+            // 
+            // lblDiscount
+            // 
+            this.lblDiscount.AutoSize = true;
+            this.lblDiscount.Location = new System.Drawing.Point(9, 246);
+            this.lblDiscount.Name = "lblDiscount";
+            this.lblDiscount.Size = new System.Drawing.Size(63, 17);
+            this.lblDiscount.TabIndex = 16;
+            this.lblDiscount.Text = "Discount";
+            // 
+            // lblBank
+            // 
+            this.lblBank.AutoSize = true;
+            this.lblBank.Location = new System.Drawing.Point(20, 318);
+            this.lblBank.Name = "lblBank";
+            this.lblBank.Size = new System.Drawing.Size(40, 17);
+            this.lblBank.TabIndex = 15;
+            this.lblBank.Text = "Bank";
+            // 
+            // lblNewUser
+            // 
+            this.lblNewUser.AutoSize = true;
+            this.lblNewUser.Location = new System.Drawing.Point(5, 384);
+            this.lblNewUser.Name = "lblNewUser";
+            this.lblNewUser.Size = new System.Drawing.Size(69, 17);
+            this.lblNewUser.TabIndex = 14;
+            this.lblNewUser.Text = "New User";
+            // 
+            // LblPurchace
+            // 
+            this.LblPurchace.AutoSize = true;
+            this.LblPurchace.Location = new System.Drawing.Point(6, 454);
+            this.LblPurchace.Name = "LblPurchace";
+            this.LblPurchace.Size = new System.Drawing.Size(68, 17);
+            this.LblPurchace.TabIndex = 13;
+            this.LblPurchace.Text = "Purchase";
+            // 
+            // lblProduct
+            // 
+            this.lblProduct.AutoSize = true;
+            this.lblProduct.Location = new System.Drawing.Point(10, 104);
+            this.lblProduct.Name = "lblProduct";
+            this.lblProduct.Size = new System.Drawing.Size(57, 17);
+            this.lblProduct.TabIndex = 12;
+            this.lblProduct.Text = "Product";
+            // 
             // lblUser
             // 
             this.lblUser.AccessibleDescription = "";
             this.lblUser.AutoSize = true;
             this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.Location = new System.Drawing.Point(12, 35);
+            this.lblUser.Location = new System.Drawing.Point(12, 17);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(52, 18);
             this.lblUser.TabIndex = 11;
@@ -215,7 +290,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(12, 462);
+            this.btnLogin.Location = new System.Drawing.Point(12, 479);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(52, 36);
             this.btnLogin.TabIndex = 10;
@@ -224,7 +299,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnPurchase
             // 
-            this.btnPurchase.Location = new System.Drawing.Point(12, 404);
+            this.btnPurchase.Location = new System.Drawing.Point(12, 415);
             this.btnPurchase.Name = "btnPurchase";
             this.btnPurchase.Size = new System.Drawing.Size(52, 36);
             this.btnPurchase.TabIndex = 9;
@@ -242,7 +317,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnBank
             // 
-            this.btnBank.Location = new System.Drawing.Point(12, 285);
+            this.btnBank.Location = new System.Drawing.Point(13, 279);
             this.btnBank.Name = "btnBank";
             this.btnBank.Size = new System.Drawing.Size(52, 36);
             this.btnBank.TabIndex = 7;
@@ -251,7 +326,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnDiscount
             // 
-            this.btnDiscount.Location = new System.Drawing.Point(12, 227);
+            this.btnDiscount.Location = new System.Drawing.Point(12, 207);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(52, 36);
             this.btnDiscount.TabIndex = 6;
@@ -260,7 +335,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnPromotions
             // 
-            this.btnPromotions.Location = new System.Drawing.Point(12, 165);
+            this.btnPromotions.Location = new System.Drawing.Point(12, 136);
             this.btnPromotions.Name = "btnPromotions";
             this.btnPromotions.Size = new System.Drawing.Size(52, 36);
             this.btnPromotions.TabIndex = 5;
@@ -269,7 +344,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnProducts
             // 
-            this.btnProducts.Location = new System.Drawing.Point(12, 105);
+            this.btnProducts.Location = new System.Drawing.Point(12, 65);
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.Size = new System.Drawing.Size(52, 36);
             this.btnProducts.TabIndex = 4;
@@ -341,17 +416,13 @@ namespace Desktop_Windwos_form_application
             this.btnAddNewBank.UseVisualStyleBackColor = true;
             this.btnAddNewBank.Click += new System.EventHandler(this.btnAddNewBank_Click);
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // productDataGridView
             // 
             this.productDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productDataGridView.Location = new System.Drawing.Point(258, 143);
+            this.productDataGridView.Location = new System.Drawing.Point(153, 143);
             this.productDataGridView.Name = "productDataGridView";
-            this.productDataGridView.Size = new System.Drawing.Size(913, 406);
+            this.productDataGridView.Size = new System.Drawing.Size(1087, 406);
             this.productDataGridView.TabIndex = 4;
             this.productDataGridView.Visible = false;
             this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productdataGrid_CellContentClick);
@@ -389,18 +460,6 @@ namespace Desktop_Windwos_form_application
             this.bankDataGridView.Visible = false;
             this.bankDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BankDataGrid_CellContentClick);
             // 
-            // bindingSource2
-            // 
-            this.bindingSource2.CurrentChanged += new System.EventHandler(this.bindingSource2_CurrentChanged);
-            // 
-            // bindingSource3
-            // 
-            this.bindingSource3.CurrentChanged += new System.EventHandler(this.bindingSource3_CurrentChanged);
-            // 
-            // bindingSource4
-            // 
-            this.bindingSource4.CurrentChanged += new System.EventHandler(this.bindingSource4_CurrentChanged);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -422,9 +481,26 @@ namespace Desktop_Windwos_form_application
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
+            // bindingSource2
+            // 
+            this.bindingSource2.CurrentChanged += new System.EventHandler(this.bindingSource2_CurrentChanged);
+            // 
+            // bindingSource3
+            // 
+            this.bindingSource3.CurrentChanged += new System.EventHandler(this.bindingSource3_CurrentChanged);
+            // 
+            // bindingSource4
+            // 
+            this.bindingSource4.CurrentChanged += new System.EventHandler(this.bindingSource4_CurrentChanged);
+            // 
             // frmMainPage
             // 
-            this.ClientSize = new System.Drawing.Size(1275, 596);
+            this.BackgroundImage = global::Desktop_Windwos_form_application.Properties.Resources.pexels_nothing_ahead_8670494;
+            this.ClientSize = new System.Drawing.Size(1319, 660);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bankDataGridView);
             this.Controls.Add(this.discountDataGridView);
@@ -446,15 +522,15 @@ namespace Desktop_Windwos_form_application
             this.File.PerformLayout();
             this.Sidepanel.ResumeLayout(false);
             this.Sidepanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.promotionDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.discountDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bankDataGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

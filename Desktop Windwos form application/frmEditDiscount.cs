@@ -304,7 +304,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmEditDiscount
             // 
-            this.ClientSize = new System.Drawing.Size(593, 445);
+            this.ClientSize = new System.Drawing.Size(568, 445);
             this.Controls.Add(this.ckBoxIsValidChecked);
             this.Controls.Add(this.lblLastlyEditPerson);
             this.Controls.Add(this.txtLastlyAddPerson);

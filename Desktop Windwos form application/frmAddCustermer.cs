@@ -148,7 +148,7 @@ namespace Desktop_Windwos_form_application
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(239, 94);
+            this.txtName.Location = new System.Drawing.Point(203, 93);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(269, 23);
             this.txtName.TabIndex = 12;
@@ -157,7 +157,7 @@ namespace Desktop_Windwos_form_application
             // txtLoyelticard
             // 
             this.txtLoyelticard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLoyelticard.Location = new System.Drawing.Point(239, 218);
+            this.txtLoyelticard.Location = new System.Drawing.Point(203, 217);
             this.txtLoyelticard.Name = "txtLoyelticard";
             this.txtLoyelticard.Size = new System.Drawing.Size(269, 23);
             this.txtLoyelticard.TabIndex = 13;
@@ -166,7 +166,7 @@ namespace Desktop_Windwos_form_application
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(239, 188);
+            this.txtAddress.Location = new System.Drawing.Point(203, 187);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(269, 23);
             this.txtAddress.TabIndex = 14;
@@ -175,7 +175,7 @@ namespace Desktop_Windwos_form_application
             // txtPhoneNumber
             // 
             this.txtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNumber.Location = new System.Drawing.Point(239, 155);
+            this.txtPhoneNumber.Location = new System.Drawing.Point(203, 154);
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(269, 23);
             this.txtPhoneNumber.TabIndex = 15;
@@ -184,7 +184,7 @@ namespace Desktop_Windwos_form_application
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(239, 123);
+            this.txtEmail.Location = new System.Drawing.Point(203, 122);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(269, 23);
             this.txtEmail.TabIndex = 16;
@@ -194,7 +194,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(287, 9);
+            this.label2.Location = new System.Drawing.Point(256, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 25);
             this.label2.TabIndex = 17;
@@ -203,7 +203,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(292, 316);
+            this.btnSubmit.Location = new System.Drawing.Point(252, 276);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(99, 38);
             this.btnSubmit.TabIndex = 18;
@@ -213,7 +213,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddCustermer
             // 
-            this.ClientSize = new System.Drawing.Size(652, 408);
+            this.ClientSize = new System.Drawing.Size(541, 353);
             this.Controls.Add(this.webView);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label2);

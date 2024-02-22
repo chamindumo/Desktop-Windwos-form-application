@@ -34,7 +34,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(76, 112);
+            this.txtInput.Location = new System.Drawing.Point(79, 71);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(161, 20);
             this.txtInput.TabIndex = 0;
@@ -42,7 +42,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(108, 201);
+            this.btnSubmit.Location = new System.Drawing.Point(126, 110);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(75, 23);
             this.btnSubmit.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmInputPromptForm
             // 
-            this.ClientSize = new System.Drawing.Size(304, 261);
+            this.ClientSize = new System.Drawing.Size(322, 172);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtInput);

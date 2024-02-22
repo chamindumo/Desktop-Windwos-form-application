@@ -335,6 +335,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="frmUserPageForm.resx">
       <DependentUpon>frmUserPageForm.cs</DependentUpon>
@@ -422,6 +423,39 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7130555.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7130565.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7134994.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7130488.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-eva-bronzini-7629493.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7130488 %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-codioful-%28formerly-gradienta%29-7135014.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-nothing-ahead-8670494.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-johannes-plenio-1103970.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-scott-webb-1022928.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="protos\Back ground\pexels-scott-webb-1029624.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

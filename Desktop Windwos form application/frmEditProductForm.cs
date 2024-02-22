@@ -92,7 +92,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.lbHeadding.AutoSize = true;
             this.lbHeadding.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadding.Location = new System.Drawing.Point(331, 9);
+            this.lbHeadding.Location = new System.Drawing.Point(225, 9);
             this.lbHeadding.Name = "lbHeadding";
             this.lbHeadding.Size = new System.Drawing.Size(129, 25);
             this.lbHeadding.TabIndex = 0;
@@ -179,7 +179,7 @@ namespace Desktop_Windwos_form_application
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.Location = new System.Drawing.Point(230, 173);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(528, 23);
+            this.txtDescription.Size = new System.Drawing.Size(252, 23);
             this.txtDescription.TabIndex = 12;
             this.txtDescription.TextChanged += new System.EventHandler(this.txtProductDescription_TextChanged);
             // 
@@ -222,7 +222,7 @@ namespace Desktop_Windwos_form_application
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(349, 604);
+            this.btnSubmit.Location = new System.Drawing.Point(264, 584);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(111, 48);
             this.btnSubmit.TabIndex = 19;
@@ -232,7 +232,7 @@ namespace Desktop_Windwos_form_application
             // 
             // txtEditBy
             // 
-            this.txtEditBy.Location = new System.Drawing.Point(221, 531);
+            this.txtEditBy.Location = new System.Drawing.Point(221, 515);
             this.txtEditBy.Name = "txtEditBy";
             this.txtEditBy.Size = new System.Drawing.Size(261, 20);
             this.txtEditBy.TabIndex = 20;
@@ -242,11 +242,12 @@ namespace Desktop_Windwos_form_application
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(65, 532);
+            this.label1.Location = new System.Drawing.Point(65, 518);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 17);
             this.label1.TabIndex = 21;
             this.label1.Text = "Edit by";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ckBoxisValidChecked
             // 
@@ -260,7 +261,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmEditProductForm
             // 
-            this.ClientSize = new System.Drawing.Size(822, 664);
+            this.ClientSize = new System.Drawing.Size(569, 647);
             this.Controls.Add(this.ckBoxisValidChecked);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtEditBy);
@@ -562,8 +563,12 @@ namespace Desktop_Windwos_form_application
             }
         }
 
+
         #endregion
 
-       
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

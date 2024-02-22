@@ -87,7 +87,7 @@ namespace Desktop_Windwos_form_application
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(210, 23);
+            this.label1.Location = new System.Drawing.Point(193, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(129, 25);
             this.label1.TabIndex = 0;
@@ -272,7 +272,7 @@ namespace Desktop_Windwos_form_application
             // 
             // frmAddDiscount
             // 
-            this.ClientSize = new System.Drawing.Size(563, 479);
+            this.ClientSize = new System.Drawing.Size(479, 479);
             this.Controls.Add(this.ckBoxIsValidChecked);
             this.Controls.Add(this.lblLastlyAddedPerson);
             this.Controls.Add(this.txtLastlyModifiedperson);
